@@ -105,7 +105,7 @@ input[type=checkbox]:checked + label i:after
 	padding-left: 10px;
 }
 
-input.valid,
+/* input.valid,
 textarea.valid
 {
 	border-color: #48d848;
@@ -122,9 +122,9 @@ textarea:focus
 {
 	border-color: #2499d8;
 	box-shadow: 0 0 0 4px rgba(56, 170, 216, .66);
-}
+} */
 
-input.valid:focus,
+/* input.valid:focus,
 textarea.valid:focus
 {
 	border-color: #48d848;
@@ -136,7 +136,7 @@ textarea.invalid:focus
 {
 	border-color: #d84848;
 	box-shadow: 0 0 0 4px rgba(216, 72, 72, .66);
-}
+} */
 
 @keyframes fadein
 {

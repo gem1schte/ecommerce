@@ -1,6 +1,6 @@
 <?php
 require_once 'conn.php';
-
+require_once 'assets.php';
 // Execute the following logic only if a POST request is received
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Ensure that the form fields exist
@@ -42,14 +42,41 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                     echo '<img src="image/programmer_meme.jpg" title="This meme describes a programmer’s daily struggle with errors...">';
                 } else {
-                    alert('Incorrect password!');
-                    echo "<script> location.href = 'login.html';</script>";
-                    exit();
+                    echo '
+                    <script>
+                        setTimeout(function() {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: "Incorrect password!",    
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                window.location = "login.html";
+                            });
+                        }, 100);
+                    </script>
+                    ';
+
                 }
             } else {
-                alert('User not found!');
-                echo "<script> location.href = 'login.html';</script>";
-                exit();                    
+                echo '
+                <script>
+                    setTimeout(function() {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "User not found!",
+                            footer: "<a href=\"register.html\">Register a new account now?</a>"
+                           
+                        }).then(() => {
+                            window.location = "login.html";
+                        });
+                    }, 100);
+                </script>
+                ';
+                exit();
+         
             }
 
             // Close the statement
@@ -60,11 +87,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         echo "Please enter a username and password!";
     }
-}
-
-function alert($message){
-    // Display the alert box 
-    echo "<script>alert('$message');</script>";
 }
 
 // Close the database connection

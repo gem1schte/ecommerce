@@ -1,16 +1,36 @@
 <?php
+require_once 'assets.php';
 session_start();
 session_unset();
 session_destroy();
-// <a href='login.html'>logout</a>";
-echo "<script>
-if(confirm('Are you want logout?')){
-location.href = 'login.html';
-}
-else{
 
-window.history.back()
-}
-</script>"
-
+echo '
+	<script>
+		setTimeout(function() {
+			Swal.fire({
+  				icon: "warning",
+  				title: "Do you want to log out?",
+				text: "See you later",
+				showCancelButton: true,
+				confirmButtonColor: "#3085d6",
+				cancelButtonColor: "#d33",
+				confirmButtonText: "Yes, Confirm Logout!"
+			}).then((result) => {
+  				if (result.isConfirmed) {
+    				Swal.fire({
+      					title: "Logged Out!",
+      					text: "You have been logged out successfully.",
+      					icon: "success"
+    				}).then(() => {
+						
+						window.location = "login.html";
+					});
+  				} else {
+					
+					window.history.back();
+				}
+			});
+		}, 100);
+	</script>
+';
 ?>

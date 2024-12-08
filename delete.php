@@ -1,19 +1,32 @@
 <?php
 require_once 'conn.php';
+require_once 'assets.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_POST['username'])) {
         $username = $_POST['username'];
 
-        // Display a confirmation dialog using JavaScript and perform the operation
-        echo "<script>
-                if (confirm('Are you sure you want to delete your account?')) {
-                    // If user clicks OK, redirect to delete.php with confirmation parameter
-                    window.location.href = 'delete.php?username=" . urlencode($username) . "&confirm=true';  // Redirect to the same page to perform deletion
-                } else {
-                    window.history.back();  // If user cancels, go back to the previous page
-                }
-              </script>";
+        echo "
+        <script>
+            setTimeout(function() {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Are you sure you intend to delete your account?',
+                    text: 'This action cannot be undone.',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Delete My Account!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'delete.php?confirm=true&username=" . urlencode($username) . "';
+                    } else {
+                        window.history.back();
+                    }
+                });
+            }, 100);
+        </script>
+        ";
     }
 }
 
@@ -32,24 +45,25 @@ if (isset($_GET['confirm']) && $_GET['confirm'] === 'true' && isset($_GET['usern
         // Execute the query
         $stmt->execute();
 
-        if ($stmt->affected_rows > 0) {
-            echo "<script>
-                    alert('Account deleted successfully!');
-                    window.location.href = 'login.html';  // After deletion, redirect to login page
-                  </script>";
-        } else {
-            echo "<script>
-                    alert('No matching user found. Delete Failed!');
-                    window.history.back();  // Go back to the previous page
-                  </script>";
-        }
-
+        if ($stmt->affected_rows > 0) 
+        echo "
+        <script>
+            window.location.href = 'login.html';   
+        </script>
+        ";
+    } else {
+        echo "
+        <script>  
+            window.history.back();
+        </script>
+        ";
+    }
         // Close the statement
         $stmt->close();
     } else {
         echo "Failed to prepare SQL statement: " . $conn->error;
     }
-}
+
 
 $conn->close();
 ?>

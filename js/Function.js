@@ -85,11 +85,37 @@ window.onload = function (){
 }
 
 //showpassword
+let PasswordVisible = false;
+
 function showpassword() {
-  var x = document.getElementById("password");
-  if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
-  }
+    const passwordLabel = document.getElementById("password");
+    const eyeIcon = document.getElementById("eyeIcon");
+
+    if (PasswordVisible) {
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
+        passwordLabel.type = 'password';
+        PasswordVisible = false;
+    } else {
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
+        passwordLabel.type = 'text';
+        PasswordVisible = true;
+    }
 }
+
+//Input validation
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('input','text').forEach(function (element) {
+    element.addEventListener('input',function(){
+      if(this.validity.valid){
+        this.classList.add('valid');
+        this.classList.remove('invalid');
+      }
+      else{
+        this.classList.add('invalid');
+        this.classList.remove('valid');
+      }
+    })
+  })
+});

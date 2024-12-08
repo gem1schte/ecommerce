@@ -1,6 +1,6 @@
 <?php
 require_once 'conn.php';
-
+require_once 'assets.php';
 // Prepare statement
 $sql = "INSERT INTO register (username, email, password) VALUES (?, ?, ?)";
 $stmt = $conn->prepare($sql);
@@ -17,28 +17,51 @@ $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash passwor
 $stmt->bind_param("sss", $username, $email, $password);
 
 //Check username or email is already registered
-$query = "SELECT * FROM register WHERE username = '$username' OR email = '$email'";
+$query = "SELECT 1 FROM register WHERE username = '$username' OR email = '$email'";
 $check_result = $conn->query($query);
 if ($check_result->num_rows > 0){
-    alert("This username or email has been register!");
-    echo "<script>  location.href = 'register.html';</script>";
-    exit();
+	echo '
+	<script>
+		setTimeout(function() {
+			Swal.fire({
+				icon: "warning",
+				title: "Warning!",
+				text: "This username or email has been registered!",
+				showConfirmButton: false,
+				timer: 1500
+			}).then(() => {
+				window.location = "register.html";
+			});
+		}, 100);
+	</script>
+	';
+	exit();
+	
 }
 
 // Execute the statement
 if ($stmt->execute()) {
-    alert("User registered successfully!");
-    echo "<script>location.href = 'login.html';</script>";
+
+	echo '
+	<script>
+		setTimeout(function() {
+			Swal.fire({
+				icon: "success",
+				title: "Nice to meet you!",
+				text: "You have successfully registered!",
+				showConfirmButton: false,
+				timer: 1500
+			}).then(() => {
+				window.location = "login.html";
+			});
+		}, 100);
+	</script>
+	';
+	
 } 
 else {
     echo "Error: " . $stmt->error;
 }
-
-
-function alert($message){
-    // Display the alert box 
-    echo "<script>alert('$message');</script>";
-};
 
 // Close statement and connection
 $stmt->close();
