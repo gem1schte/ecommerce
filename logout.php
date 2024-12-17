@@ -8,7 +8,7 @@ echo '
 	<script>
 		setTimeout(function() {
 			Swal.fire({
-  				icon: "warning",
+  				icon: "question",
   				title: "Do you want to log out?",
 				text: "See you later",
 				showCancelButton: true,

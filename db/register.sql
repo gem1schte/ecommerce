@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- 主機： 127.0.0.1
--- 產生時間： 2024-12-01 09:45:51
--- 伺服器版本： 10.4.32-MariaDB
--- PHP 版本： 8.0.30
+-- Host: 127.0.0.1
+-- Generation Time: Dec 17, 2024 at 02:46 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 資料庫： `test`
+-- Database: `test`
 --
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `register`
+-- Table structure for table `register`
 --
 
 CREATE TABLE `register` (
@@ -34,15 +34,13 @@ CREATE TABLE `register` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- 傾印資料表的資料 `register`
+-- Dumping data for table `register`
 --
 
 INSERT INTO `register` (`username`, `email`, `password`) VALUES
-('AWDWDaaa2123', 'AWDWDaaa2123@www.www', '$2y$10$XH/rjOn7uaTT64BZi8qTHOelCZEm4Uy9BhccJAdJbPNQYsR/yzADu'),
-('XZaa7878', 'XZaa7878@qq.dwd', '$2y$10$rUFXK83ILWM1LXfXkDUb4.tqAdVcdP9KXPjddmSum6u3wMvk/pIZG'),
-('AWe12316532', 'AWe12316532@qq.q', '$2y$10$pCAWGlmvEU6Ypubg.JUH8ezl6On7I9eW5cEfmqcjUJ/UBAMR2mRUe'),
-('QDWwd45', 'QDWwd45@ww.w', '$2y$10$5XIWJfAGpYflQnUfM8M8huvJqm/Seekec1Z4yYBPYi962cQ.CFxI6'),
-('Axdwd132', 'axdwd@gmail.com', '$2y$10$qA9bTElPP5hmR1eX9.XjFOuAic3sN.zwl2AV9vVo/MCQeXrmJQ/uu');
+('Test123@gmail.com', 'Test123@gmail.com', '$2y$10$ki7U/xYHQLorSOxwuZCGeu.YV4sin.8ty4WqUhI9bVXOTFNdv7qBO'),
+('Test456', 'Test456@yahoo.com', '$2y$10$ccZkkxB5dk2sV8yQ9Lokpe5loLQ7uh.0I0uEJ/0BjNZJLxDE.ZVKS'),
+('Test789', 'Test789@icloud.com', '$2y$10$w5yCTFycTYy.SyufsDhrf.m/YU2BKb/AorhpR3TT4N3vq0/R4Drcy');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

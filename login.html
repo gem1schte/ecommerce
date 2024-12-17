@@ -3,36 +3,45 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Login Account</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0">
+    <title> Login Account </title>
     <link rel="icon" href="image/favicon.ico">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/LoDyn.css" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.2take1.menu/css/fonts.css?" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
 
     <!-- Scripts -->
     <script src="js/Function.js"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
 </head>
 
+<body class="bg-secondary">
 
-<!--Body Background -->
-<body class="bg-primary">
-    
     <noscript>
         <div class="no_js">
             <span>This site requires JavaScript.</span>
         </div>
     </noscript>
 
-    <div id="app">
+    <div>
         <nav id="navbar" class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
+
+            <!-- Collapse plugin for small screens -->
+            <button 
+            class="navbar-toggler" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#navbarSupportedContent" 
+            aria-controls="navbarToggleExternalContent" 
+            aria-expanded="false" 
+            aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <a class="navbar-brand" href="">
@@ -47,11 +56,14 @@
 
                     <!-- Dropdown -->
                     <li class="nav-item dropdown">
-                        <button class="nav-link dropdown-toggle dropbtn" type="button" id="dropdownMenuButton" onclick="Dropdown()">
+                        <button class="nav-link dropdown-toggle dropbtn" type="button" id="dropdownMenuButton"
+                            onclick="Dropdown()">
                             Download
                         </button>
                         <ul class="dropdown-menu dropdown-content" id="dropdown-list">
-                            <li><a class="dropdown-item" href="https://drive.google.com/drive/mobile/folders/0B9kzP7SHVJadfmxXRUhGU1E1UU5KaDhCQ1BPUmduakltcU10NXJjaHpZdlJoYjFhYm5XbTg?resourcekey=0-bu0QASvk-qWLPt3xfdrARg">SpongeBob SquarePants</a>
+                            <li><a class="dropdown-item"
+                                    href="https://drive.google.com/drive/mobile/folders/0B9kzP7SHVJadfmxXRUhGU1E1UU5KaDhCQ1BPUmduakltcU10NXJjaHpZdlJoYjFhYm5XbTg?resourcekey=0-bu0QASvk-qWLPt3xfdrARg">SpongeBob
+                                    SquarePants</a>
                             </li>
                         </ul>
                     </li>
@@ -59,117 +71,108 @@
                 </ul>
             </div>
 
-            <!-- Right Side Of Navbar -->
-            <div class="">
-                <div class="col-sm-12">
-                    <a class="btn btn-info" href="register.html">Register</a>
-                </div>
-            </div>
-
-
             <!-- Change bg color -->
             <ul>
                 <a class="">
                     <i id="toggleDark" onclick="Change_bg_color()" class="bi-brightness-high-fill"></i>
                 </a>
             </ul>
-
         </nav>
 
-        <main class="py-4">
+        <main class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-6 col-sm-8">
+                    <div class="card text-white bg-dark">
+                        <div class="card-header text-center fw-bold">Login</div>
+                        <div class="card-body">
+                            
+                            <form class="form-horizontal was-validated" method="POST" action="login.php">
 
-            <form method="POST" action="login.php">
-
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <div class="card text-white bg-info">
-
-                            <div class="card-header">
-                                Login
-                            </div>
-
-                            <!-- username label -->
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="username" class="col-sm-10 col-form-label">Username</label>
-                                    <div class="offset-sm-1 col-sm-10">
-                                        <input class="form-control-sm text-center"
-                                            placeholder="Enter your username or email"
-                                            title="" 
-                                            type="text" 
-                                            name="username_email"
-                                            id="username_email"
-                                            required 
-                                            autofocus
-                                            />
+                                <!-- username label -->
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Username</label>
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                        <input
+                                        placeholder="Enter your username or email"
+                                        title=""
+                                        type="text"
+                                        name="username_email"
+                                        id="username_email"
+                                        class="form-control" 
+                                        required
+                                        pattern="[A-Za-z0-9_@.]{4,32}"
+                                        autofocus/>
+                                        <div class="valid-feedback">Valid username or email.</div>
+                                        <div class="invalid-feedback">Please enter a valid username or email.</div>
                                     </div>
                                 </div>
 
-                                <!-- password label -->
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="password" class="col-sm-10 col-form-label">Password</label>
-                                        <div class="offset-sm-1 col-sm-10">
-                                            <input 
-                                            class="form-control-sm text-center" 
-                                            placeholder="Enter your password"
-                                            title="" 
-                                            type="password" 
-                                            name="password" 
-                                            id="password" 
-                                            required
-                                            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,16}"
-                                            />
-                                            <button 
-                                            type="button" 
-                                            class="eye-button"
-                                            onclick="showpassword()"
-                                        >
-                                            <i id="eyeIcon" class="fa fa-eye"></i>
-                                        </button>
-                                        </div>
-                                    </div>
-
-                                    <!-- login button -->
-                                    <div class="form-group justify-content-center">
-                                        <div class="col-sm-12">
-                                            <button type="login" class="btn btn-success">Login</button>
-                                        </div>
-                                    </div>
-
-                                    <!-- Remember checkbox -->
-                                    <div class="form-check mb-4">
-                                        <input 
-                                        class="form-check-input" 
-                                        type="checkbox" 
-                                        value="Y" 
-                                        id="remember"
-                                        >
-                                        <label class="form-check-label" for="remember">
-                                            <i class="material-icons"></i>
-                                            Remember
-                                        </label>
-                                    </div>
-
+                            <!-- password label -->
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text"><i class="fa fa-key"></i></span>
+                                    <input
+                                    class="form-control"
+                                    placeholder="Enter your password"
+                                    title=""
+                                    type="password" 
+                                    name="password" 
+                                    id="password" 
+                                    required
+                                    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,16}"
+                                    />
+                                    <button type="button" class="btn btn-light" onclick="showpassword()">
+                                        <i id="eyeIcon" class="fa fa-eye"></i>
+                                    </button>
+                                    <div class="valid-feedback">Valid password.</div>
+                                    <div class="invalid-feedback">Please enter a valid password.</div>
                                 </div>
-
                             </div>
 
+                            <!-- login button -->
+                            <div class="align-items-center d-flex">
+                                <button type="submit" class="btn btn-success ms-auto">Login</button>
+                            </div>
+                            
+                            <!-- Remember checkbox -->
+                            <div class="d-flex align-items-center">
+                                <div class="form-check">
+                                    <input
+                                    class="for-check-input"
+                                    type="checkbox"
+                                    id="remember"
+                                    name="remember"
+                                    value="Y"
+                                    >
+                                    <label for="remember" class="for-check-label text-white">Remember Me</label>
+                                </div>
+                            </div>
+
+                            </form>
                         </div>
-                    </div>
+                            <!-- Register Account -->
+						<div class="card-footer py-3 border-0 bg-gradient">
+							<div class="text-center">
+								Don't have an account? <a href="register.html">Create One</a>
+							</div>
+						</div>                        
 
+                    </div>
                 </div>
-            </form>
+            </div>
+
         </main>
     </div>
 
     <!-- Footer -->
     <footer class="bg-dark">
-        <div class="copyright">
-            © Copyright 2024. Developed by Trevor0313. All rights reserved.
+        <div class="footer">
+            ©2024  Developed by Trevor0313. All rights reserved.
         </div>
     </footer>
-
+    
 </body>
 
 </html>

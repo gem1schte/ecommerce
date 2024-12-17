@@ -23,8 +23,8 @@ function Change_bg_color() {
   const body = document.querySelector('body');
   const toggle = document.getElementById('toggleDark');
 
-  if (body.classList.contains('bg-primary')) {
-    body.classList.remove('bg-primary');
+  if (body.classList.contains('bg-secondary')) {
+    body.classList.remove('bg-secondary');
     body.classList.add('bg-white');
     toggle.classList.remove('bi-brightness-high-fill');
 
@@ -32,7 +32,7 @@ function Change_bg_color() {
   } 
   else {
     body.classList.remove('bg-white');
-    body.classList.add('bg-primary');
+    body.classList.add('bg-secondary');
     toggle.classList.remove('bi-moon-fill');
     toggle.classList.add('bi-brightness-high-fill');
   }
@@ -61,7 +61,7 @@ function Index_Change_bg_color() {
 //Typed
 //Source https://github.com/mattboldt/typed.js
 window.onload = function (){
-    new Typed('#element', {
+    new Typed('#login_Section_Title', {
     strings: ['<i>Hello </i>', 'Welcome.'],
     typeSpeed: 50,
     backSpeed:50,
@@ -73,7 +73,7 @@ window.onload = function (){
 }
 
 window.onload = function (){
-  new Typed('#Indexhtml_Section_Title', {
+  new Typed('#Index_Section_Title', {
   strings: ['<i>History of Programming Languages </i>'],
   typeSpeed: 50,
   backSpeed:50,
