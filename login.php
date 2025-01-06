@@ -51,8 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     echo '<button type="submit">Delete Account</button>';
                     echo '</form>';
 
-
-                    echo '<img src="image/programmer_meme.jpg" title="This meme describes a programmer’s daily struggle with errors...">';
                 } else {
                     echo '
                     <script>

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Register Accoont </title>
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
-    
+
 
     <!-- Scripts -->
     <script src="js/Function.js"></script>
@@ -23,7 +23,7 @@
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    
+
 </head>
 
 <body class="bg-secondary">
@@ -38,26 +38,21 @@
         <nav id="navbar" class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
 
             <!-- Collapse plugin for small screens -->
-            <button class="navbar-toggler" 
-            type="button" 
-            data-bs-toggle="collapse" 
-            data-bs-target="#navbarSupportedContent" 
-            aria-controls="navbarToggleExternalContent" 
-            aria-expanded="false" 
-            aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-              </button>            
+            </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <a class="navbar-brand" href="">
-                    <img src="image/Hyperlink.gif" height="50px" style="margin-top: -5px; margin-bottom: -5px;"
-                        alt="" />
+                    <i class="bi bi-bag"></i>
                     Register
                 </a>
 
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item "><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item "><a class="nav-link" href="index.php">Home</a></li>
 
                     <!-- Dropdown -->
                     <li class="nav-item dropdown">
@@ -90,33 +85,27 @@
                     <div class="card text-white bg-dark">
                         <div class="card-header text-center fw-bold">Register</div>
                         <div class="card-body">
-                            
+
                             <!-- Authentication Links -->
-                            <form class="form-horizontal was-validated" method="POST" action="register.php" enctype="multipart/form-data">
+                            <form class="form-horizontal was-validated" method="POST" action="register.php"
+                                enctype="multipart/form-data">
 
                                 <!-- Typed -->
-                                 <div class="text-center text-white">
+                                <div class="text-center text-white">
                                     <span id="Register_Section_Title"></span>
-                                 </div>
+                                </div>
 
                                 <!-- username label -->
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Username</label>
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                        <input
-                                        class="form-control"
-                                        placeholder="e.g.Trevor_313" 
-                                        title="4-32 characters, allows letters, numbers, and special characters." 
-                                        type="text"
-                                            name="username" 
-                                            id="username"   
-                                            required
-                                            pattern="[A-Za-z0-9_@.]{4,32}" 
-                                            autofocus 
-                                            value="" />
-                                            <div class="valid-feedback">Valid username.</div>
-                                            <div class="invalid-feedback">Enter a valid username.</div>
+                                        <input class="form-control" placeholder="e.g.Trevor_313"
+                                            title="4-32 characters, allows letters, numbers, and special characters."
+                                            type="text" name="username" id="username" required
+                                            pattern="[A-Za-z0-9_@.]{4,32}" autofocus value="" />
+                                        <div class="valid-feedback">Valid username.</div>
+                                        <div class="invalid-feedback">Enter a valid username.</div>
                                     </div>
                                 </div>
 
@@ -125,36 +114,23 @@
                                     <label for="email" class="form-label">Email</label>
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                                        <input
-                                        class="form-control"
-                                        placeholder="mail@example.com"
-                                        title="Enter a valid email address."
-                                        type="text"
-                                            name="email"
-                                            id="email"
-                                            required
-                                            pattern="\S+@\S+\.\S+"
-                                            value="" />
-                                            <div class="valid-feedback">Valid email address.</div>
-                                            <div class="invalid-feedback">Enter a valid email address.</div>
+                                        <input class="form-control" placeholder="mail@example.com"
+                                            title="Enter a valid email address." type="text" name="email" id="email"
+                                            required pattern="\S+@\S+\.\S+" value="" />
+                                        <div class="valid-feedback">Valid email address.</div>
+                                        <div class="invalid-feedback">Enter a valid email address.</div>
                                     </div>
                                 </div>
-                                
+
                                 <!-- password label -->
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fa fa-key"></i></span>
-                                        <input 
-                                        class="form-control" 
-                                        placeholder="e.g.Password123"
-                                        title="Password must be 6-16 characters long, with uppercase letters, lowercase letters, and numbers."
-                                            type="password"
-                                            name="password"
-                                            id="password"
-                                            required
-                                            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,16}"
-                                            value=""/>
+                                        <input class="form-control" placeholder="e.g.Password123"
+                                            title="Password must be 6-16 characters long, with uppercase letters, lowercase letters, and numbers."
+                                            type="password" name="password" id="password" required
+                                            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,16}" value="" />
                                         <button type="button" class="btn btn-light" onclick="showpassword()">
                                             <i id="eyeIcon" class="fa fa-eye"></i>
                                         </button>
@@ -167,16 +143,9 @@
                                 <label for="confirmPassword" class="form-label">Confirm Password</label>
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-text"><i class="fa fa-key"></i></span>
-                                    <input
-                                        placeholder="e.g.Password123"
-                                        title="Enter Confirm Password"
-                                        type="password"
-                                        name="confirmPassword"
-                                        id="confirmPassword"
-                                        class="form-control"
-                                        required
-                                        pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,16}"
-                                        autofocus />
+                                    <input placeholder="e.g.Password123" title="Enter Confirm Password" type="password"
+                                        name="confirmPassword" id="confirmPassword" class="form-control" required
+                                        pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,16}" autofocus />
                                     <button type="button" class="btn btn-light" onclick="confirm_show_password()">
                                         <i id="confirm_password_eye_icon" class="fa fa-eye"></i>
                                     </button>
@@ -191,15 +160,16 @@
 
                                 <!-- Register Account -->
                                 <div class="form-check mb-3">
-                                    <input class="for-check-input" type="checkbox" id="tos_agree" required value="Y" name="tos_agree" />
+                                    <input class="for-check-input" type="checkbox" id="tos_agree" required value="Y"
+                                        name="tos_agree" />
                                     I agree to the
                                     <a href="tos.html" class="clickable"><u>Terms of Service</u></a>.
                                 </div>
 
                             </form>
                         </div>
-                        
-                            <!-- Login Account -->
+
+                        <!-- Login Account -->
                         <div class="card-footer py-3 border-0 bg-gradient">
                             <div class="text-center">
                                 Already have an account? <a href="login.html">Login</a>
@@ -217,7 +187,7 @@
     <!-- Footer -->
     <footer class="bg-dark">
         <div class="footer">
-            ©2024~<span id="year"></span> Developed by m1haelark1. All rights reserved.
+            ©2024~<span id="year"></span> Developed by gem1schte. All rights reserved.
         </div>
     </footer>
 
