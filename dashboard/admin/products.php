@@ -4,24 +4,24 @@ include_once '../../includes/assets.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (
-        isset($_POST['name']) &&
+        isset($_POST['products_name']) &&
         isset($_POST['description']) &&
         isset($_POST['price']) &&
         isset($_POST['original_price']) &&
         isset($_POST['stock_quantity']) &&
-        isset($_POST['image_path'])
+        isset($_POST['products_image'])
     ) {
 
-        $name = $_POST['name'];
+        $name = $_POST['products_name'];
         $description = $_POST['description'];
         $price = $_POST['price'];
         $original_price = $_POST['original_price'];
         $stock_quantity = $_POST['stock_quantity'];
-        $image_path = $_POST['image_path'];
+        $image_path = $_POST['products_image'];
 
         $product_id = rand(1000, 99999);
 
-        $sql = "INSERT INTO products  (name,product_id ,description, price, original_price,stock_quantity, image_path) 
+        $sql = "INSERT INTO products  (products_name,product_id ,description, price, original_price,stock_quantity, products_image) 
          VALUES (?, ?, ?, ?, ?,?, ?)";
         $stmt = $conn->prepare($sql);
 
@@ -93,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             type="text"
                             class="form-control"
                             id="name"
-                            name="name"
+                            name="products_name"
                             placeholder="Enter product name"
                             required>
                     </div>
@@ -145,12 +145,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </div>
 
                     <div class="mb-3">
-                        <label for="image_path" class="form-label">Image Path</label>
+                        <label for="products_image" class="form-label">Image Path</label>
                         <input
                             type="text"
                             class="form-control"
-                            id="image_path"
-                            name="image_path"
+                            id="products_image"
+                            name="products_image"
                             placeholder="Enter image path or URL"
                             required>
                     </div>

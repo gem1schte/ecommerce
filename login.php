@@ -4,17 +4,17 @@ require_once 'includes/assets.php';
 // Execute the following logic only if a POST request is received
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Ensure that the form fields exist
-    if (isset($_POST['username_email']) && isset($_POST['password'])) {
-        $username_email = $_POST['username_email'];
+    if (isset($_POST['username']) && isset($_POST['password'])) {
+        $username = $_POST['username'];
         $password = $_POST['password'];
 
         // Use a prepared statement to query the database
-        $sql = "SELECT password FROM register WHERE username = ? OR email = ?";
+        $sql = "SELECT password FROM register WHERE username = ? ";
         $stmt = $conn->prepare($sql);
 
         if ($stmt) {
             // Bind parameters
-            $stmt->bind_param("ss", $username_email, $username_email);
+            $stmt->bind_param("s", $username);
 
             // Execute the query
             $stmt->execute();
@@ -29,15 +29,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     
                     // Start a new session
                     header("Location: index.php");
-                    echo "Login successful! Welcome, " . htmlspecialchars($username_email) . ".</p>";
+                    echo "Login successful! Welcome, " . htmlspecialchars($username) . ".</p>";
 
                     // Update last login time
-                    $currentTime = date('Y-m-d H:i:s');
-                    $update_sql = "UPDATE register SET last_login_time = ? WHERE username = ? or email = ?";
+                    
+                    $login_time = date('Y-m-d H:i:s');
+                    $update_sql = "UPDATE register SET last_login_time = ? WHERE username = ?";
                     $update_stmt = $conn->prepare($update_sql);
                     if ($update_stmt) {
                         // Bind parameters for the update statement
-                        $update_stmt->bind_param("sss", $currentTime, $username_email, $username_email);
+                        $update_stmt->bind_param("ss", $login_time, $username);
                         // Execute the update query
                         $update_stmt->execute();
                         $update_stmt->close();
@@ -50,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                     //Delete Account
                     echo '<form method="POST" action="delete.php">';
-                    echo '<input type="hidden" name="username" value="' . htmlspecialchars($username_email) . '">';
+                    echo '<input type="hidden" name="username" value="' . htmlspecialchars($username) . '">';
                     echo '<button type="submit">Delete Account</button>';
                     echo '</form>';
 

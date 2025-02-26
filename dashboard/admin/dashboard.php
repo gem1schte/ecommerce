@@ -2,7 +2,7 @@
 require_once '../../includes/conn.php';
 session_start();
 
-$sql = 'SELECT product_id, name, stock_quantity,original_price,description,price, product_star,image_path FROM products';
+$sql = 'SELECT product_id, products_name, stock_quantity,original_price,description,price, product_star,products_image FROM products';
 $result = $conn->query($sql);
 
 if (!$result) {
@@ -131,7 +131,7 @@ if (!$result) {
 
                                             <tr>
                                                 <td><?php echo htmlspecialchars($row['product_id']); ?></td>
-                                                <td><?php echo htmlspecialchars($row['name']); ?> <img src="<?php echo htmlspecialchars($row['image_path']); ?>" width="100" height="100" alt="..." /> </td>
+                                                <td><?php echo htmlspecialchars($row['products_name']); ?> <img src="<?php echo htmlspecialchars($row['products_image']); ?>" width="100" height="100" alt="..." /> </td>
                                                 <td><?php echo htmlspecialchars($row['original_price']); ?></td>
                                                 <td><?php echo htmlspecialchars($row['price']); ?></td>
                                                 <td><?php echo htmlspecialchars($row['stock_quantity']); ?></td>

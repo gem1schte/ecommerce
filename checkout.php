@@ -19,15 +19,15 @@ if (isset($_POST['checkout'])) {
   $country = $_POST['country'];
   $city = $_POST['city'];
   $address = $_POST['address'];
-  $orders_created_date = date('Y-m-d H:i:s');
+  $orders_created_at = date('Y-m-d H:i:s');
   $payment_method = $_POST['payment_method'];
   $postal_code = $_POST['postal_code'];
   
-  $sql = "INSERT INTO orders_info (orders_id, country, city, address, orders_created_date, payment_method, postal_code) 
+  $sql = "INSERT INTO orders_info (orders_id, country, city, address, orders_created_at, payment_method, postal_code) 
   VALUES(?,?,?,?,?,?,?)";
 
   if ($stmt = $conn->prepare($sql)) {
-      $stmt->bind_param("sssssss", $orders_id, $country, $city, $address, $orders_created_date, $payment_method, $postal_code);
+      $stmt->bind_param("sssssss", $orders_id, $country, $city, $address, $orders_created_at, $payment_method, $postal_code);
       $stmt->execute();
       if ($stmt->affected_rows > 0) {
 
@@ -126,7 +126,7 @@ if (isset($_POST['checkout'])) {
 if (!empty($_SESSION['cart'])) {
   # code...
   $product_ids = implode(',', array_keys($_SESSION['cart']));
-  $sql = "SELECT product_id, image_path,name,price FROM products WHERE product_id IN ($product_ids)";
+  $sql = "SELECT product_id, products_image,products_name,price FROM products WHERE product_id IN ($product_ids)";
   $result = $conn->query($sql);
 
   if ($result->num_rows > 0) {
@@ -138,9 +138,9 @@ if (!empty($_SESSION['cart'])) {
     while ($row = $result->fetch_assoc()) {
       # code...
       $product_id = $row['product_id'];
-      $name = $row['name'];
+      $name = $row['products_name'];
       $price = $row['price'];
-      $product_image = $row['image_path'];
+      $image_path = $row['products_image'];
       $quantity = $_SESSION['cart'][$product_id];
       $total_price = $price * $quantity;
       $tax = $total_price * 0.10;
@@ -149,7 +149,7 @@ if (!empty($_SESSION['cart'])) {
       echo "
             <li class='list-group-item d-flex justify-content-between lh-sm'>
               <div>    
-                <img src='{$product_image}'  class='rounded me-2 d-inline-block' width='100'>
+                <img src='{$image_path}'  class='rounded me-2 d-inline-block' width='100'>
                 <h6 class='text-end d-inline-block'>{$name}</h6>
 
                 <form action='checkout.php' method='post' class='d-inline'>
@@ -188,10 +188,14 @@ echo "
 
           </ul> ";
 }
-
+else {
+  echo "<tr><td colspan='5'>Error: " . $conn->error . "</td></tr>";
+  
+}
 }
 else {
   echo "<p>Your cart is empty</p>";
+
 }
 ?>
  

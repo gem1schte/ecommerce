@@ -2,7 +2,8 @@
 require_once 'includes/conn.php';
 require_once 'includes/assets.php';
 // Prepare statement
-$sql = "INSERT INTO register (username,first_name,last_name,user_id, email, password, account_registered_date) VALUES (?, ?, ?,?,?, ?,?)";
+$sql = "INSERT INTO register (username,first_name,last_name,user_id, email, password, account_registered_at) 
+VALUES (?, ?, ?,?,?, ?,?)";
 $user_id = rand(10000000,9223372036854775807); // Randomly generates a number between 8 and 19 digits
 $stmt = $conn->prepare($sql);
 
@@ -10,15 +11,14 @@ if (!$stmt) {
     die("Prepare failed: " . $conn->error); // Debugging
 }
 
-// Bind parameters
+
 $username = $_POST['username'];
 $email = $_POST['email'];
 $first_name = $_POST['first_name'];
 $last_name = $_POST['last_name'];
 $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash password for security
-// $password = $_POST['password']; //Storing the password in plain text is risky and insecure
-$account_registered_date = date('Y-m-d H:i:s');
-$stmt->bind_param("sssssss", $username, $first_name,$last_name,$user_id, $email, $password, $account_registered_date);
+$account_registered_at = date('Y-m-d H:i:s');
+$stmt->bind_param("sssssss", $username, $first_name,$last_name,$user_id, $email, $password, $account_registered_at);
 
 //Check username or email is already registered
 $query = "SELECT 1 FROM register WHERE username = '$username' OR email = '$email'";
@@ -43,7 +43,6 @@ if ($check_result->num_rows > 0){
 	
 }
 
-// Execute the statement
 if ($stmt->execute()) {
 
 	echo '

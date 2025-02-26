@@ -97,14 +97,14 @@ if (isset($_POST['remove_from_cart'])) {
                     <?php
                     if (!empty($_SESSION['cart'])) {
                         $product_ids = implode(',', array_keys($_SESSION['cart']));
-                        $sql = "SELECT product_id, image_path,name, price FROM products WHERE product_id IN ($product_ids)";
+                        $sql = "SELECT product_id, products_image,products_name, price FROM products WHERE product_id IN ($product_ids)";
                         $result = $conn->query($sql);
 
                         if ($result) {
                             while ($row = $result->fetch_assoc()) {
                                 $product_id = $row['product_id'];
-                                $name = htmlspecialchars($row['name']);
-                                $image_path = htmlspecialchars($row['image_path']);
+                                $name = htmlspecialchars($row['products_name']);
+                                $image_path = htmlspecialchars($row['products_image']);
                                 $price = number_format($row['price'], 2);
                                 $quantity = $_SESSION['cart'][$product_id];
                                 $total_price = number_format($row['price'] * $quantity, 2);

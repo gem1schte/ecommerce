@@ -2,7 +2,7 @@
 include 'includes/conn.php';
 session_start();
 
-$sql = 'SELECT product_id, name, original_price,description,price, product_star,image_path FROM products';
+$sql = 'SELECT product_id, products_name, original_price,description,price, product_star,products_image FROM products';
 $result = $conn->query($sql);
 
 if (!$result) {
@@ -109,12 +109,12 @@ if (!$result) {
             <div class="col mb-5">
               <div class="card h-100">
                 <!-- Product image-->
-                <img class="card-img-top" src="<?php echo htmlspecialchars($row['image_path']); ?>" alt="..." />
+                <img class="card-img-top" src="<?php echo htmlspecialchars($row['products_image']); ?>" alt="..." />
                 <!-- Product details-->
                 <div class="card-body p-4">
                   <div class="text-center">
                     <!-- Product name-->
-                    <h5 class="fw-bolder"><?php echo htmlspecialchars($row['name']); ?></h5>
+                    <h5 class="fw-bolder"><?php echo htmlspecialchars($row['products_name']); ?></h5>
                     <!-- Product reviews-->
                     <div class="d-flex justify-content-center small text-warning mb-2">
                       <div class="bi-star-fill"><?php echo htmlspecialchars($row['product_star']); ?></div>
@@ -141,12 +141,12 @@ if (!$result) {
             <!-- Sale badge-->
             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
             <!-- Product image-->
-            <img class="card-img-top" src="https://www.apple.com/v/iphone-16-pro/d/images/meta/iphone-16-pro_overview__ejy873nl8yi6_og.png?202412122331" alt="..." />
+            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
             <!-- Product details-->
             <div class="card-body p-4">
               <div class="text-center">
                 <!-- Product name-->
-                <h5 class="fw-bolder">iPhone 16 Pro</h5>
+                <h5 class="fw-bolder"></h5>
                 <!-- Product reviews-->
                 <div class="d-flex justify-content-center small text-warning mb-2">
                   <div class="bi-star-fill"></div>
@@ -156,8 +156,8 @@ if (!$result) {
                   <div class="bi-star-fill"></div>
                 </div>
                 <!-- Product price-->
-                <span class="text-muted text-decoration-line-through">$40000.00</span>
-                $36900.00
+                <span class="text-muted text-decoration-line-through">$50.00</span>
+                $25.00
               </div>
             </div>
             <!-- Product actions-->
