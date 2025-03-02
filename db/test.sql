@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2025 at 05:08 PM
+-- Generation Time: Mar 02, 2025 at 05:02 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -30,8 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `orders_info` (
   `orders_id` varchar(50) NOT NULL,
   `country` varchar(50) NOT NULL,
-  `city` varchar(50) NOT NULL,
-  `address` text NOT NULL,
+  `city` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `address` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `postal_code` varchar(20) NOT NULL,
   `orders_created_at` datetime NOT NULL,
   `payment_method` enum('Credit Card','PayPal','Bank Transfer','Cash') NOT NULL
@@ -52,9 +52,10 @@ INSERT INTO `orders_info` (`orders_id`, `country`, `city`, `address`, `postal_co
 
 CREATE TABLE `products` (
   `product_id` int(11) NOT NULL,
-  `products_name` varchar(255) NOT NULL,
+  `products_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `products_image` varchar(255) DEFAULT NULL,
-  `description` text DEFAULT NULL,
+  `description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `brand` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `original_price` decimal(10,2) DEFAULT NULL,
   `price` decimal(10,2) NOT NULL,
   `stock_quantity` int(11) NOT NULL,
@@ -65,10 +66,10 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`product_id`, `products_name`, `products_image`, `description`, `original_price`, `price`, `stock_quantity`, `product_star`) VALUES
-(41516, 'Samsung SSD 990 PRO', 'https://farm66.static.flickr.com/65535/52505350197_3e0819ecc8_b.jpg', 'Secure victory with 990 PRO\'s expanded 4TB capacity, empowering you with a random read speed of up to 1,600K IOPS. Witness faster loading times on your PC and PlayStation® 5, as it breathes life into your games.', 999.00, 100.00, 999, 4.5),
-(93038, 'iphone16 pro', 'https://www.apple.com/v/iphone-16-pro/d/images/meta/iphone-16-pro_overview__ejy873nl8yi6_og.png?202412122331a', 'Splash, Water, and Dust Resistant3\nRated IP68 (maximum depth of 6 meters up to 30 minutes) under IEC standard 60529', 999.00, 100.00, 999, 5.0),
-(93586, 'Nvidia RTX 5060', 'https://www.overclockers.co.uk/blog/wp-content/uploads/2024/12/NVIDIA-5060-Rumour-Overclockers-UK-Blog-Feature-Image-Bottom-Text-Blog-1600x900Light-TextTwitter-.png', 'The Nvidia GeForce RTX 5060 is a mid-range desktop graphics card utilizing the GB206 chip based on the Blackwell architecture. The 5060 offers 8 GB GDDR7 graphics memory with a 128-bit memory bus.', 999.00, 100.00, 999, 5.0);
+INSERT INTO `products` (`product_id`, `products_name`, `products_image`, `description`, `brand`, `original_price`, `price`, `stock_quantity`, `product_star`) VALUES
+(41516, 'Samsung SSD 980 PRO', 'https://upload.wikimedia.org/wikipedia/commons/7/75/Samsung_980_PRO_PCIe_4.0_NVMe_SSD_1TB-top_PNr%C2%B00915.jpg', 'Powered by Samsung in-house controller for pcie® 4.0 SSD, the 980 PRO is optimized for speed. It delivers read speeds up to 7,000 MB/s, making it 2 times faster than PCIe® 3.0 SSDs and 12.7 times faster than SATA SSDs. The 980 PRO achieves max speeds on PCIe® 4.0 and may vary in other environments.', 'Samsung', 999.00, 642.00, 999, 4.5),
+(93038, 'iphone16 pro', 'https://www.apple.com/v/iphone-16-pro/d/images/meta/iphone-16-pro_overview__ejy873nl8yi6_og.png?202412122331a', 'Splash, Water, and Dust Resistant3\nRated IP68 (maximum depth of 6 meters up to 30 minutes) under IEC standard 60529', 'Apple', NULL, 1000.00, 999, 5.0),
+(93586, 'Nvidia RTX 5060', 'https://www.overclockers.co.uk/blog/wp-content/uploads/2024/12/NVIDIA-5060-Rumour-Overclockers-UK-Blog-Feature-Image-Bottom-Text-Blog-1600x900Light-TextTwitter-.png', 'The Nvidia GeForce RTX 5060 is a mid-range desktop graphics card utilizing the GB206 chip based on the Blackwell architecture. The 5060 offers 8 GB GDDR7 graphics memory with a 128-bit memory bus.', 'Nvidia', 999.00, 655.00, 999, 5.0);
 
 -- --------------------------------------------------------
 
@@ -85,8 +86,8 @@ CREATE TABLE `register` (
   `token_expiry` datetime DEFAULT NULL,
   `account_registered_at` datetime NOT NULL DEFAULT current_timestamp(),
   `last_login_time` datetime DEFAULT NULL,
-  `first_name` varchar(50) DEFAULT NULL,
-  `last_name` varchar(50) DEFAULT NULL
+  `first_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
@@ -94,7 +95,7 @@ CREATE TABLE `register` (
 --
 
 INSERT INTO `register` (`user_id`, `username`, `password`, `email`, `token`, `token_expiry`, `account_registered_at`, `last_login_time`, `first_name`, `last_name`) VALUES
-(219273716, 'Test456', '$2y$10$3qGnRaAkhIGgXmykYSsSH.PldMHBo04BGkZj260Bfey9F78ZW5he2', 'Test456@yahoo.com', NULL, NULL, '2024-12-27 14:35:21', '2025-02-26 16:30:49', NULL, NULL),
+(219273716, 'Test456', '$2y$10$3qGnRaAkhIGgXmykYSsSH.PldMHBo04BGkZj260Bfey9F78ZW5he2', 'Test456@yahoo.com', NULL, NULL, '2024-12-27 14:35:21', '2025-03-02 10:52:23', NULL, NULL),
 (3253652496792670337, 'Test789', '$2y$10$Wl7OBBlrq8PtvrxfWr27Zuq4eoadSoVkgAwG2RSPFumcn7Bf2wAFa', 'Test789@icloud.com', NULL, NULL, '2024-12-28 14:41:58', '2025-02-26 16:30:05', NULL, NULL),
 (4845727533474930302, 'Test123', '$2y$10$llpH5dn.MyYyIXOsk.1H0ueebvX.y7YDJUupZuCTx8UlDA/qv943K', 'Test123@gmail.com', NULL, NULL, '2024-12-28 14:41:01', '2025-02-26 16:30:27', NULL, NULL);
 

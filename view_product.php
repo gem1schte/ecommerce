@@ -1,5 +1,6 @@
 <?php
 require_once 'includes/conn.php';
+session_start();
 
 if (isset($_GET['id'])) {
     $product_id = $_GET['id'];
@@ -62,7 +63,18 @@ if (isset($_GET['id'])) {
                             <button class="btn btn-outline-dark" type="submit">
                                 <i class="bi-cart-fill me-1"></i>
                                 Cart
-                                <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+
+                                <?php
+
+                                if (isset($_SESSION['cart'])) {
+                                    $count = count($_SESSION['cart']);
+                                    echo "<span class='badge bg-dark text-white ms-1 rounded-pill'>$count</span>";
+                                } else{
+                                echo"
+                                <span class='badge bg-dark text-white ms-1 rounded-pill'>$count</span>
+                                ";
+                            }
+                                ?>
                             </button>
                         </form>
                     </div>
@@ -83,10 +95,15 @@ if (isset($_GET['id'])) {
                             <div class="card-body">
                                 <h1 class="card-title"><?php echo htmlspecialchars($row['products_name']); ?></h1>
 
-                                <span class="text-muted text-decoration-line-through">
-                                    <p class="text-primary h5">$<?php echo htmlspecialchars($row['original_price']); ?></p>
+                                <span class="text-muted text-decoration-line-through text-primary h5">
+                                    <?php
+                                    if ($row['original_price'] > $row['price']) {
+                                        echo "$" . htmlspecialchars($row['original_price']);
+                                    }
+                                    ?>
                                 </span>
-                                <?php echo htmlspecialchars($row['price']); ?>
+                                <span class="h5 text-primary">$<?php echo htmlspecialchars($row['price']); ?>
+                                </span>
 
                                 <div class="mb-3">
                                     <strong>Description:</strong>

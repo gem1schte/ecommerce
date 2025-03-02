@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $name = $_POST['products_name'];
         $description = $_POST['description'];
+        $brand = $_POST['brand'];
         $price = $_POST['price'];
         $original_price = $_POST['original_price'];
         $stock_quantity = $_POST['stock_quantity'];
@@ -21,12 +22,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $product_id = rand(1000, 99999);
 
-        $sql = "INSERT INTO products  (products_name,product_id ,description, price, original_price,stock_quantity, products_image) 
-         VALUES (?, ?, ?, ?, ?,?, ?)";
+        $sql = "INSERT INTO products  (products_name,product_id ,description, brand,price, original_price,stock_quantity, products_image) 
+         VALUES (?, ?, ?, ?, ?, ?,?, ?)";
         $stmt = $conn->prepare($sql);
 
         if ($stmt) {
-            $stmt->bind_param("ssssdss", $name, $product_id, $description, $price, $original_price, $stock_quantity, $image_path);
+            $stmt->bind_param("sssssdss", $name, $product_id, $description, $brand, $price, $original_price, $stock_quantity, $image_path);
 
             if ($stmt->execute()) {
                 echo "
@@ -84,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="card-header bg-primary text-white text-center">
                 <h2 class="mb-0"><i class="fas fa-box"></i>Product Management</h2>
             </div>
-            
+
             <div class="card-body">
                 <form method="POST" action="products.php" enctype="multipart/form-data">
                     <div class="mb-3">
@@ -142,6 +143,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                 placeholder="Enter available quantity"
                                 required>
                         </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="brand" class="form-label">Brand</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="brand"
+                                name="brand"
+                                placeholder="Enter available quantity"
+                                required>
+                        </div>
+
                     </div>
 
                     <div class="mb-3">

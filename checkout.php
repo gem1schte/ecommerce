@@ -1,3 +1,7 @@
+<!-- UI Source: Checkout form
+ (https://getbootstrap.com/docs/5.3/examples/checkout/) 
+ -->
+
 <?php
 session_start();
 
@@ -111,14 +115,29 @@ if (isset($_POST['checkout'])) {
     <main>
       <div class="py-5 text-center">
         <h2>Checkout form</h2>
-        <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+        <p class="lead"> Thanks you for buying our products</p>
       </div>
 
       <div class="row g-5">
         <div class="col-md-5 col-lg-4 order-md-last">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-primary">Your cart</span>
-            <span class="badge bg-primary rounded-pill">3</span>
+            
+            <?php
+            if (isset($_SESSION['cart'])) {
+              $count = count($_SESSION['cart']);
+              echo "
+              <span class='badge bg-primary rounded-pill'>$count</span>
+              ";
+            }
+            
+            else{
+              echo "
+              <span class='badge bg-primary rounded-pill'>$count</span>
+              ";
+            }                    
+            ?>
+
           </h4>
 
 
@@ -136,7 +155,6 @@ if (!empty($_SESSION['cart'])) {
 
     $subtotal = 0;
     while ($row = $result->fetch_assoc()) {
-      # code...
       $product_id = $row['product_id'];
       $name = $row['products_name'];
       $price = $row['price'];
@@ -215,7 +233,13 @@ else {
             <div class="row g-3">
               <div class="col-sm-6">
                 <label for="firstName" class="form-label">First name</label>
-                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="" required>
+                <input type="text" 
+                class="form-control" 
+                id="firstName" 
+                name="firstName" 
+                placeholder="" 
+                value="" 
+                required>
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>
@@ -223,7 +247,13 @@ else {
 
               <div class="col-sm-6">
                 <label for="lastName" class="form-label">Last name</label>
-                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="" required>
+                <input type="text" 
+                class="form-control" 
+                id="lastName" 
+                name="lastName" 
+                placeholder="" 
+                value="" 
+                required>
                 <div class="invalid-feedback">
                   Valid last name is required.
                 </div>
@@ -233,7 +263,13 @@ else {
                 <label for="username" class="form-label">Email</label>
                 <div class="input-group has-validation">
                   <span class="input-group-text">@</span>
-                  <input type="text" class="form-control" id="email" name="email" placeholder="Email" pattern="\S+@\S+\.\S+" required>
+                  <input type="text" 
+                  class="form-control" 
+                  id="email" 
+                  name="email" 
+                  placeholder="Email" 
+                  pattern="\S+@\S+\.\S+" 
+                  required>
                   <div class="invalid-feedback">Enter your email.</div>
                   <div class="valid-feedback">The email is valid. You can go to email get orders information.</div>
                 </div>
@@ -241,7 +277,12 @@ else {
 
               <div class="col-12">
                 <label for="address" class="form-label">Address</label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" required>
+                <input type="text" 
+                class="form-control" 
+                id="address" 
+                name="address" 
+                placeholder="1234 Main St" 
+                required>
                 <div class="invalid-feedback">
                   Please enter your shipping address.
                 </div>
@@ -249,7 +290,10 @@ else {
 
               <div class="col-md-5">
                 <label for="country" class="form-label">Country</label>
-                <select class="form-select" id="country" name="country" required>
+                <select class="form-select" 
+                id="country" 
+                name="country" 
+                required>
                   <option value="">Choose...</option>
                   <?php
                   foreach ($countries as $country) {
@@ -261,7 +305,13 @@ else {
 
               <div class="col-md-3">
                 <label for="city" class="form-label">city</label>
-                <input type="text" class="form-control" id="city" name="city" placeholder="California" required>
+                <input 
+                type="text" 
+                class="form-control" 
+                id="city" 
+                name="city" 
+                placeholder="California" 
+                required>
                 <div class="invalid-feedback">
                 Please provide a valid city.
                 </div>
@@ -269,7 +319,13 @@ else {
 
               <div class="col-md-3">
                 <label for="zip" class="form-label">Zip</label>
-                <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="" required>
+                <input 
+                type="text" 
+                class="form-control" 
+                id="postal_code" 
+                name="postal_code" 
+                placeholder="" 
+                required>
                 <div class="invalid-feedback">
                   Zip code required.
                 </div>
@@ -283,7 +339,10 @@ else {
 
             <div class="col-md-3">
               <label for="payment_method" class="form-label">Payment method</label>
-              <select class="form-select" id="payment_method" name="payment_method" required>
+              <select class="form-select" 
+              id="payment_method" 
+              name="payment_method" 
+              required>
                 <option selected disabled value="">Choose...</option>
                 <option value="Credit Card">Credit Card</option>
                 <option value="PayPal">Paypal</option>
