@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="container">
             
             <div class="text-center mb-5">
-                <h2 class="display-5 fw-bold">Reset Password</h2>
+                <h2 class="display-5 fw-bold"><?= __('Reset Password')?></h2>
             </div>
 
             <div class="row justify-content-center">
@@ -130,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                             <div class="col-12">
                                 <div class="d-grid">
-                                    <button class="btn btn-primary btn-lg" type="submit">Reset Password</button>
+                                    <button class="btn btn-primary btn-lg" type="submit"><?= __('Reset Password')?></button>
                                 </div>
                             </div>
 

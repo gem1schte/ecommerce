@@ -6,9 +6,9 @@
 
                 </div>
                 <div>
-                    <a class="text-reset" href="login.html" target="_blank" rel="sponsored">Login</a>
+                    <a class="text-reset" href="login.html" target="_blank" rel="sponsored"><?= __('Login') ?></a>
                     <div class="vr mx-2"></div>
-                    <a class="text-reset" href="register.html" target="_blank">Register</a>
+                    <a class="text-reset" href="register.html" target="_blank"><?= __('Register') ?></a>
                 </div>
             </div>
         </div>
@@ -22,15 +22,35 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.php">Home</a></li>
-                    <li class="nav-item"><a style="display: none;" class="nav-link" href="#!">About</a></li>
-                    <div class="gtranslate_wrapper"></div>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.php"><?= __('Home') ?></a></li>
+
+                    <!-- Translation dropdown -->
+                    <li class="nav-item dropdown d-flex flex-row-reverse">
+                        <button class="btn btn-while dropdown-toggle dropbtn " type="button" id="dropdownMenuButton"
+                            onclick="Dropdown()">
+                            <i class="fa-solid fa-globe"></i>
+                            <?= __('Language') ?>
+                            <ul class="dropdown-menu dropdown-content" id="dropdown-list">
+                                <?php
+                                // 建立目前網址參數（排除 lang 參數）
+                                function current_url_with_lang($lang)
+                                {
+                                    $params = $_GET;
+                                    $params['lang'] = $lang;
+                                    return basename($_SERVER['PHP_SELF']) . '?' . http_build_query($params);
+                                }
+                                ?>
+                                <div><a class="text-reset text-decoration-none" href="<?= current_url_with_lang('en-us'); ?>"><?= __('English(USA)')?></a></div>
+                                <div><a class="text-reset text-decoration-none" href="<?= current_url_with_lang('zh-tw'); ?>"><?= __('Chinese(Traditional)')?></a></div>
+                            </ul>
+                        </button>
+                    </li>
 
                 </ul>
                 <form class="d-flex" action="cart.php">
                     <button class="btn btn-outline-dark" type="submit">
                         <i class="fa-solid fa-cart-shopping"></i>
-                        Cart
+                        <?= __('Cart') ?>
                         <?php
 
                         if (isset($_SESSION['cart'])) {

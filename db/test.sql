@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2025 at 07:03 PM
+-- Generation Time: Apr 18, 2025 at 02:43 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -34,7 +34,7 @@ CREATE TABLE `orders_info` (
   `address` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `postal_code` varchar(20) NOT NULL,
   `orders_created_at` datetime NOT NULL,
-  `payment_method` enum('Credit Card','PayPal','Bank Transfer','Cash') NOT NULL
+  `payment_method` enum('Credit Card','PayPal','Bank Transfer','Cash on delivery') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`product_id`, `products_name`, `products_image`, `description`, `brand`, `original_price`, `price`, `stock_quantity`, `product_star`) VALUES
 (41516, 'Samsung SSD 980 PRO', 'https://upload.wikimedia.org/wikipedia/commons/7/75/Samsung_980_PRO_PCIe_4.0_NVMe_SSD_1TB-top_PNr%C2%B00915.jpg', 'Powered by Samsung in-house controller for pcie® 4.0 SSD, the 980 PRO is optimized for speed. It delivers read speeds up to 7,000 MB/s, making it 2 times faster than PCIe® 3.0 SSDs and 12.7 times faster than SATA SSDs. The 980 PRO achieves max speeds on PCIe® 4.0 and may vary in other environments.', 'Samsung', 999.00, 642.00, 999, 4.5),
 (93038, 'iphone16 pro', 'https://www.apple.com/v/iphone-16-pro/d/images/meta/iphone-16-pro_overview__ejy873nl8yi6_og.png?202412122331a', 'Splash, Water, and Dust Resistant3\nRated IP68 (maximum depth of 6 meters up to 30 minutes) under IEC standard 60529', 'Apple', NULL, 1000.00, 999, 5.0),
-(93586, 'Nvidia RTX 5060', 'https://www.overclockers.co.uk/blog/wp-content/uploads/2024/12/NVIDIA-5060-Rumour-Overclockers-UK-Blog-Feature-Image-Bottom-Text-Blog-1600x900Light-TextTwitter-.png', 'The Nvidia GeForce RTX 5060 is a mid-range desktop graphics card utilizing the GB206 chip based on the Blackwell architecture. The 5060 offers 8 GB GDDR7 graphics memory with a 128-bit memory bus.', 'Nvidia', 999.00, 655.00, 999, 5.0);
+(93586, 'Nvidia RTX 5060', 'https://www.overclockers.co.uk/blog/wp-content/uploads/2025/01/ordering-rtx-50-twitter-1536x864.png', 'The Nvidia GeForce RTX 5060 is a mid-range desktop graphics card utilizing the GB206 chip based on the Blackwell architecture. The 5060 offers 8 GB GDDR7 graphics memory with a 128-bit memory bus.', 'Nvidia', 999.00, 655.00, 999, 5.0);
 
 -- --------------------------------------------------------
 

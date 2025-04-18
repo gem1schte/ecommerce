@@ -91,8 +91,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="row">
                 <div class="col-12">
                     <div class="mb-5">
-                        <h2 class="display-5 fw-bold text-center">Password Reset</h2>
-                        <p class="text-center m-0">Provide the email address associated with your account to recover your password.</p>
+                        <h2 class="display-5 fw-bold text-center"><?= __('Password Reset')?></h2>
+                        <p class="text-center m-0"><?= __('Provide the email address associated with your account to recover your password')?>.</p>
                     </div>
                 </div>
             </div>
@@ -121,18 +121,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                                     <div class="col-12">
                                         <div class="d-grid">
-                                            <button class="btn btn-primary btn-lg" type="submit">Send Reset Mail</button>
+                                            <button class="btn btn-primary btn-lg" type="submit"><?= __('Send Reset Mail')?></button>
                                         </div>
                                     </div>
                                     
                                     <div class="col-12">
                                         <div class="row justify-content-between">
                                             <div class="col-6">
-                                                <a href="login.html" class="link-secondary text-decoration-none">Login</a>
+                                                <a href="login.html" class="link-secondary text-decoration-none"><?= __('Login')?></a>
                                             </div>
                                             <div class="col-6">
                                                 <div class="text-end">
-                                                    <a href="register.html" class="link-secondary text-decoration-none">Register</a>
+                                                    <a href="register.html" class="link-secondary text-decoration-none"><?= __('Register')?></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -153,7 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="d-flex gap-3 flex-column w-100 ">
                                 <a href="mailto:mail@example.com" class="btn btn-lg btn-danger">
                                     <i class="fa-solid fa-envelope"></i>
-                                    <span class="ms-2 fs-6">Contact us via Email</span>
+                                    <span class="ms-2 fs-6"><?= __('Contact us via Email')?></span>
                                 </a>                                                     
                             </div>
                         </div>

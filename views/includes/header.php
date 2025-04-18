@@ -22,5 +22,5 @@
       <span>This site requires JavaScript.</span>
     </div>
   </noscript>
-  
+  <?php include('lang.php');?>
   <?php include('navbar.php');?>

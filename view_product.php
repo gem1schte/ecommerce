@@ -52,14 +52,14 @@ if (isset($_GET['id'])) {
                             ?>
 
                             <div class="mb-4">
-                                <strong>Description:</strong>
+                                <strong><?= __('Description')?>:</strong>
                                     <p><?php echo htmlspecialchars($row['description']); ?></p>
                             </div>
 
                             <!-- Add to Cart Form -->
                             <form action="cart.php" method="post">
                                 <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($row['product_id']) ?>">
-                                <label class="me-2">Quantity:</label>
+                                <label class="me-2"><?= __('Quantity')?>:</label>
                                 <select name="quantity" id="quantity">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -72,7 +72,7 @@ if (isset($_GET['id'])) {
                                     type="submit"
                                     name="add_to_cart">
                                     <i class="fa-solid fa-cart-shopping"></i>
-                                    Add to cart
+                                   <?= __('Add to cart')?>
                                 </button>
 
                             </form>

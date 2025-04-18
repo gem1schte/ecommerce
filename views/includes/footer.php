@@ -28,6 +28,7 @@ https://mdbootstrap.com/docs/standard/navigation/footer/
 
           <div class="social-links">
             <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook" class="social-icon bg-primary"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank" aria-label="Linkedin" class="social-icon bg-primary"><i class="fa-brands fa-linkedin-in"></i></a>
             <a href="https://x.com/" target="_blank" aria-label="Twitter" class="social-icon bg-info"><i class="fa-brands fa-x-twitter"></i></a>
             <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram" class="social-icon bg-danger"><i class="fa-brands fa-instagram"></i></a>
           </div>
@@ -131,16 +132,3 @@ https://mdbootstrap.com/docs/standard/navigation/footer/
 <script src="views/assets/js/Function.js"></script>
 <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-
-<!-- https://gtranslate.io/website-translator-widget -->
-<script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
-<script>
-  window.gtranslateSettings = {
-    "default_language": "en",
-    "languages": ["en", "zh-CN", "ja", "fr", "de"],
-    "alt_flags":{"en":"usa"},
-    "globe_color": "#808080",
-    "wrapper_selector": ".gtranslate_wrapper",
-    "globe_size": 40
-  }
-</script>

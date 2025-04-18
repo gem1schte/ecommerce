@@ -34,7 +34,7 @@ if (isset($_POST['remove_from_cart'])) {
 <body class="bg-white">
 
     <div class="container py-5">
-        <h1 class="text-center">Shopping Cart</h1>
+        <h1 class="text-center"><?= __('Shopping Cart')?></h1>
         <!-- Cart Table -->
         <div class="table-responsive">
                     <?php
@@ -109,7 +109,7 @@ if (isset($_POST['remove_from_cart'])) {
                 <div class="col-md-6 offset-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Cart Summary</h5>
+                            <h5 class="card-title"><?= __('Cart Summary')?></h5>
                             <?php
                             $subtotal = 0;
                             foreach ($_SESSION['cart'] as $product_id => $quantity) {
@@ -123,21 +123,21 @@ if (isset($_POST['remove_from_cart'])) {
                             $total = $subtotal + $tax;
                             ?>
                             <div class="d-flex justify-content-between">
-                                <span>Subtotal</span>
+                                <span><?= __('Subtotal')?></span>
                                 <span>$<?php echo number_format($subtotal, 2); ?></span>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <span>Tax (5%)</span>
+                                <span><?= __('Tax')?>(5%)</span>
                                 <span>$<?php echo number_format($tax, 2); ?></span>
                             </div>
                             <hr>
                             <div class="d-flex justify-content-between fw-bold">
-                                <span>Total</span>
+                                <span><?= __('Total')?></span>
                                 <span>$<?php echo number_format($total, 2); ?></span>
                             </div>
 
                             <form action="checkout.php" method="post">
-                            <button class="btn btn-primary w-100 mt-3">Proceed to Checkout</button>
+                            <button class="btn btn-primary w-100 mt-3"><?= __('Proceed to Checkout')?></button>
                             </form>
 
                         </div>

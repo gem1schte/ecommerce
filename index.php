@@ -35,7 +35,7 @@ if (!$result) {
       <img src="https://i.marieclaire.com.tw/assets/mc/202409/66DF5472DDB321725912178.jpeg" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5>Apple Watch Series 10</h5>
-        <p>Wide‑angle OLED,All‑day battery life, up to 18 hours of normal use6,Up to 36 hours in Low Power Mode6</p>
+        <p>Wide‑angle OLED,All‑day battery life, up to 18 hours of normal,Up to 36 hours in Low Power</p>
       </div>
     </div>
 
@@ -64,31 +64,47 @@ if ($brand_result->num_rows > 0) {
 }
 ?>
 <div class="container py-5">
-<h4 class="mb-0">Product Collection</h4>
+  <h4 class="mb-0"><i class="fa-solid fa-filter"></i><?= __('Filters') ?></h4>
   <div class="row g-4">
     <div class="col-lg-3">
       <div class="filter-sidebar p-4 shadow-sm">
-        <div class="filter-group">
-          <h6 class="mb-3">Categories</h6>
-          <div class="form-check mb-2">
 
-            <label class="form-check-label" for="electronics">
-              <?PHP
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+          <div class="filter-group">
 
-              foreach ($brand as $item) {
-                echo "
-                <input class='form-check-input' type='checkbox' id='electronics'>";
-                echo htmlspecialchars($item) . "<br>";
-              }
-              ?>
+            <h6 class="accordion-header" id="headingOne">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                <?= __('Brand') ?>
+              </button>
+            </h6>
 
-            </label>
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+              data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <div class="form-check mb-2">
+
+                  <label class="form-check-label" for="electronics">
+                    <?PHP
+
+                    foreach ($brand as $item) {
+                      echo "
+  <input class='form-check-input' type='checkbox' id='electronics'>";
+                      echo htmlspecialchars($item) . "<br>";
+                    }
+                    ?>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+
+
           </div>
-
         </div>
 
         <div class="filter-group">
-          <h6 class="mb-3">Price Range</h6>
+          <h6 class="mb-3"><?= __('Price Range') ?></h6>
           <input type="range" class="form-range" min="0" max="1000" value="500">
           <div class="d-flex justify-content-between">
             <span class="text-muted">$0</span>
@@ -97,22 +113,22 @@ if ($brand_result->num_rows > 0) {
         </div>
 
         <div class="filter-group">
-          <h6 class="mb-3">Rating</h6>
+          <h6 class="mb-3"><?= __('Rating') ?></h6>
           <div class="form-check mb-2">
             <input class="form-check-input" type="radio" name="rating" id="rating4">
             <label class="form-check-label" for="rating4">
-              <i class="bi bi-star-fill text-warning"></i> 4 & above
+              <i class="bi bi-star-fill text-warning"></i> 4 & <?= __('above') ?>
             </label>
           </div>
           <div class="form-check mb-2">
             <input class="form-check-input" type="radio" name="rating" id="rating3">
             <label class="form-check-label" for="rating3">
-              <i class="bi bi-star-fill text-warning"></i> 3 & above
+              <i class="bi bi-star-fill text-warning"></i> 3 & <?= __('above') ?>
             </label>
           </div>
         </div>
 
-        <button class="btn btn-outline-primary w-100">Apply Filters</button>
+        <button class="btn btn-outline-primary w-100"><?= __('Apply Filters') ?></button>
       </div>
     </div>
   </div>
@@ -173,7 +189,7 @@ if ($brand_result->num_rows > 0) {
               </div>
               <!-- Product actions-->
               <div class="card-footer d-flex justify-content-between bg-light">
-                <div class="text-center"><a class="btn btn-primary btn-sm" href="view_product.php?id=<?php echo htmlspecialchars($row['product_id']); ?>">View products</a></div>
+                <div class="text-center"><a class="btn btn-primary btn-sm" href="view_product.php?id=<?php echo htmlspecialchars($row['product_id']); ?>"><?= __('View products') ?></a></div>
               </div>
 
             </div>

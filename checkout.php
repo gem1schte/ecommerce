@@ -55,6 +55,9 @@ if (isset($_POST['checkout'])) {
                   }, 100);
           </script>
           ";
+          echo '<div class = "error">';
+          echo 'Your order id is: ' . $orders_id;
+          echo '</div>';
     } else {
       echo '
         <script>
@@ -87,13 +90,13 @@ if (isset($_POST['checkout'])) {
   <div class="container">
     <main>
       <div class="py-5 text-center">
-        <h2>Thanks you for buying our products</h2>
+        <h2><?= __('Thanks you for buying our products') ?></h2>
       </div>
 
       <div class="row g-5">
         <div class="col-md-5 col-lg-4 order-md-last">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-primary">Your cart</span>
+            <span class="text-primary"><?= __('Your cart') ?></span>
 
             <?php
             if (isset($_SESSION['cart'])) {
@@ -176,7 +179,7 @@ if (isset($_POST['checkout'])) {
 
                 <li class='list-group-item d-flex justify-content-between bg-body-tertiary'>
                   <div class='text-success'>
-                    <h6 class='my-0'>Tax </h6>
+                    <h6 class='my-0'><?= __('Tax') ?></h6>
                     <small>(5%)</small>
                   </div>
                   <span class='text-success'><?= $tax ?></span>
@@ -184,14 +187,13 @@ if (isset($_POST['checkout'])) {
 
                 <li class='list-group-item d-flex justify-content-between bg-body-tertiary'>
                   <div class='text-success'>
-                    <h6 class='my-0'>Promo code</h6>
-                    <small>EXAMPLECODE</small>
+                    <h6 class='my-0'><?= __('Promo code') ?></h6>
                   </div>
                   <span class='text-success'>−$5</span>
                 </li>
 
                 <li class='list-group-item d-flex justify-content-between'>
-                  <span>Total (USD)</span>
+                  <span><?= __('Total') ?> (USD)</span>
                   <strong><?= $subtotal ?></strong>
                 </li>
 
@@ -208,19 +210,22 @@ if (isset($_POST['checkout'])) {
 
           <form class="card p-2">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Promo code">
-              <button type="submit" class="btn btn-secondary">Redeem</button>
+              <input type="text" 
+              class="form-control" 
+              placeholder="<?= __('Promo code') ?>"
+              >
+              <button type="submit" class="btn btn-secondary"><?= __('Redeem') ?></button>
             </div>
           </form>
         </div>
 
 
         <div class="col-md-7 col-lg-8">
-          <h4 class="mb-3">Billing address</h4>
+          <h4 class="mb-3"><?= __('Billing address') ?></h4>
           <form class="needs-validation" method="post">
             <div class="row g-3">
               <div class="col-sm-6">
-                <label for="firstName" class="form-label">First name</label>
+                <label for="firstName" class="form-label"><?= __('First name') ?></label>
                 <input type="text"
                   class="form-control"
                   id="firstName"
@@ -229,12 +234,12 @@ if (isset($_POST['checkout'])) {
                   value=""
                   required>
                 <div class="invalid-feedback">
-                  Valid first name is required.
+                  <?= __('Real first name is required') ?>
                 </div>
               </div>
 
               <div class="col-sm-6">
-                <label for="lastName" class="form-label">Last name</label>
+                <label for="lastName" class="form-label"><?= __('Last name') ?></label>
                 <input type="text"
                   class="form-control"
                   id="lastName"
@@ -243,12 +248,12 @@ if (isset($_POST['checkout'])) {
                   value=""
                   required>
                 <div class="invalid-feedback">
-                  Valid last name is required.
+                  <?= __('Real last name is required') ?>
                 </div>
               </div>
 
               <div class="col-12">
-                <label for="username" class="form-label">Email</label>
+                <label for="username" class="form-label"><?= __('Email') ?></label>
                 <div class="input-group has-validation">
                   <span class="input-group-text">@</span>
                   <input type="text"
@@ -258,13 +263,13 @@ if (isset($_POST['checkout'])) {
                     placeholder="Email"
                     pattern="\S+@\S+\.\S+"
                     required>
-                  <div class="invalid-feedback">Enter your email.</div>
-                  <div class="valid-feedback">The email is valid. You can go to email get orders information.</div>
+                  <div class="invalid-feedback"><?= __('Enter your email address') ?></div>
+                  <div class="valid-feedback"><?= __('The email is valid. You can go to email get orders information') ?></div>
                 </div>
               </div>
 
               <div class="col-12">
-                <label for="address" class="form-label">Address</label>
+                <label for="address" class="form-label"><?= __('Address') ?></label>
                 <input type="text"
                   class="form-control"
                   id="address"
@@ -272,12 +277,12 @@ if (isset($_POST['checkout'])) {
                   placeholder="1234 Main St"
                   required>
                 <div class="invalid-feedback">
-                  Please enter your shipping address.
+                  <?= __('Please enter your shipping address') ?>
                 </div>
               </div>
 
               <div class="col-md-5">
-                <label for="country" class="form-label">Country</label>
+                <label for="country" class="form-label"><?= __('Country') ?></label>
                 <select class="form-select"
                   id="country"
                   name="country"
@@ -292,21 +297,21 @@ if (isset($_POST['checkout'])) {
               </div>
 
               <div class="col-md-3">
-                <label for="city" class="form-label">city</label>
+                <label for="city" class="form-label"><?= __('city') ?></label>
                 <input
                   type="text"
                   class="form-control"
                   id="city"
                   name="city"
-                  placeholder="California"
+                  placeholder="<?= __('California') ?>"
                   required>
                 <div class="invalid-feedback">
-                  Please provide a valid city.
+                  <?= __('Provide a valid city') ?>
                 </div>
               </div>
 
               <div class="col-md-3">
-                <label for="zip" class="form-label">Zip</label>
+                <label for="zip" class="form-label"><?= __('Zip') ?></label>
                 <input
                   type="text"
                   class="form-control"
@@ -315,7 +320,7 @@ if (isset($_POST['checkout'])) {
                   placeholder=""
                   required>
                 <div class="invalid-feedback">
-                  Zip code required.
+                  <?= __('Provide a valid Zip code') ?>
                 </div>
               </div>
 
@@ -323,25 +328,25 @@ if (isset($_POST['checkout'])) {
 
             <hr class="my-4">
 
-            <h4 class="mb-3">Payment </h4>
+            <h4 class="mb-3"><?= __('Payment') ?> </h4>
 
             <div class="col-md-3">
-              <label for="payment_method" class="form-label">Payment method</label>
+              <label for="payment_method" class="form-label"><?= __('Payment method') ?></label>
               <select class="form-select"
                 id="payment_method"
                 name="payment_method"
                 required>
-                <option selected disabled value="">Choose...</option>
-                <option value="Credit Card">Credit Card</option>
+                <option selected disabled value=""><?= __('Choose') ?>...</option>
+                <option value="Credit Card"><?= __('Credit Card') ?></option>
                 <option value="PayPal">Paypal</option>
-                <option value="Bank Transfer">Bank Transfer</option>
-                <option value="Cash">Cash</option>
+                <option value="Bank Transfer"><?= __('Bank Transfer') ?></option>
+                <option value="Cash on delivery"><?= __('Cash on delivery') ?></option>
               </select>
             </div>
 
             <hr class="my-4">
 
-            <button class="w-100 btn btn-primary btn-lg" type="submit" name="checkout">Continue to checkout</button>
+            <button class="w-100 btn btn-primary btn-lg" type="submit" name="checkout"><?= __('Continue to checkout') ?></button>
           </form>
 
         </div>
