@@ -1,6 +1,5 @@
 <?php
-include 'views/includes/header.php';
-include 'views/includes/config.php';
+require_once __DIR__ . '/core/config.php';
 
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
@@ -26,6 +25,7 @@ if (isset($_POST['remove_from_cart'])) {
     unset($_SESSION['cart'][$product_id]);
 }
 ?>
+<?php include 'views/includes/header.php';?>
 
 <title>Cart</title>
 
@@ -101,7 +101,7 @@ if (isset($_POST['remove_from_cart'])) {
                 }
             } else {
                 echo "<p style='user-select: none;' class='fs-1 text-center  text-danger'>" . __('Your cart is empty') . "</p>";
-                echo "<p class='text-center'><a href='" . $web_url . "index.php' class='btn btn-primary'>" .  __('Continue Shopping') . "</a></p>";
+                echo "<p class='text-center'><a href='" . WEBSITE_URL . "index.php' class='btn btn-primary'>" .  __('Continue Shopping') . "</a></p>";
             }
             ?>
         </div>
@@ -139,7 +139,7 @@ if (isset($_POST['remove_from_cart'])) {
                                 <span>$<?php echo number_format($total, 2); ?></span>
                             </div>
 
-                            <form action=<?= $web_url . "checkout.php" ?> method="post">
+                            <form action=<?= WEBSITE_URL . "checkout.php" ?> method="post">
                                 <button class="btn btn-primary w-100 mt-3"><?= __('Proceed to Checkout') ?></button>
                             </form>
 

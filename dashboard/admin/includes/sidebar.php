@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=$admin_url . "index.php"?>">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=ADMIN_URL . "index.php"?>">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fa-solid fa-lock"></i>
         </div>
@@ -20,7 +20,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="<?=$admin_url . "index.php"?>">
+        <a class="nav-link" href="<?=ADMIN_URL . "index.php"?>">
             <i class="fa-solid fa-gauge"></i>
             <span>Dashboard</span></a>
     </li>
@@ -43,8 +43,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Select:</h6>
-                <a class="collapse-item" href="<?=$admin_url . "products.php"?>">New products</a>
-                <!-- <a class="collapse-item" href="http://localhost/Database/dashboard/admin/functions/edit_product.php">Edit products</a> -->
+                <a class="collapse-item" href="<?=ADMIN_URL . "products.php"?>">New products</a>
             </div>
         </div>
     </li>

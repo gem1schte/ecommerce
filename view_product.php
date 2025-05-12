@@ -1,5 +1,5 @@
 <?php
-require_once 'views/includes/config.php';
+require_once __DIR__ . '/core/config.php';
 
 if (isset($_GET['id'])) {
     $product_id = $_GET['id'];
@@ -16,7 +16,7 @@ if (isset($_GET['id'])) {
 
         <?php include('views/includes/header.php');?>
         
-        <title>Tempest shopping</title>
+        <title>View Product</title>
 
         <div class="container py-5">
             <div class="row">
@@ -56,7 +56,7 @@ if (isset($_GET['id'])) {
                             </div>
 
                             <!-- Add to Cart Form -->
-                            <form action="<?= $web_url . "cart.php" ?>" method="post">
+                            <form action="<?= WEBSITE_URL . "cart.php" ?>" method="post">
                                 <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($row['product_id']) ?>">
                                 <label class="me-2"><?= __('Quantity')?>:</label>
                                 <select name="quantity" id="quantity">
@@ -121,7 +121,10 @@ if (isset($_GET['id'])) {
 
 <?php
     } else {
-        echo "Product not found.";
+        echo "
+        <stropng>Product not found.</strong><br>
+        <a href='index.php'>Continue Shopping.</a>
+        ";
     }
     $stmt->close();
 } else {

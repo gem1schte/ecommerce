@@ -1,9 +1,3 @@
-<?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,11 +16,5 @@ if (session_status() === PHP_SESSION_NONE) {
 </head>
 
 <body>
-
-  <noscript>
-    <div class="no_js">
-      <span>This site requires JavaScript.</span>
-    </div>
-  </noscript>
-  <?php include('lang.php');?>
+  <?php include(__DIR__ . '/../../functions/includes/lang.php'); ?>
   <?php include('navbar.php');?>

@@ -1,6 +1,6 @@
 <?Php
-require_once '../../views/includes/config.php';
-include_once '../../views/includes/assets.php';
+require_once __DIR__ . '/../../core/config.php';
+require_once __DIR__ . '/../../views/includes/assets.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (

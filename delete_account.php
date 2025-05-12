@@ -1,5 +1,5 @@
 <?php
-require_once 'views/includes/config.php';
+require_once __DIR__ . '/core/config.php';
 include_once 'views/includes/assets.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     confirmButtonText: 'Yes, Delete My Account!'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = 'delete.php?confirm=true&username=" . urlencode($username) . "';
+                        window.location.href = 'delete_account.php?confirm=true&username=" . urlencode($username) . "';
                     } else {
                         window.history.back();
                     }

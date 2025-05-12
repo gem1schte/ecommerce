@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2025 at 02:19 PM
+-- Generation Time: May 10, 2025 at 05:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -95,9 +95,8 @@ CREATE TABLE `register` (
 --
 
 INSERT INTO `register` (`user_id`, `username`, `password`, `email`, `token`, `token_expiry`, `account_registered_at`, `last_login_time`, `first_name`, `last_name`) VALUES
-(219273716, 'Test456', '$2y$10$RvBrSlV4tQio0k6FW6apPe1vh8qyNkiKiVhi7iI3JDoPfbM5htFNa', 'Test456@yahoo.com', NULL, NULL, '2024-12-27 14:35:21', '2025-03-25 14:18:18', '', ''),
-(3253652496792670337, 'Test789', '$2y$10$u68BZauRWGSQ/EYNusgNFuXUZCTL2GkI8tBjfhVzrkwaTbQVZDy/C', 'Test789@icloud.com', NULL, NULL, '2024-12-28 14:41:58', '2025-03-25 14:16:10', '', ''),
-(4845727533474930302, 'Test123', '$2y$10$llpH5dn.MyYyIXOsk.1H0ueebvX.y7YDJUupZuCTx8UlDA/qv943K', 'Test123@gmail.com', NULL, NULL, '2024-12-28 14:41:01', '2025-04-22 11:46:19', '', '');
+(219273716, 'Test456', '$2y$10$jCrH3TMWJIyn9AgPHgarhO7SieUGRdkWeqG.U8rvhtqv8uBQoJTgW', 'Test456@gmail.com', NULL, NULL, '2024-12-27 14:35:21', '2025-03-25 14:18:18', '', ''),
+(4845727533474930302, 'Test123', '$2y$10$llpH5dn.MyYyIXOsk.1H0ueebvX.y7YDJUupZuCTx8UlDA/qv943K', 'Test123@gmail.com', NULL, NULL, '2024-12-28 14:41:01', '2025-04-22 11:46:19', 'Douglas', 'McGee');
 
 --
 -- Indexes for dumped tables

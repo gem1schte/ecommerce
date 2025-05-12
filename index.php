@@ -3,7 +3,8 @@
  -->
 
 <?php
-include 'views/includes/config.php';
+require_once __DIR__ . '/core/config.php';
+
 $sql = 'SELECT product_id, product_name, original_price,description,brand,price, product_star,product_images FROM products';
 $result = $conn->query($sql);
 
@@ -14,36 +15,23 @@ if (!$result) {
 
 <?php include('views/includes/header.php'); ?>
 
-<title>Tempest shopping</title>
+<title>Tempest Shopping</title>
 
 <!-- Start carousel -->
-<div id="carouselExampleCaptions" class="carousel slide" style="user-select: none;">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-  </div>
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img src="https://www.nvidia.com/content/dam/en-zz/Solutions/geforce/graphic-cards/50-series/rtx-5090/geforce-rtx-5090-bm-xl770-d.jpg" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Nvidia Rtx 5060</h5>
-        <p>The Nvidia GeForce RTX 5060 is a mid-range desktop graphics card utilizing the GB206 chip based on the Blackwell architecture. The 5060 offers 8 GB GDDR7 graphics memory with a 128-bit memory bus.</p>
-      </div>
     </div>
-    <div class="carousel-item mx-auto col-md-8 col-lg-6 order-lg-last">
+    <div class="carousel-item">
       <img src="https://i.marieclaire.com.tw/assets/mc/202409/66DF5472DDB321725912178.jpeg" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Apple Watch Series 10</h5>
-        <p>Wide‑angle OLED,All‑day battery life, up to 18 hours of normal,Up to 36 hours in Low Power</p>
-      </div>
     </div>
-
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
@@ -98,8 +86,6 @@ if ($brand_result->num_rows > 0) {
                   </div>
                 </div>
               </div>
-
-
 
             </div>
           </div>
@@ -191,7 +177,7 @@ if ($brand_result->num_rows > 0) {
               </div>
               <!-- Product actions-->
               <div class="card-footer d-flex justify-content-between bg-light">
-                <div class="text-center"><a class="btn btn-primary btn-sm" href="<?= $web_url . "view_product.php?id=" ?><?php echo htmlspecialchars($row['product_id']); ?>"><?= __('View products') ?></a></div>
+                <div class="text-center"><a class="btn btn-primary btn-sm" href="<?= WEBSITE_URL . "view_product.php?id=" ?><?php echo htmlspecialchars($row['product_id']); ?>"><?= __('View products') ?></a></div>
               </div>
 
             </div>
@@ -201,8 +187,6 @@ if ($brand_result->num_rows > 0) {
       ?>
 
     </div>
-  </div>
-  </div>
   </div>
 </section>
 <!-- Footer -->

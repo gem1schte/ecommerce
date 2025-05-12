@@ -3,9 +3,9 @@
  -->
 
 <?php
-include_once 'views/includes/config.php';
+require_once __DIR__ . '/core/config.php';
 include_once 'views/includes/assets.php';
-include_once 'views/mail/mailer.php';
+include_once 'functions/includes/mailer.php';
 
 //all country list
 $all_countries_list = "https://www.apicountries.com/countries";
@@ -200,11 +200,10 @@ if (isset($_POST['checkout'])) {
               echo "<tr><td colspan='5'>Error: " . $conn->error . "</td></tr>";
             }
           } else {
-            echo "<p>" . __('Your cart is empty') ."</p>";
-            echo "<a href='" . $web_url . "index.php' class='text-reset text-decoration-none'>" .  __('Continue Shopping') ."</a>";
+            echo "<p>" . __('Your cart is empty') . "</p>";
+            echo "<p class='text-center'><a href='" . WEBSITE_URL . "index.php' class='btn btn-primary'>" .  __('Continue Shopping') . "</a></p>";
           }
           ?>
-
 
           <form class="card p-2">
             <div class="input-group">
@@ -315,7 +314,6 @@ if (isset($_POST['checkout'])) {
                   <option value="">Choose...</option>
                   <?php
                   foreach ($countries as $country) {
-                    // echo "<option value='" . $country['name']['common'] . "'>" . $country['name']['common'] . "</option>";
                     echo "<option value='" . htmlspecialchars($country['name']) . "'>" . htmlspecialchars($country['name']) . "</option>";
                   }
                   ?>
@@ -375,7 +373,7 @@ if (isset($_POST['checkout'])) {
             <button class="w-100 btn btn-primary btn-lg" type="submit" name="checkout"><?= __('Continue to checkout') ?></button>
           </form>
 
-          <form action="views/payment/stripe.php" method="POST">
+          <form action="functions/payment/stripe/stripe.php" method="POST">
             <button class="btn btn-lg btn-dark">
               <i class="fa-solid fa-credit-card"></i>
               <span class="ms-2 fs-6"><?= __('Debit Card or Credit Card') ?></span>

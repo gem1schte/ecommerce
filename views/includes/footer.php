@@ -32,7 +32,7 @@ https://mdbootstrap.com/docs/standard/navigation/footer/
             <a href="https://x.com/" target="_blank" aria-label="Twitter" class="social-icon bg-info"><i class="fa-brands fa-x-twitter"></i></a>
             <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram" class="social-icon bg-danger"><i class="fa-brands fa-instagram"></i></a>
           </div>
-          
+
         </div>
         <!-- Grid column -->
 
@@ -131,4 +131,11 @@ https://mdbootstrap.com/docs/standard/navigation/footer/
 <!-- Scripts -->
 <script src="views/assets/js/Function.js"></script>
 <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<noscript>
+  <div class="no_js">
+    <span>This site requires JavaScript.</span>
+  </div>
+</noscript>

@@ -2,10 +2,9 @@
 https://bootstrapbrain.com/component/bootstrap-free-forgot-password-form-snippet/#code 
 -->
 <?php
-require_once 'views/includes/config.php';
+require_once __DIR__ . '/core/config.php';
 include_once 'views/includes/assets.php';
-include_once 'views/mail/mailer.php';
-
+include_once 'functions/includes/mailer.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // generate a unique random token of length 32

@@ -1,5 +1,6 @@
 <?php
-require_once 'views/includes/config.php';
+session_start();
+require_once __DIR__ . '/core/config.php';
 include_once 'views/includes/assets.php';
 // Execute the following logic only if a POST request is received
 if ($_SERVER["REQUEST_METHOD"] === "POST") {

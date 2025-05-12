@@ -1,6 +1,5 @@
 <?php
-require_once '../../views/includes/config.php';
-
+require_once __DIR__ . '/../../core/config.php';
 
 $sql = 'SELECT product_id, product_name, brand,stock_quantity,original_price,description,price, product_star,product_images FROM products';
 $result = $conn->query($sql);
@@ -88,7 +87,7 @@ if (!$result) {
 
                     <!-- Delete product -->
                     <td>
-                        <form action=<?= $admin_url . "functions/delete_product.php?id=" . htmlspecialchars($row['product_id'])?> method='post' class='d-inline'>
+                        <form action=<?= ADMIN_URL . "functions/delete_product.php?id=" . htmlspecialchars($row['product_id'])?> method='post' class='d-inline'>
                             <input type='hidden' name='product_id' value='<?= htmlspecialchars($row['product_id']); ?>'>
                             <button type='submit' name='submit' class='btn btn-danger'><i class="fa-solid fa-trash"></i></button>
                         </form>
@@ -96,7 +95,7 @@ if (!$result) {
 
                     <!-- Edit product -->
                     <td>
-                        <form action=<?= $admin_url . "functions/edit_product.php?id=" . htmlspecialchars($row['product_id'])?> method="post" class="d-d-inline">
+                        <form action=<?= ADMIN_URL . "functions/edit_product.php?id=" . htmlspecialchars($row['product_id'])?> method="post" class="d-d-inline">
                             <input type="hidden" name='product_id' value='<?= htmlspecialchars($row['product_id']); ?>'>
                             <button type="submit" name='submit' class="btn btn-secondary"><i class="fa-solid fa-pen-to-square"></i></button>
                         </form>

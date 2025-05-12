@@ -1,5 +1,5 @@
 <?php
-require_once 'views/includes/config.php';
+require_once __DIR__ . '/core/config.php';
 include_once 'views/includes/assets.php';
 // Prepare statement
 $register_account = "INSERT INTO register (username,first_name,last_name,user_id, email, password, account_registered_at) 

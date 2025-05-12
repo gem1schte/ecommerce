@@ -1,6 +1,6 @@
 <?php
-require_once '../../../views/includes/config.php';
-require_once '../../../views/includes/assets.php';
+require_once __DIR__ . '/../../../core/config.php';
+require_once __DIR__ . '/../../../views/includes/assets.php';
 
 $product_id = null;
 $product_names = $product_description = $price = $original_price = $stock_quantity = $brand = $product_images = "";

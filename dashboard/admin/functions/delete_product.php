@@ -1,6 +1,6 @@
 <?php
-require_once '../../../views/includes/config.php';
-require_once '../../../views/includes/assets.php';
+require_once __DIR__ . '/../../../core/config.php';
+require_once __DIR__ . '/../../../views/includes/assets.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
@@ -8,8 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $product_id = $_POST['product_id'];
 
     if ($product_id) {
-        $sql = "DELETE FROM products WHERE product_id = ?";
-        $stmt = $conn->prepare($sql);
+        $delete_products = "DELETE FROM products WHERE product_id = ?";
+        $stmt = $conn->prepare($delete_products);
 
         if ($stmt) {
             $stmt->bind_param("i", $product_id);
