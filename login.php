@@ -1,7 +1,8 @@
 <?php
 session_start();
 require_once __DIR__ . '/core/config.php';
-include_once 'views/includes/assets.php';
+require_once __DIR__ . '/views/includes/assets.php';
+
 // Execute the following logic only if a POST request is received
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Ensure that the form fields exist
@@ -10,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $password = $_POST['password'];
 
         // Use a prepared statement to query the database
-        $login_account = "SELECT password FROM register WHERE username = ? ";
+        $login_account = "SELECT password FROM user_accounts WHERE username = ? ";
         $stmt = $conn->prepare($login_account);
 
         if ($stmt) {
@@ -35,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     
                     // Update last login time                    
                     $login_time = date('Y-m-d H:i:s');
-                    $update_sql = "UPDATE register SET last_login_time = ? WHERE username = ?";
+                    $update_sql = "UPDATE user_accounts SET last_login_time = ? WHERE username = ?";
                     $update_stmt = $conn->prepare($update_sql);
                     if ($update_stmt) {
                         // Bind parameters for the update statement
@@ -46,7 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     }
 
                 } else {
-                    echo '
+                    ?>
+                   
                     <script>
                         setTimeout(function() {
                             Swal.fire({
@@ -60,11 +62,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             });
                         }, 100);
                     </script>
-                    ';
 
+                    <?php
                 }
             } else {
-                echo '
+                ?>
+              
                 <script>
                     setTimeout(function() {
                         Swal.fire({
@@ -72,13 +75,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             title: "Oops...",
                             text: "User not found!",
                             footer: "<a href=\"register.html\">Register a new account now?</a>"
-                           
                         }).then(() => {
                             window.location = "login.html";
                         });
                     }, 100);
                 </script>
-                ';
+                
+                <?php
                 exit();
          
             }

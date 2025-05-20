@@ -4,12 +4,9 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  /* overflow-x: hidden; */
-  /* box-sizing: border-box; */
 }
 
 body {
-  /* overflow-y: scroll; */
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -20,7 +17,6 @@ main {
 }
 
 footer {
-  /* position: relative; */
   color: #eeeeee;
   padding: 1px 0 0 0;
   text-align: center;
@@ -28,9 +24,6 @@ footer {
   font-size: 15px;
   margin-top: auto;
   height: 60px;
-  /* bottom: 0;
-	  width: 100%;
-	  margin: 100px 0 0 0; */
 }
 
 #navbar {
@@ -92,18 +85,6 @@ footer {
   width: 95%;
   border-radius: 5px;
   margin: 2px auto;
-}
-
-input.valid:focus,
-textarea.valid:focus {
-  border-color: #48d848;
-  box-shadow: 0 0 0 3px rgba(85, 255, 0, 0.66);
-}
-
-input.invalid:focus,
-textarea.invalid:focus {
-  border-color: #d84848;
-  box-shadow: 0 0 0 3px rgb(244, 4, 4);
 }
 
 .for-check-input,

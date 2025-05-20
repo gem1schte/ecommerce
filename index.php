@@ -13,7 +13,7 @@ if (!$result) {
 }
 ?>
 
-<?php include('views/includes/header.php'); ?>
+<?php include __DIR__. ('/views/includes/header.php');?>
 
 <title>Tempest Shopping</title>
 
@@ -99,22 +99,6 @@ if ($brand_result->num_rows > 0) {
             </div>
           </div>
 
-          <div class="filter-group">
-            <h6 class="mb-3"><?= __('Rating') ?></h6>
-            <div class="form-check mb-2">
-              <input class="form-check-input" type="radio" name="rating" id="rating4">
-              <label class="form-check-label" for="rating4">
-                <i class="bi bi-star-fill text-warning"></i> 4 & <?= __('above') ?>
-              </label>
-            </div>
-            <div class="form-check mb-2">
-              <input class="form-check-input" type="radio" name="rating" id="rating3">
-              <label class="form-check-label" for="rating3">
-                <i class="bi bi-star-fill text-warning"></i> 3 & <?= __('above') ?>
-              </label>
-            </div>
-          </div>
-
           <button class="btn btn-outline-primary w-100"><?= __('Apply Filters') ?></button>
         </div>
       </div>
@@ -135,18 +119,14 @@ if ($brand_result->num_rows > 0) {
 
               <?php
               if ($row['original_price'] > $row['price']) {
-                echo "
-                  <div class='badge bg-dark text-white position-absolute' style='top: 0.5rem; right: 0.5rem'>Sale</div>
-                  ";
+                echo "<div class='badge bg-dark text-white position-absolute' style='top: 0.5rem; right: 0.5rem'>" . __('Sale') . "</div>";
               }
               ?>
 
               <?php
               if ($row['original_price'] > $row['price']) {
                 $discount = round((($row['original_price'] - $row['price']) / $row['original_price']) * 100);
-                echo "
-                    <div class='badge bg-success text-white position-absolute' style='top: 0.5rem; left: 0.5rem'>$discount%</div>
-                  ";
+                echo "<div class='badge bg-success text-white position-absolute' style='top: 0.5rem; left: 0.5rem'>$discount%</div>";     
               }
               ?>
 
@@ -189,8 +169,10 @@ if ($brand_result->num_rows > 0) {
     </div>
   </div>
 </section>
+<!-- End Section -->
+
 <!-- Footer -->
-<?php include('views/includes/footer.php'); ?>
+<?php include __DIR__. ('/views/includes/footer.php');?>
 
 </body>
 

@@ -25,7 +25,7 @@ try {
     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
-    $mail->setFrom($_ENV['SMTP_Recipients'], 'Mailer');
+    $mail->setFrom($_ENV['SMTP_Recipients'], $_ENV['SMTP_name']);
     $mail->addBCC ($_ENV['SMTP_Recipients']); 
 
     //Content

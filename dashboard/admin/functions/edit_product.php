@@ -61,7 +61,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         );
         if ($stmt->execute()) {
             if ($stmt->affected_rows > 0 ){
-                echo "
+                ?>
+            
                 <script>
                     setTimeout(function() {
                         Swal.fire({
@@ -74,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                         });
                     }, 100);
                 </script>
-                ";
+               <?php
                 exit;
             }
      
@@ -87,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 }
 ?>
 
-<?php include('../includes/header.php'); ?>
+<?php include __DIR__ . ('/../includes/header.php'); ?>
 <!-- Custom styles for this template-->
 <link href="../assets/css/sb-admin-2.min.css" rel="stylesheet">
 
@@ -215,16 +216,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
 </div>
 
-
-<!-- Bootstrap core JavaScript-->
-<script src="../assets/js/jquery.min.js"></script>
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="../assets/js/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="../assets/js/sb-admin-2.min.js"></script>
-<?php
-include('../includes/footer.php');
-?>
+<!-- Footer -->
+<?php include __DIR__ . ('/../includes/footer.php'); ?>

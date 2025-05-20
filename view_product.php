@@ -14,7 +14,7 @@ if (isset($_GET['id'])) {
         $row = $result->fetch_assoc();
 ?>
 
-        <?php include('views/includes/header.php');?>
+        <?php include __DIR__. ('/views/includes/header.php');?>
         
         <title>View Product</title>
 
@@ -114,10 +114,8 @@ if (isset($_GET['id'])) {
             </div>
         </section>
 
-
-
         <!-- Footer -->
-        <?php include('views/includes/footer.php');?>
+        <?php include __DIR__. ('/views/includes/footer.php');?>
 
 <?php
     } else {

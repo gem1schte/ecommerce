@@ -24,8 +24,24 @@ if (isset($_POST['remove_from_cart'])) {
     $product_id = filter_var($_POST['product_id'], FILTER_SANITIZE_NUMBER_INT);
     unset($_SESSION['cart'][$product_id]);
 }
+
+// delete quantity
+if (isset($_POST['delete_quantity'])) {
+    $product_id = filter_var($_POST['product_id'], FILTER_SANITIZE_NUMBER_INT);
+    $quantity = filter_var($_POST['quantity'], FILTER_SANITIZE_NUMBER_INT);
+
+    if ($product_id > 0 && $quantity > 0 && isset($_SESSION['cart'][$product_id])) {
+        $_SESSION['cart'][$product_id] -= $quantity;
+    }
+
+    //when cart quantity is 0, remove product from cart
+    if ($_SESSION['cart'][$product_id] <= 0) {
+        unset($_SESSION['cart'][$product_id]);
+    }
+}
 ?>
-<?php include 'views/includes/header.php';?>
+
+<?php include __DIR__ . ('/views/includes/header.php'); ?>
 
 <title>Cart</title>
 
@@ -69,11 +85,15 @@ if (isset($_POST['remove_from_cart'])) {
                                     </div>
 
                                     <div class='col-md-2'>
-                                        <div class='input-group'>
-                                            <button class='btn btn-outline-secondary btn-sm' value='-1' type='button'>-</button>
-                                            <input style='max-width:100px' type='text' class='form-control  form-control-sm text-center quantity-input' value='<?= $quantity ?>'>
-                                            <button class='btn btn-outline-secondary btn-sm' value='1' type='button'>+</button>
-                                        </div>
+                                        <form method="POST">
+                                            <div class='input-group'>
+                                                <input type="hidden" name="product_id" value="<?= $product_id ?>">
+                                                <input type="hidden" name="quantity" value="1">
+                                                <button class='btn btn-outline-secondary btn-sm' name="delete_quantity" value='-1' type='submit'>-</button>
+                                                <input style='max-width:100px' type='text' class='form-control form-control-sm text-center quantity-input' value='<?= $quantity ?>'>
+                                                <button class='btn btn-outline-secondary btn-sm' name="add_to_cart" value='1' type='submit'>+</button>
+                                            </div>
+                                        </form>
                                     </div>
 
                                     <div class='col-md-2 text-end'>
@@ -151,7 +171,7 @@ if (isset($_POST['remove_from_cart'])) {
     </div>
 
     <!-- Footer -->
-    <?php include('views/includes/footer.php'); ?>
+    <?php include __DIR__ . ('/views/includes/footer.php'); ?>
 
 </body>
 

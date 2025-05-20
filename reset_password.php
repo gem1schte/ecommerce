@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/core/config.php';
-include_once 'views/includes/assets.php';
+require_once __DIR__ . '/views/includes/assets.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-            $sql = "SELECT token, token_expiry FROM register WHERE token = ?";
+            $sql = "SELECT token, token_expiry FROM user_accounts WHERE token = ?";
 
             if (isset($_GET['token'])) {
 
@@ -31,39 +31,69 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $token_expiry = $row['token_expiry'];
 
                         if ($token === $db_token && strtotime($token_expiry) > time()) {
-                            $update_password = "UPDATE register SET password = ?,token = NULL, token_expiry = NULL WHERE token = ?";
+                            $update_password = "UPDATE user_accounts SET password = ?,token = NULL, token_expiry = NULL WHERE token = ?";
                             $stmt = $conn->prepare($update_password);
 
                             if ($stmt) {
                                 $stmt->bind_param("ss", $password, $token);
                                 if ($stmt->execute()) {
-                                    echo "
-                                <script>
-                                    setTimeout(function() {
-                                        Swal.fire({
-                                            icon: 'success',
-                                            title: 'Success!',
-                                            text: 'Your password has been successfully reset!',
-                                            showConfirmButton: true,
-                                        }).then(() => {
-                                            window.location = 'login.html';
-                                        });
-                                    }, 100);
-                                </script>
-                                ";
+?>
+
+                                    <script>
+                                        setTimeout(function() {
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: 'Success!',
+                                                text: 'Your password has been successfully reset!',
+                                                showConfirmButton: true,
+                                            }).then(() => {
+                                                window.location = 'login.html';
+                                            });
+                                        }, 100);
+                                    </script>
+                        <?php
                                 }
                             }
                         }
                     } else {
-                        echo '<div class = "error">';
-                        echo ("Token not found or has expired.");
-                        echo '</div>';
+                        ?>
+
+                        <script>
+                            setTimeout(function() {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Token Error:',
+                                    text: 'Token not found or has expired.',
+                                    showConfirmButton: true,
+                                }).then(() => {
+                                    window.location = 'forget_password.php';
+                                })
+                            }, 100);
+                        </script>
+
+            <?php
+
                     }
                 }
             }
+        } else {
+            ?>
+
+            <script>
+                setTimeout(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Password Error',
+                        text: 'Passwords do not match.',
+                    });
+                }, 100);
+            </script>
+
+        <?php
         }
     } else {
-        echo "
+        ?>
+
         <script>
             setTimeout(function() {
                 Swal.fire({
@@ -74,21 +104,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 })
             }, 100);
         </script>
-        ";
+<?php
     }
 }
 ?>
 
-<?php include('views/includes/header.php');?>
+<?php include __DIR__ . ('/views/includes/header.php'); ?>
 
 <title>Reset Password</title>
 
 <section class="py-3 py-md-5 py-xl-8 was-validated">
     <form method="post">
         <div class="container">
-            
+
             <div class="text-center mb-5">
-                <h2 class="display-5 fw-bold"><?= __('Reset Password')?></h2>
+                <h2 class="display-5 fw-bold"><?= __('Reset Password') ?></h2>
             </div>
 
             <div class="row justify-content-center">
@@ -97,15 +127,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="col-12 col-lg-5">
 
                             <div class="form-floating mb-3 position-relative">
-                                <input type="password" 
-                                name="password" 
-                                id="password" 
-                                class="form-control"
-                                placeholder="" 
-                                required
-                                pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,16}"
-                                title="Password must be 6-16 characters long, with uppercase letters, lowercase letters, and numbers."
-                                autofocus />
+                                <input type="password"
+                                    name="password"
+                                    id="password"
+                                    class="form-control"
+                                    placeholder=""
+                                    required
+                                    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,16}"
+                                    title="Password must be 6-16 characters long, with uppercase letters, lowercase letters, and numbers."
+                                    autofocus />
                                 <label for="password">Password</label>
                                 <button type="button" class="btn btn-light position-absolute end-0 top-50 translate-middle-y me-2" onclick="showpassword()">
                                     <i id="eyeIcon" class="fa fa-eye"></i>
@@ -113,15 +143,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
 
                             <div class="form-floating mb-3 position-relative">
-                                <input 
-                                type="password" 
-                                name="confirmPassword" 
-                                id="confirmPassword" 
-                                class="form-control"
-                                placeholder="" 
-                                required
-                                pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,16}"
-                                title="Confirm Password" />
+                                <input
+                                    type="password"
+                                    name="confirmPassword"
+                                    id="confirmPassword"
+                                    class="form-control"
+                                    placeholder=""
+                                    required
+                                    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,16}"
+                                    title="Confirm Password" />
                                 <label for="confirmPassword">Confirm Password</label>
                                 <button type="button" class="btn btn-light position-absolute end-0 top-50 translate-middle-y me-2" onclick="confirm_show_password()">
                                     <i id="confirm_password_eye_icon" class="fa fa-eye"></i>
@@ -130,7 +160,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                             <div class="col-12">
                                 <div class="d-grid">
-                                    <button class="btn btn-primary btn-lg" type="submit"><?= __('Reset Password')?></button>
+                                    <button class="btn btn-primary btn-lg" type="submit"><?= __('Reset Password') ?></button>
                                 </div>
                             </div>
 
@@ -143,9 +173,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
 </section>
 
-
 <!-- Footer -->
-<?php include('views/includes/footer.php');?>
+<?php include __DIR__ . ('/views/includes/footer.php'); ?>
 
 </body>
 

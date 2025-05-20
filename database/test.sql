@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2025 at 05:13 PM
+-- Generation Time: May 20, 2025 at 06:04 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -74,10 +74,10 @@ INSERT INTO `products` (`product_id`, `product_name`, `product_images`, `descrip
 -- --------------------------------------------------------
 
 --
--- Table structure for table `register`
+-- Table structure for table `user_accounts`
 --
 
-CREATE TABLE `register` (
+CREATE TABLE `user_accounts` (
   `user_id` bigint(20) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -91,12 +91,12 @@ CREATE TABLE `register` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `register`
+-- Dumping data for table `user_accounts`
 --
 
-INSERT INTO `register` (`user_id`, `username`, `password`, `email`, `token`, `token_expiry`, `account_registered_at`, `last_login_time`, `first_name`, `last_name`) VALUES
+INSERT INTO `user_accounts` (`user_id`, `username`, `password`, `email`, `token`, `token_expiry`, `account_registered_at`, `last_login_time`, `first_name`, `last_name`) VALUES
 (219273716, 'Test456', '$2y$10$jCrH3TMWJIyn9AgPHgarhO7SieUGRdkWeqG.U8rvhtqv8uBQoJTgW', 'Test456@gmail.com', NULL, NULL, '2024-12-27 14:35:21', '2025-03-25 14:18:18', '', ''),
-(4845727533474930302, 'Test123', '$2y$10$llpH5dn.MyYyIXOsk.1H0ueebvX.y7YDJUupZuCTx8UlDA/qv943K', 'Test123@gmail.com', NULL, NULL, '2024-12-28 14:41:01', '2025-04-22 11:46:19', 'Douglas', 'McGee');
+(4845727533474930302, 'Test123', '$2y$10$wsi0q/wuRyOZ6K9L2.UJ3OI320seI/D1Nj8v2t6yc0PgqPU05r.Wu', 'Test123@gmail.com', '111111', '2025-05-21 20:44:13', '2024-12-28 14:41:01', '2025-04-22 11:46:19', 'Douglas', 'McGee');
 
 --
 -- Indexes for dumped tables
@@ -115,20 +115,10 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`);
 
 --
--- Indexes for table `register`
+-- Indexes for table `user_accounts`
 --
-ALTER TABLE `register`
+ALTER TABLE `user_accounts`
   ADD PRIMARY KEY (`user_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `register`
---
-ALTER TABLE `register`
-  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8964933552502346846;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

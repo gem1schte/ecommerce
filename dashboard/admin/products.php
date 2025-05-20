@@ -34,7 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $original_price, $stock_quantity, $product_images);
 
             if ($stmt->execute()) {
-                echo "
+                ?>
+                
                 <script>
                     setTimeout(function() {
                         Swal.fire({
@@ -45,7 +46,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         })
                     }, 100);
                 </script>
-                ";
+                
+                <?php
             } else {
                 echo "<script>alert('Product addition failed!');</script>";
             }
@@ -62,9 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 
 
-<?php
-include('includes/header.php');
-?>
+<?php require_once __DIR__ . '/includes/header.php';?>
 
 <div class="container">
     <div class="row">
@@ -186,8 +186,4 @@ include('includes/header.php');
 
 </div>
 
-
-
-<?php
-include('includes/footer.php');
-?>
+<?php require_once __DIR__ . '/includes/footer.php';?>

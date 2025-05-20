@@ -43,8 +43,8 @@ foreach ($_SESSION['cart'] as $product_id => $quantity) {
 }
 $checkout_session = \Stripe\Checkout\Session::create([
   "mode" => "payment",
-  "success_url" => "http://localhost/success.php",
-  "cancel_url" => "http://localhost/index.php",
+  "success_url" => WEBSITE_URL."success.php",
+  "cancel_url" => WEBSITE_URL."checkout.php",
   "locale" => "auto",
   "line_items" => $line_items
 ]);

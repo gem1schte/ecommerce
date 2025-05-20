@@ -4,8 +4,8 @@
 
 <?php
 require_once __DIR__ . '/core/config.php';
-include_once 'views/includes/assets.php';
-include_once 'functions/includes/mailer.php';
+require_once __DIR__ . '/views/includes/assets.php';
+require_once __DIR__ . '/functions/includes/mailer.php';
 
 //all country list
 $all_countries_list = "https://www.apicountries.com/countries";
@@ -34,40 +34,37 @@ if (isset($_POST['checkout'])) {
     $stmt->execute();
     if ($stmt->affected_rows > 0) {
 
-      echo "
-          <script>
-          setTimeout(function() {
-              const Toast = Swal.mixin({
-                  toast: true,
-                  position: 'top-end',
-                  showConfirmButton: false,
-                  timer: 3000,
-                  timerProgressBar: true,
-                  didOpen: (toast) => {
-                  toast.onmouseenter = Swal.stopTimer;
-                  toast.onmouseleave = Swal.resumeTimer;
-                  }
-                  });
-                  Toast.fire({
-                  icon: 'success',
-                  title: 'Order placed successfully'
-                  })
-                  }, 100);
-          </script>
-          ";
+?>
+
+      <script>
+        setTimeout(function() {
+          Swal.fire({
+            icon: "success",
+            title: "Payment successfully",
+            text: "Your order has been placed successfully.",
+            showConfirmButton: true,
+          }).then(() => {
+            window.location = "index.php";
+          });
+        }, 100);
+      </script>
+
+    <?php
     } else {
-      echo '
-        <script>
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Order placed failed!",    
-                    showConfirmButton: true,
-                }).then(() => {
-                    window.location = "checkout.php";
-                });
-        </script>
-        ';
+    ?>
+
+      <script>
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Order placed failed!",
+          showConfirmButton: true,
+        }).then(() => {
+          window.location = "checkout.php";
+        });
+      </script>
+
+<?php
     }
     # code...
   } else {
@@ -78,7 +75,7 @@ if (isset($_POST['checkout'])) {
 ?>
 
 
-<?php include('views/includes/header.php'); ?>
+<?php include __DIR__ . ('/views/includes/header.php'); ?>
 
 <title>Checkout form</title>
 
@@ -126,7 +123,9 @@ if (isset($_POST['checkout'])) {
                   <br>
 
                   <?php
-                  $subtotal = 0;
+                  $sub_total = 0;
+                  $total_tax = 0;
+
                   while ($row = $result->fetch_assoc()) {
                     $product_id = $row['product_id'];
                     $product_names = $row['product_name'];
@@ -135,7 +134,8 @@ if (isset($_POST['checkout'])) {
                     $quantity = $_SESSION['cart'][$product_id];
                     $total_price = $price * $quantity;
                     $tax = $total_price * 0.05;
-                    $subtotal += $row['price'] * $quantity + $tax;
+                    $sub_total += $row['price'] * $quantity + $tax;
+                    $total_tax += $tax;
                   ?>
 
 
@@ -179,7 +179,7 @@ if (isset($_POST['checkout'])) {
                     <h6 class='my-0'><?= __('Tax') ?></h6>
                     <small>(5%)</small>
                   </div>
-                  <span class='text-success'><?= $tax ?></span>
+                  <span class='text-success'><?= $total_tax ?></span>
                 </li>
 
                 <li class='list-group-item d-flex justify-content-between bg-body-tertiary'>
@@ -191,7 +191,7 @@ if (isset($_POST['checkout'])) {
 
                 <li class='list-group-item d-flex justify-content-between'>
                   <span><?= __('Total') ?> (USD)</span>
-                  <strong><?= $subtotal ?></strong>
+                  <strong><?= $sub_total ?></strong>
                 </li>
 
               </ul>
@@ -272,7 +272,10 @@ if (isset($_POST['checkout'])) {
                 $mpdf = new \Mpdf\Mpdf();
                 $html = "<h2>Order Confirmation</h2>
                 <p>Order ID: <strong>$orders_id</strong></p>
-                <p>Shipping Address: $country,$city,$address,$postal_code</p>
+                <p>Shipping Country: $country,$postal_code</p>
+                <p>Shipping City: $city</p>
+                <p>Shipping Address: $address</p>
+                <p>Order Created At: $orders_created_at</p>
                 <p>Payment Method: $payment_method</p>";
                 $mpdf->WriteHTML($html);
                 $pdfContent = $mpdf->Output('', 'S');
@@ -384,12 +387,10 @@ if (isset($_POST['checkout'])) {
       </div>
     </main>
 
-
-
   </div>
 
   <!-- Footer -->
-  <?php include('views/includes/footer.php'); ?>
+  <?php include __DIR__ . ('/views/includes/footer.php'); ?>
 
 </body>
 

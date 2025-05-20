@@ -38,7 +38,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="index.php"><?= WEBSITE_NAME?></a>
+            <a class="navbar-brand" href="index.php"><?= WEBSITE_NAME ?></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -53,15 +53,15 @@
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
                             <?php
                             // 建立目前網址參數（排除 lang 參數）
-                            function current_url_with_lang($lang)
+                            function select_lang($lang)
                             {
                                 $params = $_GET;
                                 $params['lang'] = $lang;
                                 return basename($_SERVER['PHP_SELF']) . '?' . http_build_query($params);
                             }
                             ?>
-                            <div><a class="text-reset text-decoration-none" href="<?= current_url_with_lang('en-us'); ?>"><?= __('English(USA)') ?></a></div>
-                            <div><a class="text-reset text-decoration-none" href="<?= current_url_with_lang('zh-tw'); ?>"><?= __('Chinese(Traditional)') ?></a></div>
+                            <div><a class="text-reset text-decoration-none" href="<?= select_lang('en-us'); ?>"><?= __('English(USA)') ?></a></div>
+                            <div><a class="text-reset text-decoration-none" href="<?= select_lang('zh-tw'); ?>"><?= __('Chinese(Traditional)') ?></a></div>
                         </ul>
                     </div>
 
@@ -79,7 +79,14 @@
                             echo "
                                 <span class='badge bg-dark text-white ms-1 rounded-pill'>0</span>";
                         }
-                        ?> </button>
+
+                        // When checkout button is clicked, clear the cart
+                        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['checkout'])) {
+                            unset($_SESSION['cart']);
+                        }
+                        ?>
+
+                    </button>
                 </form>
 
                 <!-- Register & Login for mobile view -->
