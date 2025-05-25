@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=ADMIN_URL . "index.php"?>">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= ADMIN_URL . "index.php" ?>">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fa-solid fa-lock"></i>
         </div>
@@ -20,7 +20,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="<?=ADMIN_URL . "index.php"?>">
+        <a class="nav-link" href="<?= ADMIN_URL . "index.php" ?>">
             <i class="fa-solid fa-gauge"></i>
             <span>Dashboard</span></a>
     </li>
@@ -35,15 +35,29 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-            aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#products"
+            aria-expanded="false" aria-controls="products">
             <i class="fa-solid fa-box"></i>
             <span>Products</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="products" class="collapse" aria-labelledby="products" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Select:</h6>
-                <a class="collapse-item" href="<?=ADMIN_URL . "products.php"?>">New products</a>
+                <a class="collapse-item" href="<?= ADMIN_URL . "functions/upload_products.php" ?>">New products</a>
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#permissions"
+            aria-expanded="false" aria-controls="permissions">
+            <i class="fa-solid fa-lock"></i>
+            <span>Permissions</span>
+        </a>
+        <div id="permissions" class="collapse" aria-labelledby="permissions" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Select:</h6>
+                <a class="collapse-item" href="<?= ADMIN_URL . "views/user_accounts.php"?>">User Account</a>
             </div>
         </div>
     </li>
@@ -57,15 +71,15 @@
     </div>
     <!-- Ui Source code-->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
-            aria-expanded="true" aria-controls="collapseThree">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#sourcecode"
+            aria-expanded="false" aria-controls="sourcecode">
             <i class="fa-brands fa-github"></i>
             <span>Source code</span>
         </a>
-        <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="sourcecode" class="collapse" aria-labelledby="sourcecode" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">UI:</h6>
-                <a class="collapse-item" href="https://github.com/StartBootstrap/startbootstrap-sb-admin-2.git">sb-admin-2
+                <a class="collapse-item" href="https://github.com/StartBootstrap/startbootstrap-sb-admin-2">sb-admin-2
                 </a>
             </div>
         </div>

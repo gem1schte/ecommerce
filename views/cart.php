@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/core/config.php';
+require_once __DIR__ . '/../core/config.php';
 
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
@@ -13,6 +13,11 @@ if (isset($_POST['add_to_cart'])) {
     if ($product_id > 0 && $quantity > 0) {
         if (isset($_SESSION['cart'][$product_id])) {
             $_SESSION['cart'][$product_id] += $quantity;
+
+            //limit the maximum purchase quantity to 5
+            if ($_SESSION['cart'][$product_id] > 5) {
+                $_SESSION['cart'][$product_id] = 5;
+            }
         } else {
             $_SESSION['cart'][$product_id] = $quantity;
         }
@@ -41,7 +46,7 @@ if (isset($_POST['delete_quantity'])) {
 }
 ?>
 
-<?php include __DIR__ . ('/views/includes/header.php'); ?>
+<?php include __DIR__ . ('/../views/includes/header.php'); ?>
 
 <title>Cart</title>
 
@@ -159,7 +164,7 @@ if (isset($_POST['delete_quantity'])) {
                                 <span>$<?php echo number_format($total, 2); ?></span>
                             </div>
 
-                            <form action=<?= WEBSITE_URL . "checkout.php" ?> method="post">
+                            <form action=<?= WEBSITE_URL . "views/checkout.php" ?> method="post">
                                 <button class="btn btn-primary w-100 mt-3"><?= __('Proceed to Checkout') ?></button>
                             </form>
 
@@ -171,7 +176,7 @@ if (isset($_POST['delete_quantity'])) {
     </div>
 
     <!-- Footer -->
-    <?php include __DIR__ . ('/views/includes/footer.php'); ?>
+    <?php include __DIR__ . ('/../views/includes/footer.php'); ?>
 
 </body>
 

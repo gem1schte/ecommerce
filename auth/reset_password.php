@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/core/config.php';
-require_once __DIR__ . '/views/includes/assets.php';
+require_once __DIR__ . '/../core/config.php';
+require_once __DIR__ . '/../views/includes/assets.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 text: 'Your password has been successfully reset!',
                                                 showConfirmButton: true,
                                             }).then(() => {
-                                                window.location = 'login.html';
+                                                window.location = '<?= WEBSITE_URL . 'views/login.php'?>';
                                             });
                                         }, 100);
                                     </script>
@@ -109,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<?php include __DIR__ . ('/views/includes/header.php'); ?>
+<?php include __DIR__ . ('/../views/includes/header.php');?>
 
 <title>Reset Password</title>
 
@@ -174,7 +174,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </section>
 
 <!-- Footer -->
-<?php include __DIR__ . ('/views/includes/footer.php'); ?>
+<?php include __DIR__ . ('/../views/includes/footer.php');?>
 
 </body>
 

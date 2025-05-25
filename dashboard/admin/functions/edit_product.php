@@ -3,7 +3,7 @@ require_once __DIR__ . '/../../../core/config.php';
 require_once __DIR__ . '/../../../views/includes/assets.php';
 
 $product_id = null;
-$product_names = $product_description = $price = $original_price = $stock_quantity = $brand = $product_images = "";
+$product_names = $product_description = $price = $original_price = $stock = $brand = $product_images = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['product_id'])) {
     $product_id = $_POST['product_id'];
@@ -22,11 +22,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['product_id'])) {
             $product_description = $row['description'];
             $price = $row['price'];
             $original_price = $row['original_price'];
-            $stock_quantity = $row['stock_quantity'];
+            $stock = $row['stock'];
             $brand = $row['brand'];
             $product_images = $row['product_images'];
         } else {
-            echo "Product not found.";
+?>
+            <script>
+                setTimeout(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Product Not Found',
+                        text: 'The requested product does not exist.',
+                        showConfirmButton: true,
+                    }).then(() => {
+                        window.location = '<?= ADMIN_URL . 'index.php'; ?>';
+                    });
+                }, 100);
+            </script>
+
+            <?php
+            exit();
         }
     } else {
         echo "Error preparing statement: " . htmlspecialchars($conn->error);
@@ -41,10 +56,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $brand = $_POST['brand'] ?? $brand;
     $original_price = $_POST['original_price'] ?? $original_price;
     $price = $_POST['price'] ?? $price;
-    $stock_quantity = $_POST['stock_quantity'] ?? $stock_quantity;
+    $stock = $_POST['stock'] ?? $stock;
     $product_images = $_POST['product_images'] ?? $product_images;
-    
-    $update = "UPDATE products SET product_name = ?, description = ?, price = ?, original_price = ?, stock_quantity = ?, brand = ?, product_images = ? WHERE product_id = ?";
+
+    $update = "UPDATE products SET product_name = ?, description = ?, price = ?, original_price = ?, stock = ?, brand = ?, product_images = ? WHERE product_id = ?";
     $stmt = $conn->prepare($update);
 
     if ($stmt) {
@@ -54,15 +69,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
             $product_description,
             $price,
             $original_price,
-            $stock_quantity,
+            $stock,
             $brand,
             $product_images,
             $product_id
         );
         if ($stmt->execute()) {
-            if ($stmt->affected_rows > 0 ){
-                ?>
-            
+            if ($stmt->affected_rows > 0) {
+            ?>
+
                 <script>
                     setTimeout(function() {
                         Swal.fire({
@@ -71,20 +86,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                             text: 'Your product has been successfully updated!',
                             showConfirmButton: true,
                         }).then(() => {
-                            window.location = '../../../dashboard/admin/index.php';
+                            window.location = '<?= ADMIN_URL . 'index.php'; ?>';
                         });
                     }, 100);
                 </script>
-               <?php
-                exit;
+            <?php
+                exit();
             }
-     
         } else {
-            echo "Error updating product: " . htmlspecialchars($stmt->error);
+            ?>
+
+            <script>
+                setTimeout(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Failed to edit the product. Please try again.',
+                        showConfirmButton: true,
+                    }).then(() => {
+                        window.location = '<?= ADMIN_URL . 'index.php'; ?>';
+                    });
+                }, 100);
+            </script>
+<?php
         }
     };
-
-
 }
 ?>
 
@@ -96,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     <div class="row">
         <div class="col-md-12">
 
-            <a href="http://localhost/Database/dashboard/admin/index.php">
+            <a href="<?= ADMIN_URL . 'index.php'; ?>">
                 <i class="material-symbols-rounded opacity-5">Dashboard</a>
             /Edit Product</i>
 
@@ -164,17 +190,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
 
                     <div class="col-md-6 mb-3">
-                        <label for="stock_quantity" class="form-label">Stock Quantity</label>
+                        <label for="stock" class="form-label">Stock Quantity</label>
                         <input
                             type="number"
                             class="form-control"
-                            id="stock_quantity"
-                            name="stock_quantity"
-                            value="<?= htmlspecialchars($stock_quantity); ?>"
+                            id="stock"
+                            name="stock"
+                            value="<?= htmlspecialchars($stock); ?>"
                             placeholder="Enter available quantity"
                             required>
                     </div>
 
+                    <?php
+                    $sql = 'SELECT DISTINCT brand FROM products';
+                    $result = $conn->query($sql);
+                    $brand_list = [];
+
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $brand_list[] = $row['brand'];
+                        }
+                    }
+                    ?>
                     <div class="col-md-6 mb-3">
                         <label for="brand" class="form-label">Brand</label>
                         <input
@@ -183,7 +220,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                             id="brand"
                             name="brand"
                             value="<?= htmlspecialchars($brand); ?>"
-                            placeholder="Enter available quantity">
+                            placeholder="Enter available quantity"
+                            list="brand_list">
+
+                        <datalist id="brand_list">
+                            <?php foreach ($brand_list as $brand_item): ?>
+                                <option value="<?= htmlspecialchars($brand_item) ?>">
+                                <?php endforeach; ?>
+                        </datalist>
+
                     </div>
 
                 </div>
@@ -202,7 +247,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
 
                 <div class="text-end">
-                    <button type="submit" name="submit" class="btn btn-success">Submit </button>
+                    <button type="submit" name="submit" class="btn btn-success">Submit</button>
                 </div>
 
         </div>

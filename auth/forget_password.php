@@ -2,9 +2,9 @@
 https://bootstrapbrain.com/component/bootstrap-free-forgot-password-form-snippet/#code 
 -->
 <?php
-require_once __DIR__ . '/core/config.php';
-require_once __DIR__ . '/views/includes/assets.php';
-require_once __DIR__ . '/functions/includes/mailer.php';
+require_once __DIR__ . '/../core/config.php';
+require_once __DIR__ . '/../views/includes/assets.php';
+require_once __DIR__ . '/../functions/includes/mailer.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -37,9 +37,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $stmt->execute();
 
                     //Send mail link
+                    $reset_url=WEBSITE_URL."auth/reset_password.php?token={$token}";
                     $mail->addAddress($email);
                     $mail->Subject = 'Reset password';
-                    $mail->Body = "<p>Hello {$email}</p> Click the link: <a href='http://localhost/Database/reset_password.php?token={$token}'>reset password</a>";
+                    $mail->Body = "<p>Hello {$email}</p> Click the link: <a href='$reset_url'>reset password</a>";
 
                     try {
                         $mail->send();
@@ -80,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<?php include __DIR__ . ('/views/includes/header.php'); ?>
+<?php include __DIR__ . ('/../views/includes/header.php'); ?>
 
 <title>Forget Password</title>
 
@@ -129,11 +130,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <div class="col-12">
                                     <div class="row justify-content-between">
                                         <div class="col-6">
-                                            <a href="login.html" class="link-secondary text-decoration-none"><?= __('Login') ?></a>
+                                            <a href="<?= WEBSITE_URL . '/views/login.php'?>" class="link-secondary text-decoration-none"><?= __('Login') ?></a>
                                         </div>
                                         <div class="col-6">
                                             <div class="text-end">
-                                                <a href="register.html" class="link-secondary text-decoration-none"><?= __('Register') ?></a>
+                                                <a href="<?= WEBSITE_URL . '/views/register.php'?>" class="link-secondary text-decoration-none"><?= __('Register') ?></a>
                                             </div>
                                         </div>
                                     </div>
@@ -168,7 +169,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </section>
 
 <!-- Footer -->
-<?php include __DIR__ . ('/views/includes/footer.php'); ?>
+<?php include __DIR__ . ('/../views/includes/footer.php'); ?>
 
 </body>
 

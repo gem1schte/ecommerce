@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/core/config.php';
-require_once __DIR__ . '/views/includes/assets.php';
+require_once __DIR__ . '/../core/config.php';
+require_once __DIR__ . '/../views/includes/assets.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['username'])) {
     $username = $_POST['username'];
@@ -56,12 +56,16 @@ if (isset($_GET['confirm']) && $_GET['confirm'] === 'true' && isset($_GET['usern
                         showConfirmButton: false,
                         timer: 1500
                     }).then(() => {
-                        window.location.href = "<?= WEBSITE_URL . 'login.html'; ?>";
+                        window.location.href = "<?= WEBSITE_URL . 'views/login.php' ?>";
                     });
                 }, 100);
             </script>
 
         <?php
+            // Unset the session variable if the deleted account is the current user
+            if (isset($_SESSION['user']) && $_SESSION['user'] === $username) {
+                unset($_SESSION['user']);
+            }
         }
     } else {
         ?>

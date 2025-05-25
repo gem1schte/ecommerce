@@ -1,7 +1,7 @@
 <?php
-session_start();
-require_once __DIR__ . '/core/config.php';
-require_once __DIR__ . '/views/includes/assets.php';
+require_once __DIR__ . '/../core/config.php';
+require_once __DIR__ . '/../views/includes/assets.php';
+require_once __DIR__ . '/../functions/includes/mailer.php';
 
 // Execute the following logic only if a POST request is received
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     
                     // Store the username in the session
                     $_SESSION['user'] = $username;
-                    header("Location: index.php");
+                    header("Location:" .WEBSITE_URL. "index.php");
                     exit();
                     
                     // Update last login time                    
@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                 showConfirmButton: false,
                                 timer: 1500
                             }).then(() => {
-                                window.location = "login.html";
+                                window.location = "<?= WEBSITE_URL . 'views/login.php'?>";
                             });
                         }, 100);
                     </script>
@@ -74,9 +74,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             icon: "error",
                             title: "Oops...",
                             text: "User not found!",
-                            footer: "<a href=\"register.html\">Register a new account now?</a>"
+                            footer: "<a href=<?= WEBSITE_URL . 'views/register.php'?>>Register a new account now?</a>"
                         }).then(() => {
-                            window.location = "login.html";
+                            window.location = "<?= WEBSITE_URL . 'views/login.php'?>";
                         });
                     }, 100);
                 </script>

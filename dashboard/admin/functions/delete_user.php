@@ -3,14 +3,14 @@ require_once __DIR__ . '/../../../core/config.php';
 require_once __DIR__ . '/../../../views/includes/assets.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
-    $product_id = $_POST['product_id'];
+    $userid = $_POST['user_id'];
 ?>
 
     <script>
         setTimeout(function() {
             Swal.fire({
                 icon: 'warning',
-                title: 'Are you sure you want to delete this product?',
+                title: 'Are you sure you want to delete this account?',
                 text: 'This action cannot be undone.',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                 confirmButtonText: 'OK'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = 'delete_product.php?confirm=true&product_id=<?= $product_id; ?>';
+                    window.location.href = 'delete_user.php?confirm=true&userid=<?= $userid;?>';
                 } else {
                     window.history.back();
                 }
@@ -29,13 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     <?php
     exit();
 }
-if (isset($_GET['confirm']) && $_GET['confirm'] === 'true' && isset($_GET['product_id'])) {
-    $product_id = $_GET['product_id'];
-    $delete_products = "DELETE FROM products WHERE product_id = ?";
-    $stmt = $conn->prepare($delete_products);
+
+if (isset($_GET['confirm']) && $_GET['confirm'] === 'true' && isset($_GET['userid'])) {
+    $userid = $_GET['userid'];
+    $delete_user = "DELETE FROM user_accounts WHERE user_id = ?";
+    $stmt = $conn->prepare($delete_user);
 
     if ($stmt) {
-        $stmt->bind_param("i", $product_id);
+        $stmt->bind_param("i", $userid);
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
@@ -45,12 +46,12 @@ if (isset($_GET['confirm']) && $_GET['confirm'] === 'true' && isset($_GET['produ
                 setTimeout(function() {
                     Swal.fire({
                         icon: 'success',
-                        title: 'Product Deleted',
-                        text: 'Product deleted successfully.',
+                        title: 'Account Deleted',
+                        text: 'Account deleted successfully.',
                         showConfirmButton: false,
                         timer: 1500
                     }).then(() => {
-                        window.location.href = "<?= ADMIN_URL . 'index.php'; ?>";
+                        window.location.href = "<?= ADMIN_URL . 'views/user_accounts.php';?>";
                     });
                 }, 100);
             </script>
@@ -64,11 +65,11 @@ if (isset($_GET['confirm']) && $_GET['confirm'] === 'true' && isset($_GET['produ
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'Failed to delete the product. Please try again.',
+                        text: 'Failed to delete the account. Please try again.',
                         showConfirmButton: false,
                         timer: 1500
                     }).then(() => {
-                        window.location.href = "<?= ADMIN_URL . 'index.php';?>";
+                        window.location.href = "<?= ADMIN_URL . 'views/user_accounts.php';?>";
                     });
                 }, 100);
             </script>

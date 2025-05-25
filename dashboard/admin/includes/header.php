@@ -17,7 +17,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta name="author" content="">
 
     <title>Admin Page</title>
-    <link rel="icon" href="../../image/favicon.ico">
+    <link rel="icon" href="<?= WEBSITE_URL?>/image/favicon.ico">
 
     <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet" type="text/css">
@@ -26,7 +26,7 @@ if (session_status() === PHP_SESSION_NONE) {
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?= ADMIN_URL?>/assets/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 <body id="page-top">
@@ -36,5 +36,3 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <div id="content-wrapper" class="d-flex flex-column">
 <?php include('navbar.php');?>
-   
-

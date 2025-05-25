@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../core/config.php';?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Service</title>
-    <link rel="icon" href="image/favicon.ico">
-    <link rel="stylesheet" href="views/assets/css/bootstrap.min.css">
+    <link rel="icon" href="<?= WEBSITE_URL . "image/favicon.ico"?>">
+    <link rel="stylesheet" href="<?= WEBSITE_URL . "views/assets/css/bootstrap.min.css"?>">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -188,7 +189,7 @@
 
 </body>
 
-<a href="register.html">
+<a href="register.php">
     <button>&larr; Back</button>
 </a>
 
@@ -199,7 +200,9 @@
     window.gtranslateSettings = {
         "default_language": "en",
         "languages": ["en", "zh-CN", "ja", "fr", "de"],
-        "alt_flags":{"en":"usa"},
+        "alt_flags": {
+            "en": "usa"
+        },
         "globe_color": "#808080",
         "wrapper_selector": ".gtranslate_wrapper",
         "globe_size": 40

@@ -1,4 +1,10 @@
 <?php
+// Check php version
+define('PHP_REQUIRED_VERSION', '5.4.0');
+if (version_compare(PHP_VERSION, PHP_REQUIRED_VERSION, '<')) {
+    die('This site requires PHP version ' . PHP_REQUIRED_VERSION . '. Your version is: ' . PHP_VERSION);
+}
+
 // Start session
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -7,7 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // Database connection
 $host = "localhost";
 $db_user = "root";
-$db_pass = "123456";
+$db_pass = "";
 $db_name = "test";
 $conn = new mysqli($host, $db_user, $db_pass, $db_name);
 
@@ -21,4 +27,3 @@ define('WEBSITE_NAME', 'Tempest Shopping');
 // Set website URLs
 define('WEBSITE_URL', 'http://localhost/Database/');
 define('ADMIN_URL', 'http://localhost/Database/dashboard/admin/');
-?>

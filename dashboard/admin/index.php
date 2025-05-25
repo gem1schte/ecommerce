@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../../core/config.php';
 
-$sql = 'SELECT product_id, product_name, brand,stock_quantity,original_price,description,price, product_star,product_images FROM products';
+$sql = 'SELECT product_id, product_name, brand, stock, original_price, description, price, star, product_images FROM products';
 $result = $conn->query($sql);
 
 if (!$result) {
@@ -82,8 +82,8 @@ if (!$result) {
                         ?>
                     </td>
                     
-                    <td><?php echo htmlspecialchars($row['price']); ?></td>
-                    <td><?php echo htmlspecialchars($row['stock_quantity']); ?></td>
+                    <td><?= htmlspecialchars($row['price']); ?></td>
+                    <td><?= htmlspecialchars($row['stock']); ?></td>
 
                     <!-- Delete product -->
                     <td>

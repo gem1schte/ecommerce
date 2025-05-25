@@ -27,12 +27,12 @@ foreach ($_SESSION['cart'] as $product_id => $quantity) {
 
     $line_items[] =
       [
-        "quantity" => "$quantity",
+        "quantity" => $quantity,
         "price_data" => [
           "currency" => "usd",
           "unit_amount" => $price * 100,
           "product_data" => [
-            "name" => "$product_names",
+            "name" => $product_names,
             "images" => [
               $product_images
             ]
@@ -44,11 +44,10 @@ foreach ($_SESSION['cart'] as $product_id => $quantity) {
 $checkout_session = \Stripe\Checkout\Session::create([
   "mode" => "payment",
   "success_url" => WEBSITE_URL."success.php",
-  "cancel_url" => WEBSITE_URL."checkout.php",
+  "cancel_url" => WEBSITE_URL."views/checkout.php",
   "locale" => "auto",
   "line_items" => $line_items
 ]);
-
 
 http_response_code(303);
 header("Location: " . $checkout_session->url);

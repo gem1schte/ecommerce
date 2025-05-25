@@ -3,9 +3,9 @@
  -->
 
 <?php
-require_once __DIR__ . '/core/config.php';
-require_once __DIR__ . '/views/includes/assets.php';
-require_once __DIR__ . '/functions/includes/mailer.php';
+require_once __DIR__ . '/../core/config.php';
+require_once __DIR__ . '/../views/includes/assets.php';
+require_once __DIR__ . '/../functions/includes/mailer.php';
 
 //all country list
 $all_countries_list = "https://www.apicountries.com/countries";
@@ -44,7 +44,7 @@ if (isset($_POST['checkout'])) {
             text: "Your order has been placed successfully.",
             showConfirmButton: true,
           }).then(() => {
-            window.location = "index.php";
+            window.location ="<?= WEBSITE_URL . "index.php" ?>";
           });
         }, 100);
       </script>
@@ -75,7 +75,7 @@ if (isset($_POST['checkout'])) {
 ?>
 
 
-<?php include __DIR__ . ('/views/includes/header.php'); ?>
+<?php include __DIR__ . ('/../views/includes/header.php');?>
 
 <title>Checkout form</title>
 
@@ -268,7 +268,7 @@ if (isset($_POST['checkout'])) {
               if (isset($_POST['checkout'])) {
                 $email = $_POST['email'];
 
-                require 'vendor/autoload.php';
+                require __DIR__ . '/../vendor/autoload.php';
                 $mpdf = new \Mpdf\Mpdf();
                 $html = "<h2>Order Confirmation</h2>
                 <p>Order ID: <strong>$orders_id</strong></p>
@@ -376,7 +376,7 @@ if (isset($_POST['checkout'])) {
             <button class="w-100 btn btn-primary btn-lg" type="submit" name="checkout"><?= __('Continue to checkout') ?></button>
           </form>
 
-          <form action="functions/payment/stripe/stripe.php" method="POST">
+          <form action="<?= WEBSITE_URL?>functions/payment/stripe/stripe.php" method="POST">
             <button class="btn btn-lg btn-dark">
               <i class="fa-solid fa-credit-card"></i>
               <span class="ms-2 fs-6"><?= __('Debit Card or Credit Card') ?></span>
@@ -390,7 +390,7 @@ if (isset($_POST['checkout'])) {
   </div>
 
   <!-- Footer -->
-  <?php include __DIR__ . ('/views/includes/footer.php'); ?>
+  <?php include __DIR__ . ('/../views/includes/footer.php');?>
 
 </body>
 

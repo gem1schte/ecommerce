@@ -1,8 +1,8 @@
 <?php
-session_start();
+require_once __DIR__ . '/../core/config.php';
+require_once __DIR__ . '/../views/includes/assets.php';
 session_unset();
 session_destroy();
-require_once __DIR__ . '/views/includes/assets.php';
 ?>
 
 <script>
@@ -12,7 +12,7 @@ require_once __DIR__ . '/views/includes/assets.php';
 			title: "Logout successful",
 			timer: 1500
 		}).then(() => {
-			window.location = "login.html";
+			window.location = "<?= WEBSITE_URL . 'views/login.php'?>";
 		});
 	}, 100);
 </script>

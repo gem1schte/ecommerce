@@ -16,17 +16,17 @@
                             </button>
                             <ul class="dropdown-menu dropdown-content" id="dropdown-list">
                                 <div><a class="text-reset text-decoration-none" href="#"><?= __('Order History') ?></a></div>
-                                <div><a class="text-reset text-decoration-none" href="logout.php"><?= __('Logout') ?></a></div>
-                                <form action="delete_account.php" method="POST">
+                                <div><a class="text-reset text-decoration-none"  href="<?= WEBSITE_URL ."auth/logout.php"?>" ><?= __('Logout') ?></a></div>
+                                <form action="<?= WEBSITE_URL ."auth/delete_account.php"?>" method="POST">
                                     <input type="hidden" name="username" value="<?= $_SESSION['user'] ?>">
                                     <button type="submit" class="btn btn-danger"><?= __('Delete Account') ?></button>
                                 </form>
                             </ul>
                         </li>
                     <?php else: ?>
-                        <a class="text-reset" href="login.html" rel="sponsored"><?= __('Login') ?></a>
+                        <a class="text-reset" href="<?= WEBSITE_URL ."views/login.php" ?>" rel="sponsored"><?= __('Login') ?></a>
                         <div class="vr mx-2"></div>
-                        <a class="text-reset" href="register.html"><?= __('Register') ?></a>
+                        <a class="text-reset" href="<?= WEBSITE_URL ."views/register.php" ?>"><?= __('Register') ?></a>
                     <?php endif; ?>
                 </div>
 
@@ -38,11 +38,11 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="index.php"><?= WEBSITE_NAME ?></a>
+            <a class="navbar-brand" href="<?= WEBSITE_URL ?>index.php"><?= WEBSITE_NAME ?></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.php"><?= __('Home') ?></a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= WEBSITE_URL?>index.php"><?= __('Home') ?></a></li>
 
                     <!-- Translation dropdown -->
                     <div class="dropdown">
@@ -66,7 +66,7 @@
                     </div>
 
                 </ul>
-                <form class="d-flex" action="cart.php">
+                <form class="d-flex" action="<?= WEBSITE_URL?>views/cart.php">
                     <button class="btn btn-outline-dark" type="submit">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <?= __('Cart') ?>
@@ -97,7 +97,7 @@
                             <?= $_SESSION['user'] ?>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <div><a class="text-reset text-decoration-none" href="logout.php"><?= __('Logout') ?></a></div>
+                            <div><a class="text-reset text-decoration-none" href="<?= WEBSITE_URL . "auth/logout.php" ?>"> <?= __('Logout') ?></a></div>
                             <div><a class="text-reset text-decoration-none" href="#"><?= __('Order History') ?></a></div>
                             <form action="delete_account.php" method="POST">
                                 <input type="hidden" name="username" value="<?= $_SESSION['user'] ?>">
@@ -105,9 +105,9 @@
                             </form>
                         </ul>
                     <?php else: ?>
-                        <a class="text-reset" href="login.html" rel="sponsored"><?= __('Login') ?></a>
+                        <a class="text-reset" href="<?= WEBSITE_URL ."views/login.php" ?>" rel="sponsored"><?= __('Login') ?></a>
                         <div class="vr mx-2"></div>
-                        <a class="text-reset" href="register.html"><?= __('Register') ?></a>
+                        <a class="text-reset" href="<?= WEBSITE_URL ."views/register.php" ?>"><?= __('Register') ?></a>
                     <?php endif; ?>
                 </div>
 

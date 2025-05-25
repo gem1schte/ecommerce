@@ -5,7 +5,7 @@
 <?php
 require_once __DIR__ . '/core/config.php';
 
-$sql = 'SELECT product_id, product_name, original_price,description,brand,price, product_star,product_images FROM products';
+$sql = 'SELECT product_id, product_name, original_price,description,brand,price, star,product_images FROM products';
 $result = $conn->query($sql);
 
 if (!$result) {
@@ -13,30 +13,9 @@ if (!$result) {
 }
 ?>
 
-<?php include __DIR__. ('/views/includes/header.php');?>
+<?php include __DIR__ . ('/views/includes/header.php'); ?>
 
 <title>Tempest Shopping</title>
-
-<!-- Start carousel -->
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="https://www.nvidia.com/content/dam/en-zz/Solutions/geforce/graphic-cards/50-series/rtx-5090/geforce-rtx-5090-bm-xl770-d.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="https://i.marieclaire.com.tw/assets/mc/202409/66DF5472DDB321725912178.jpeg" class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-<!-- End carousel -->
 
 <!-- Filters Sidebar -->
 <?php
@@ -58,46 +37,18 @@ if ($brand_result->num_rows > 0) {
       <div class="col-lg-3">
         <div class="filter-sidebar p-4 shadow-sm">
 
-          <div class="accordion" id="accordionPanelsStayOpenExample">
-            <div class="filter-group">
+          <h5 class="mb-4"><?= __('Brand') ?></h5>
 
-              <h6 class="accordion-header" id="headingOne">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                  <?= __('Brand') ?>
-                </button>
-              </h6>
+          <label class="form-check-label" for="electronics">
+            <?PHP
 
-              <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-                data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <div class="form-check mb-2">
-
-                    <label class="form-check-label" for="electronics">
-                      <?PHP
-
-                      foreach ($brand as $item) {
-                        echo "
+            foreach ($brand as $item) {
+              echo "
                       <input class='form-check-input' type='checkbox' id='electronics'>";
-                        echo htmlspecialchars($item) . "<br>";
-                      }
-                      ?>
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="filter-group">
-            <h6 class="mb-3"><?= __('Price Range') ?></h6>
-            <input type="range" class="form-range" min="0" max="1000" value="500">
-            <div class="d-flex justify-content-between">
-              <span class="text-muted">$0</span>
-              <span class="text-muted">$1000</span>
-            </div>
-          </div>
+              echo htmlspecialchars($item) . "<br>";
+            }
+            ?>
+          </label>
 
           <button class="btn btn-outline-primary w-100"><?= __('Apply Filters') ?></button>
         </div>
@@ -126,7 +77,7 @@ if ($brand_result->num_rows > 0) {
               <?php
               if ($row['original_price'] > $row['price']) {
                 $discount = round((($row['original_price'] - $row['price']) / $row['original_price']) * 100);
-                echo "<div class='badge bg-success text-white position-absolute' style='top: 0.5rem; left: 0.5rem'>$discount%</div>";     
+                echo "<div class='badge bg-success text-white position-absolute' style='top: 0.5rem; left: 0.5rem'>$discount%</div>";
               }
               ?>
 
@@ -139,7 +90,7 @@ if ($brand_result->num_rows > 0) {
                   <h5 class="fw-bolder"><?php echo htmlspecialchars($row['product_name']); ?></h5>
                   <!-- Product reviews-->
                   <div class="d-flex justify-content-center small text-warning mb-2">
-                    <div class=""><i class="fa-solid fa-star"></i><?php echo htmlspecialchars($row['product_star']); ?></div>
+                    <div class=""><i class="fa-solid fa-star"></i><?php echo htmlspecialchars($row['star']); ?></div>
                   </div>
 
                   <!-- Product price-->
@@ -157,7 +108,7 @@ if ($brand_result->num_rows > 0) {
               </div>
               <!-- Product actions-->
               <div class="card-footer d-flex justify-content-between bg-light">
-                <div class="text-center"><a class="btn btn-primary btn-sm" href="<?= WEBSITE_URL . "view_product.php?id=" ?><?php echo htmlspecialchars($row['product_id']); ?>"><?= __('View products') ?></a></div>
+                <div class="text-center"><a class="btn btn-primary btn-sm" href="<?= WEBSITE_URL . "views/view_product.php?id=" ?><?php echo htmlspecialchars($row['product_id']); ?>"><?= __('View products') ?></a></div>
               </div>
 
             </div>
@@ -172,7 +123,7 @@ if ($brand_result->num_rows > 0) {
 <!-- End Section -->
 
 <!-- Footer -->
-<?php include __DIR__. ('/views/includes/footer.php');?>
+<?php include __DIR__ . ('/views/includes/footer.php'); ?>
 
 </body>
 
