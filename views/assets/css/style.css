@@ -26,7 +26,7 @@ footer {
   height: 60px;
 }
 
-#navbar {
+/* #navbar {
   position: sticky;
   top: -55px;
   left: 0;
@@ -47,7 +47,7 @@ footer {
 }
 .navbar-nav > li > .dropdown-menu a:hover {
   background-color: #4d5158 !important;
-}
+} */
 
 .justify-content-center > * {
   text-align: center;
@@ -100,7 +100,9 @@ footer {
   border-radius: 50%;
   text-align: center;
   color: #fff;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin: 0 8px;
   transition: all 0.3s ease;
 }
