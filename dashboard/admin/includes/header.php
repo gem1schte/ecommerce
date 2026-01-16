@@ -13,7 +13,7 @@
     <meta name="author" content="">
 
     <title>Admin Page</title>
-    <link rel="icon" href="<?= WEBSITE_URL?>/images/favicon.ico">
+    <link rel="icon" href="<?= WEBSITE_URL?>public/assets/images/favicon.ico">
 
     <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet" type="text/css">

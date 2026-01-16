@@ -3,7 +3,7 @@ https://bootstrapbrain.com/component/bootstrap-free-forgot-password-form-snippet
 -->
 <?php
 require_once __DIR__ . '/../core/init.php';
-require_once __DIR__ . '/../functions/includes/mailer.php';
+require_once __DIR__ . '/../functions/mailer.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 

@@ -129,7 +129,7 @@ https://mdbootstrap.com/docs/standard/navigation/footer/
 <!-- Footer -->
 
 <!-- Scripts -->
-<script src="<?= WEBSITE_URL?>views/assets/js/Function.js"></script>
+<script src="<?= WEBSITE_URL?>public/assets/js/app.js"></script>
 <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

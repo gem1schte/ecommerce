@@ -3,7 +3,7 @@
     <div class="container-fluid">
 
         <a class="navbar-brand" href="<?= WEBSITE_URL ?>index.php">
-            <img src="<?= WEBSITE_URL ?>images/favicon.ico" class="logo" alt="">
+            <img src="<?= WEBSITE_URL ?>public/assets/images/favicon.ico" class="logo" alt="">
             <?= WEBSITE_NAME ?>
         </a>
 
@@ -18,7 +18,7 @@
 
             <div class="offcanvas-header px-4 pb-0">
                 <a class="navbar-brand" href="<?= WEBSITE_URL ?>index.php">
-                    <img src="<?= WEBSITE_URL ?>images/favicon.ico" class="logo" alt="">
+                    <img src="<?= WEBSITE_URL ?>public/assets/images/favicon.ico" class="logo" alt="">
                     <?= WEBSITE_NAME ?>
                 </a>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -45,40 +45,42 @@
                     <!-- User dropdown -->
                     <li class="nav-item dropdown">
                         <?php if (isset($_SESSION['user'])) : ?>
-                                <button class="btn btn-light dropdown-toggle" type="button" id="user_dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa-solid fa-user"></i>
-                                    <?= $_SESSION['user'] ?>
-                                </button>
-                                <ul class="dropdown-menu dropdown-content bg-white" id="dropdown-list" aria-labelledby="user_dropdown">
-                                    <li><a class="text-reset text-decoration-none" href="<?= WEBSITE_URL . "views/order_history.php" ?>"><?= __('Order History') ?></a></li>
-                                    <li><a class="text-reset text-decoration-none" href="<?= WEBSITE_URL . "dashboard/user/views/profile.php" ?>"><?= __('Profile') ?></a></li>
-                                    <li><hr class="dropdown-divider"></li>        
-                                    <li><a class="text-danger text-decoration-none" href="<?= WEBSITE_URL . "auth/logout.php" ?>"><?= __('Logout') ?></a></li>
-                                </ul>
-                            </li>
-                        <?php else: ?>
-                            <a class="text-decoration-none text-reset" href="<?= WEBSITE_URL . "views/login.php" ?>" rel="sponsored"><?= __('Login') ?></a>
-                            <div class="vr mx-2"></div>
-                            <a class="text-decoration-none text-reset" href="<?= WEBSITE_URL . "views/register.php" ?>"><?= __('Register') ?></a>
-                        <?php endif; ?>
-                    </li>
-
-                    <!-- cart -->
-                    <li class="nav-item">
-                        <form class="position-relative" action="<?= WEBSITE_URL ?>views/cart.php">
-                            <button class="btn border-0 bg-transparent position-relative" type="submit">
-                                <i class="fa-solid fa-cart-shopping fa-lg text-dark"></i>
-                                <?php
-                                if (isset($_SESSION['cart'])) {
-                                    $count = count($_SESSION['cart']);
-                                    echo "<span class='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger small'>$count</span>";
-                                } else {
-                                    echo "<span class='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger small'>0</span>";    
-                                }
-                                ?>
+                            <button class="btn btn-light dropdown-toggle" type="button" id="user_dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-user"></i>
+                                <?= $_SESSION['user'] ?>
                             </button>
-                        </form>
+                            <ul class="dropdown-menu dropdown-content bg-white" id="dropdown-list" aria-labelledby="user_dropdown">
+                                <li><a class="text-reset text-decoration-none" href="<?= WEBSITE_URL . "views/order_history.php" ?>"><?= __('Order History') ?></a></li>
+                                <li><a class="text-reset text-decoration-none" href="<?= WEBSITE_URL . "dashboard/user/views/profile.php" ?>"><?= __('Profile') ?></a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="text-danger text-decoration-none" href="<?= WEBSITE_URL . "auth/logout.php" ?>"><?= __('Logout') ?></a></li>
+                            </ul>
                     </li>
+                <?php else: ?>
+                    <a class="text-decoration-none text-reset" href="<?= WEBSITE_URL . "views/login.php" ?>" rel="sponsored"><?= __('Login') ?></a>
+                    <div class="vr mx-2"></div>
+                    <a class="text-decoration-none text-reset" href="<?= WEBSITE_URL . "views/register.php" ?>"><?= __('Register') ?></a>
+                <?php endif; ?>
+                </li>
+
+                <!-- cart -->
+                <li class="nav-item">
+                    <form class="position-relative" action="<?= WEBSITE_URL ?>views/cart.php">
+                        <button class="btn border-0 bg-transparent position-relative" type="submit">
+                            <i class="fa-solid fa-cart-shopping fa-lg text-dark"></i>
+                            <?php
+                            if (isset($_SESSION['cart'])) {
+                                $count = count($_SESSION['cart']);
+                                echo "<span class='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger small'>$count</span>";
+                            } else {
+                                echo "<span class='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger small'>0</span>";
+                            }
+                            ?>
+                        </button>
+                    </form>
+                </li>
 
                 </ul>
 

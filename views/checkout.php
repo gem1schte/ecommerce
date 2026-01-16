@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../core/init.php';
-require_once __DIR__ . '/../functions/includes/mailer.php';
+require_once __DIR__ . '/../functions/mailer.php';
 
 //all country list
 $countries = all_countries();

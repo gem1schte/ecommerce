@@ -11,6 +11,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once __DIR__ . '/../functions/includes/lang.php';
+require_once __DIR__ . '/../functions/lang.php';
 require_once __DIR__ . '/../views/includes/assets.php';
-require_once __DIR__ . '/../functions/includes/function.php';
+require_once __DIR__ . '/../functions/bootstrap.php';
