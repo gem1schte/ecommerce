@@ -13,7 +13,7 @@ function create_uid()
 function write_log($error_msg, $level = 'INFO')
 {
     $date = date('Y-m');
-    $file = __DIR__ . '/../logs/' . $date . '.txt';
+    $file = __DIR__ . '/../storage/logs/' . $date . '.txt';
     $dir = dirname($file);
 
     if (!file_exists($dir)) {

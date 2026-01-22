@@ -1,4 +1,7 @@
 <?php
+
+use App\Utils\Alert;
+
 require_once __DIR__ . '/../../../core/init.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -34,58 +37,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         redirect_to(ADMIN_URL . "index.php");
                         
                     } else {
-?>
-                        <script>
-                            setTimeout(function() {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Oops...',
-                                    text: 'You are not an admin!',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                }).then(() => {
-                                    window.location = "<?= ADMIN_URL . 'views/login.php' ?>";
-                                });
-                            }, 100);
-                        </script>
-                        
-                    <?php
+                        Alert::error("Oops...", "You are not an admin!",
+                        ADMIN_URL . "views/login.php");
+                        exit();
                     }
                 } else {
-                    ?>
-
-                    <script>
-                        setTimeout(function() {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Oops...",
-                                text: "Incorrect password!",
-                                showConfirmButton: false,
-                                timer: 1500
-                            }).then(() => {
-                                window.location = "<?= ADMIN_URL . 'views/login.php' ?>";
-                            });
-                        }, 100);
-                    </script>
-
-                <?php
+                    Alert::error("Oops...", "Incorrect password!", ADMIN_URL . "views/login.php");
+                    exit();
                 }
             } else {
-                ?>
-
-                <script>
-                    setTimeout(function() {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Oops...",
-                            text: "User not found!"
-                        }).then(() => {
-                            window.location = "<?= ADMIN_URL . 'views/login.php' ?>";
-                        });
-                    }, 100);
-                </script>
-
-<?php
+                Alert::error("Oops...", "User not found!", ADMIN_URL . "views/login.php");
+                exit();
             }
         }
     }

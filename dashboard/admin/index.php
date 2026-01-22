@@ -86,6 +86,7 @@ if (!$result) {
                     <!-- Delete product -->
                     <td>
                         <form action=<?= ADMIN_URL . "functions/delete_product.php?id=" . htmlspecialchars($row['product_id']) ?> method='post' class='d-inline'>
+                            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token()) ?>">
                             <input type='hidden' name='product_id' value='<?= htmlspecialchars($row['product_id']); ?>'>
                             <button type='submit' name='submit' class='btn btn-danger'><i class="fa-solid fa-trash"></i></button>
                         </form>

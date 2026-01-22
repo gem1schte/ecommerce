@@ -1,4 +1,7 @@
 <?Php
+
+use App\Utils\Alert;
+
 require_once __DIR__ . '/../../../core/init.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -55,33 +58,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $stmt2->execute();
                     $stmt2->close();
                 }
-?>
-
-                <script>
-                    setTimeout(function() {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'successfully!',
-                            text: 'New product has been added successfully!',
-                            showConfirmButton: true,
-                        })
-                    }, 100);
-                </script>
-
-            <?php
+                Alert::success("Success", "New product has been added successfully!");
             } else {
-            ?>
-                <script>
-                    setTimeout(function() {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Failed!',
-                            text: 'Product addition failed!',
-                            showConfirmButton: true,
-                        })
-                    }, 100);
-                </script>
-<?php
+                Alert::error("Oops...", "Product addition failed!");
             }
 
             $stmt->close();

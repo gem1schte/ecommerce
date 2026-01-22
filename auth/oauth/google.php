@@ -1,4 +1,7 @@
 <?php
+
+use App\Utils\Alert;
+
 require_once __DIR__ . '/../../core/init.php';
 require __DIR__ . "/../../vendor/autoload.php";
 
@@ -77,22 +80,9 @@ if (isset($_GET['code'])) {
 			// When registered is successful, auto login
 			$_SESSION['user'] = $username;
 			$_SESSION['user_id'] = $user_id;
-
-		?>
-			<script>
-				setTimeout(function() {
-					Swal.fire({
-						icon: "success",
-						title: "Nice to meet you!",
-						text: "Your Google account has been registered and logged in.",
-						showConfirmButton: false,
-						timer: 1500
-					}).then(() => {
-						window.location = "<?= WEBSITE_URL . "index.php"; ?>";
-					});
-				}, 100);
-			</script>
-<?php
+            Alert::success("Success", "You have successfully registered!",
+            WEBSITE_URL . "index.php");
+            exit();
 		} else {
 			write_log("Error: " . $google_stmt->error);
 		}

@@ -2,6 +2,9 @@
 https://bootstrapbrain.com/component/bootstrap-free-forgot-password-form-snippet/#code 
 -->
 <?php
+
+use App\Utils\Alert;
+
 require_once __DIR__ . '/../core/init.php';
 require_once __DIR__ . '/../functions/mailer.php';
 
@@ -51,34 +54,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     } catch (Exception $e) {
                         write_log("Message could not be sent: " . $mail->ErrorInfo, 'ERROR');
                     }
-?>
-
-                    <script>
-                        setTimeout(function() {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Send email successfully!',
-                                text: 'An email has been sent to <?= $email ?>，with instructions to reset your password.',
-                                showConfirmButton: true,
-                            })
-                        }, 100);
-                    </script>
-                <?php
+                    Alert::success("Success","An email has been sent to $email,with instructions to reset your password.");
                 }
             } else {
-                ?>
-
-                <script>
-                    setTimeout(function() {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Send email failed!',
-                            text: 'Email not found or invalid.',
-                            showConfirmButton: true,
-                        })
-                    }, 100);
-                </script>
-<?php
+                Alert::error("Oops...", "Email not found or invalid.");
             }
         }
     }

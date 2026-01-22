@@ -1,4 +1,7 @@
 <?php
+
+use App\Utils\Alert;
+
 require_once __DIR__ . '/../core/init.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['token'])) {
@@ -39,74 +42,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['token'])) {
                             if ($stmt) {
                                 $stmt->bind_param("ss", $password, $token);
                                 if ($stmt->execute()) {
-?>
-
-                                    <script>
-                                        setTimeout(function() {
-                                            Swal.fire({
-                                                icon: 'success',
-                                                title: 'Success!',
-                                                text: 'Your password has been successfully reset!',
-                                                showConfirmButton: true,
-                                            }).then(() => {
-                                                window.location = '<?= WEBSITE_URL . 'views/login.php' ?>';
-                                            });
-                                        }, 100);
-                                    </script>
-                        <?php
+                                    Alert::success("Success",
+                                    "Your password has been successfully reset!",
+                                    WEBSITE_URL . "views/login.php"
+                                    );
+                                    exit();
                                 }
                             }
                         }
                     } else {
-                        ?>
-
-                        <script>
-                            setTimeout(function() {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Token Error:',
-                                    text: 'Token not found or has expired.',
-                                    showConfirmButton: true,
-                                }).then(() => {
-                                    window.location = 'forget_password.php';
-                                })
-                            }, 100);
-                        </script>
-
-            <?php
-
+                        Alert::error("Oops...", "Token not found or has expired.", 
+                        WEBSITE_URL . "auth/forget_password.php");
+                        exit();
                     }
                 }
             }
         } else {
-            ?>
-
-            <script>
-                setTimeout(function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Password Error',
-                        text: 'Passwords do not match.',
-                    });
-                }, 100);
-            </script>
-
-        <?php
+            Alert::error("Oops...", "Passwords do not match.");
         }
     } else {
-        ?>
-
-        <script>
-            setTimeout(function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Password Reset Error:',
-                    text: ' Please enter a valid password.',
-                    showConfirmButton: true,
-                })
-            }, 100);
-        </script>
-<?php
+        Alert::error("Oops...", "Please enter a valid password.");
     }
 }
 ?>

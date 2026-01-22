@@ -1,4 +1,7 @@
 <?php
+
+use App\Utils\Alert;
+
 require_once __DIR__ . '/../core/init.php';
 require_once __DIR__ . '/../functions/mailer.php';
 
@@ -68,37 +71,15 @@ if (isset($_POST['checkout'])) {
 
         if ($stmt->affected_rows > 0) {
             unset($_SESSION['cart']);
-?>
-
-            <script>
-                setTimeout(function() {
-                    Swal.fire({
-                        icon: "success",
-                        title: "Payment successfully",
-                        text: "Your order has been placed successfully.",
-                        showConfirmButton: true,
-                    }).then(() => {
-                        window.location = "<?= WEBSITE_URL . "index.php" ?>";
-                    });
-                }, 100);
-            </script>
-
-        <?php
-        } else {
-        ?>
-
-            <script>
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Order placed failed!",
-                    showConfirmButton: true,
-                }).then(() => {
-                    window.location = "checkout.php";
-                });
-            </script>
-
-<?php
+            Alert::success("Payment successfully", 
+            "Your order has been placed successfully.",
+            WEBSITE_URL . "index.php");
+            exit();
+        } 
+        else {
+            Alert::error("Oops...", "Order placed failed!", 
+            WEBSITE_URL . "index.php");
+            exit();
         }
         # code...
     } else {
