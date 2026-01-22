@@ -1,4 +1,7 @@
 <?php
+
+use App\Utils\Alert;
+
 require_once __DIR__ . '/../../../core/init.php';
 
 //all country list
@@ -35,21 +38,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && $userid) {
             $last_name = $row['last_name'];
             $birthday = $row['birthday'];
         } else {
-?>
-            <script>
-                setTimeout(function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Account Not Found',
-                        text: 'The requested account does not exist.',
-                        showConfirmButton: true,
-                    }).then(() => {
-                        window.location = '<?= WEBSITE_URL . 'dashboard/user/views/profile.php'; ?>';
-                    });
-                }, 100);
-            </script>
-
-            <?php
+            Alert::error("Oops...", "Account not found.",
+            WEBSITE_URL . "dashboard/user/views/profile.php");
             exit();
         }
     } else {
@@ -107,52 +97,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         );
         if ($stmt->execute()) {
             if ($stmt->affected_rows > 0) {
-            ?>
-
-                <script>
-                    setTimeout(function() {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success!',
-                            text: 'Your profile has been successfully updated!',
-                            showConfirmButton: true,
-                        }).then(() => {
-                            window.location = '<?= WEBSITE_URL . 'dashboard/user/views/profile.php'; ?>';
-                        });
-                    }, 100);
-                </script>
-            <?php
+                Alert::success("Success", "Your profile has been successfully updated!",
+                WEBSITE_URL . "dashboard/user/views/profile.php");
                 exit();
             } else {
-            ?>
-                <script>
-                    setTimeout(function() {
-                        Swal.fire({
-                            icon: 'warning',
-                            title: 'Warning',
-                            text: 'Please change the profile info',
-                            showConfirmButton: true
-                        })
-                    }, 100)
-                </script>
-            <?php
+                Alert::warning("Warning", "Please change the profile info.");
             }
         } else {
-            ?>
-
-            <script>
-                setTimeout(function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Failed to edit the profile. Please try again.',
-                        showConfirmButton: true,
-                    }).then(() => {
-                        window.location = '<?= WEBSITE_URL . 'dashboard/user/views/profile.php'; ?>';
-                    });
-                }, 100);
-            </script>
-<?php
+            Alert::error("Error", "Failed to edit the profile. Please try again.",
+            WEBSITE_URL . "dashboard/user/views/profile.php");
+            exit();
         }
     };
 }

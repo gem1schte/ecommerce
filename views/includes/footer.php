@@ -121,7 +121,7 @@ https://mdbootstrap.com/docs/standard/navigation/footer/
   <!-- Copyright star -->
   <div class="text-center text-white p-4 bg-dark">
     <div class="footer">
-      &copy; 2024~<?php echo date('Y'); ?> Developed by gem1schte. All rights reserved.
+      &copy; 2024~<?php echo date('Y'); ?> Developed by gemischte. All rights reserved.
     </div>
   </div>
   <!-- Copyright end-->

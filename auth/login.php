@@ -1,4 +1,7 @@
 <?php
+
+use App\Utils\Alert;
+
 require_once __DIR__ . '/../core/init.php';
 require_once __DIR__ . '/../functions/mailer.php';
 
@@ -43,41 +46,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         redirect_to(WEBSITE_URL . "index.php");
                     }
                 } else {
-?>
-
-                    <script>
-                        setTimeout(function() {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Oops...",
-                                text: "Incorrect password!",
-                                showConfirmButton: false,
-                                timer: 1500
-                            }).then(() => {
-                                window.location = "<?= WEBSITE_URL . 'views/login.php' ?>";
-                            });
-                        }, 100);
-                    </script>
-
-                <?php
+                    Alert::error("Oops...", "Incorrect password!",
+                    WEBSITE_URL . "views/login.php");
+                    exit();
                 }
             } else {
-                ?>
-
-                <script>
-                    setTimeout(function() {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Oops...",
-                            text: "User not found!",
-                            footer: "<a href=<?= WEBSITE_URL . 'views/register.php' ?>>Register a new account now?</a>"
-                        }).then(() => {
-                            window.location = "<?= WEBSITE_URL . 'views/login.php' ?>";
-                        });
-                    }, 100);
-                </script>
-
-<?php
+                Alert::error("Oops...", "User not found!",
+                WEBSITE_URL . "views/login.php",
+                ['footer'=> '<a href="' . WEBSITE_URL . 'views/register.php">Register a new account now?</a>']);
                 exit();
             }
 

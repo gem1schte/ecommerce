@@ -1,4 +1,7 @@
 <?php
+
+use App\Utils\Alert;
+
 require_once __DIR__ . '/../core/init.php';
 
 if($_SERVER['REQUEST_METHOD']==='POST'){
@@ -7,21 +10,8 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 }
 
 if ($_POST['password'] !== $_POST['confirmPassword']) {
-?>
-	<script>
-		setTimeout(function() {
-			Swal.fire({
-				icon: "error",
-				title: "Password Error!",
-				text: "Passwords do not match.",
-				showConfirmButton: false,
-				timer: 1500
-			}).then(() => {
-				window.location = "<?= WEBSITE_URL . "views/register.php"; ?>";
-			});
-		}, 100);
-	</script>
-<?php
+    Alert::error("Oops...", "Passwords do not match.",
+    WEBSITE_URL . "views/register.php");
 	exit();
 }
 
@@ -54,22 +44,8 @@ $check_stmt->execute();
 $check_result = $check_stmt->get_result();
 
 if ($check_result->num_rows > 0) {
-?>
-
-	<script>
-		setTimeout(function() {
-			Swal.fire({
-				icon: "warning",
-				title: "Warning!",
-				text: "This username or email has been registered!",
-				showConfirmButton: false,
-				timer: 1500
-			}).then(() => {
-				window.location = "<?= WEBSITE_URL . "views/register.php"; ?>";
-			});
-		}, 100);
-	</script>
-<?php
+    Alert::warning("Warning", "This username or email has been registered!",
+    WEBSITE_URL . "views/register.php");
 	exit();
 }
 
@@ -85,24 +61,9 @@ if ($stmt->execute()) {
 	// When registered is successful, auto login
 	$_SESSION['user']= $username;
 	$_SESSION['user_id'] = $user_id;
-	
-?>
-
-	<script>
-		setTimeout(function() {
-			Swal.fire({
-				icon: "success",
-				title: "Nice to meet you!",
-				text: "You have successfully registered!",
-				showConfirmButton: false,
-				timer: 1500
-			}).then(() => {
-				window.location = "<?= WEBSITE_URL . "index.php"; ?>";
-			});
-		}, 100);
-	</script>
-
-<?php
+    Alert::success("Success", "You have successfully registered!",
+    WEBSITE_URL . "index.php");
+    exit();
 } else {
 	write_log("Execute failed: " . $stmt->error,'ERROR');
 }

@@ -2,7 +2,7 @@
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span>©2024~ <?php echo date('Y') ?> Developed by gem1schte. All rights reserved.</span>
+            <span>©2024~ <?php echo date('Y') ?> Developed by gemischte. All rights reserved.</span>
         </div>
     </div>
 </footer>

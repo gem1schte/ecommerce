@@ -1,4 +1,7 @@
 <?php
+
+use App\Utils\Alert;
+
 require_once __DIR__ . '/../core/init.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['username']) && empty($_POST['confirm'])) {
@@ -9,33 +12,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['username']) && empty(
 
 ?>
 
-    <form id="delete" method="POST" action="delete_account.php">
+    <form id="delete_account?username=<?= $username ?>" method="POST" action="delete_account.php">
         <input type="hidden" name="confirm" value="true">
         <input type="hidden" name="username" value="<?= htmlspecialchars($username) ?>">
         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token()) ?>">
     </form>
-
-    <script>
-        setTimeout(function() {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Are you sure you intend to delete your account?',
-                text: 'This action cannot be undone.',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, Delete My Account!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('delete').submit();
-                    // window.location.href = 'delete_account.php?confirm=true&username=' + ('<?= $username ?>');
-                } else {
-                    window.history.back();
-                }
-            });
-        }, 100);
-    </script>
+    
     <?php
+    Alert::warning(
+        "Are you sure",
+        "This cannot be undone.",
+        null,
+        ["showCancelButton" => true, "submitId" => "delete_account?username=" . $username]
+    );
     exit();
 }
 
@@ -56,23 +45,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm']) && $_POST[
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
-    ?>
+            Alert::success(
+                "Success",
+                "Account deleted successfully.",
+                WEBSITE_URL . "views/login.php"
+            );
 
-            <script>
-                setTimeout(function() {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Account Deleted',
-                        text: 'Account deleted successfully.',
-                        showConfirmButton: false,
-                        timer: 1500
-                    }).then(() => {
-                        window.location.href = "<?= WEBSITE_URL . 'views/login.php' ?>";
-                    });
-                }, 100);
-            </script>
-
-        <?php
             if (isset($_SESSION['user']) && $_SESSION['user'] === $username) {
                 unset($_SESSION['user']);
             }

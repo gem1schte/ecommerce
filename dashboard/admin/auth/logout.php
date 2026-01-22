@@ -1,17 +1,9 @@
 <?php
+
+use App\Utils\Alert;
+
 require_once __DIR__ . '/../../../core/init.php';
 session_unset();
 session_destroy();
+Alert::success("Success", "Logout successful", ADMIN_URL . "views/login.php");
 ?>
-
-<script>
-	setTimeout(function() {
-		Swal.fire({
-			icon: "success",
-			title: "Logout successful",
-			timer: 1500
-		}).then(() => {
-			window.location = "<?= ADMIN_URL . 'views/login.php'?>";
-		});
-	}, 100);
-</script>

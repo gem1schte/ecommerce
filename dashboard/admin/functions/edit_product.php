@@ -1,4 +1,7 @@
 <?php
+
+use App\Utils\Alert;
+
 require_once __DIR__ . '/../../../core/init.php';
 
 $product_id = null;
@@ -26,21 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['product_id'])) {
             $brand = $row['brand'];
             $images = $row['product_images'];
         } else {
-?>
-            <script>
-                setTimeout(function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Product Not Found',
-                        text: 'The requested product does not exist.',
-                        showConfirmButton: true,
-                    }).then(() => {
-                        window.location = '<?= ADMIN_URL . 'index.php'; ?>';
-                    });
-                }, 100);
-            </script>
-
-            <?php
+            Alert::error("Oops...", "Product not found.",
+            ADMIN_URL . "index.php");
             exit();
         }
     } else {
@@ -80,53 +70,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         );
         if ($stmt->execute()) {
             if ($stmt->affected_rows > 0) {
-            ?>
-
-                <script>
-                    setTimeout(function() {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success!',
-                            text: 'Your product has been successfully updated!',
-                            showConfirmButton: false,
-                            timer: 1500
-                        }).then(() => {
-                            window.location = '<?= ADMIN_URL . 'index.php'; ?>';
-                        });
-                    }, 100);
-                </script>
-            <?php
+                Alert::success("Success", "Product has been successfully updated!",
+                ADMIN_URL . "index.php");
                 exit();
             } else {
-            ?>
-                <script>
-                    setTimeout(function() {
-                        swal.fire({
-                            icon: 'warning',
-                            title: 'Warning',
-                            text: 'Please change the product info',
-                            showConfirmButton: true
-                        }, 100)
-                    })
-                </script>
-            <?php
+                Alert::warning("Warning", "Please change the product info.");
             }
         } else {
-            ?>
-
-            <script>
-                setTimeout(function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Failed to edit the product. Please try again.',
-                        showConfirmButton: true,
-                    }).then(() => {
-                        window.location = '<?= ADMIN_URL . 'index.php'; ?>';
-                    });
-                }, 100);
-            </script>
-<?php
+            Alert::error("Oops...", "Failed to edit the product. Please try again.",
+            ADMIN_URL . "index.php");
+            exit();
         }
     };
 }

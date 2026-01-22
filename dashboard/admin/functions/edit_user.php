@@ -1,4 +1,7 @@
 <?php
+
+use App\Utils\Alert;
+
 require_once __DIR__ . '/../../../core/init.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['user_id'])) {
@@ -20,21 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['user_id'])) {
             $token = $row['token'];
             $token_expiry = $row['token_expiry'];
         } else {
-?>
-            <script>
-                setTimeout(function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Account Not Found',
-                        text: 'The requested account does not exist.',
-                        showConfirmButton: true,
-                    }).then(() => {
-                        window.location = '<?= ADMIN_URL . 'views/user_accounts.php'; ?>';
-                    });
-                }, 100);
-            </script>
-
-            <?php
+            Alert::error("Oops...", "Account not found.",
+            ADMIN_URL . "views/user_accounts.php");
             exit();
         }
     } else {
@@ -68,52 +58,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         );
         if ($stmt->execute()) {
             if ($stmt->affected_rows > 0) {
-            ?>
-
-                <script>
-                    setTimeout(function() {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success!',
-                            text: 'Your account has been successfully updated!',
-                            showConfirmButton: true,
-                        }).then(() => {
-                            window.location = '<?= ADMIN_URL . 'views/user_accounts.php'; ?>';
-                        });
-                    }, 100);
-                </script>
-            <?php
+                Alert::success("Success", "Account has been successfully updated!",
+                ADMIN_URL . "views/user_accounts.php");
                 exit();
             } else {
-            ?>
-                <script>
-                    setTimeout(function() {
-                        Swal.fire({
-                            icon: 'warning',
-                            title: 'Warning',
-                            text: 'Please change the user info',
-                            showConfirmButton: true
-                        })
-                    }, 100);
-                </script>
-            <?php
+                Alert::warning("Warning", "Please change the user info.");
             }
         } else {
-            ?>
-
-            <script>
-                setTimeout(function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Failed to edit the account. Please try again.',
-                        showConfirmButton: true,
-                    }).then(() => {
-                        window.location = '<?= ADMIN_URL . 'views/user_accounts.php'; ?>';
-                    });
-                }, 100);
-            </script>
-<?php
+            Alert::error("Oops...", "Failed to edit the account. Please try again.",
+            ADMIN_URL . "views/user_accounts.php");
+            exit();
         }
     };
 }
