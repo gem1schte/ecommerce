@@ -1,4 +1,7 @@
 <?php
+
+use App\Security\Csrf;
+
 require_once __DIR__ . '/../../core/init.php';
 
 $sql = 'SELECT product_id, product_name, brand, stock, original_price, description, price, star, product_images FROM products';
@@ -86,7 +89,7 @@ if (!$result) {
                     <!-- Delete product -->
                     <td>
                         <form action=<?= ADMIN_URL . "functions/delete_product.php?id=" . htmlspecialchars($row['product_id']) ?> method='post' class='d-inline'>
-                            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token()) ?>">
+                            <?= csrf::csrf_field() ?>
                             <input type='hidden' name='product_id' value='<?= htmlspecialchars($row['product_id']); ?>'>
                             <button type='submit' name='submit' class='btn btn-danger'><i class="fa-solid fa-trash"></i></button>
                         </form>

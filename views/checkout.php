@@ -1,5 +1,6 @@
 <?php
 
+use App\Security\Csrf;
 use App\Utils\Alert;
 
 require_once __DIR__ . '/../core/init.php';
@@ -11,7 +12,7 @@ $countries = all_countries();
 if (isset($_POST['remove_from_cart'])) {
 
     // CSRF token validation
-    ver_csrf($_POST['csrf_token'] ?? '', "views/checkout.php", "checkout");
+    Csrf::ver_csrf($_POST['csrf_token'] ?? '', "views/checkout.php", "checkout");
 
     remove_cart_product($_POST['product_id']);
 }
@@ -19,7 +20,7 @@ if (isset($_POST['remove_from_cart'])) {
 if (isset($_POST['checkout'])) {
 
     // CSRF token validation
-    ver_csrf($_POST['csrf_token'] ?? '', "views/checkout.php", "checkout");
+    Csrf::ver_csrf($_POST['csrf_token'] ?? '', "views/checkout.php", "checkout");
     
     $orders_id = 'ORD' . '-' . date("Y") . '-' . date("m") . '-' . uniqid() . '-' . bin2hex(random_bytes(4));
     $country = $_POST['country'];
@@ -177,7 +178,7 @@ if (isset($_POST['checkout'])) {
 
                                                     <form action='checkout.php' method='post' class='d-inline'>
                                                         <input type='hidden' name='product_id' value='<?= $product_id ?>'>
-                                                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token()) ?>">
+                                                        <?= csrf::csrf_field() ?>
                                                         <button type='submit' name='remove_from_cart' class='btn btn-danger'><i class='fa-solid fa-trash'></i></button>
                                                     </form>
 
@@ -257,7 +258,7 @@ if (isset($_POST['checkout'])) {
                 <div class="col-md-7 col-lg-8">
                     <h4 class="mb-3"><?= __('Billing address') ?></h4>
                     <form class="needs-validation" method="post">
-                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token()) ?>">
+                        <?= csrf::csrf_field() ?>
 
                         <div class="row g-3">
 
@@ -428,7 +429,7 @@ if (isset($_POST['checkout'])) {
                     </form>
 
                     <form action="<?= WEBSITE_URL ?>functions/payment/stripe/stripe.php" method="POST">
-                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token()) ?>">
+                        <?= csrf::csrf_field() ?>
                         <button class="btn btn-lg btn-dark">
                             <i class="fa-solid fa-credit-card"></i>
                             <span class="ms-2 fs-6"><?= __('Debit Card or Credit Card') ?></span>

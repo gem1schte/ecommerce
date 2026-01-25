@@ -3,6 +3,7 @@ https://bootstrapbrain.com/component/bootstrap-free-forgot-password-form-snippet
 -->
 <?php
 
+use App\Security\Csrf;
 use App\Utils\Alert;
 
 require_once __DIR__ . '/../core/init.php';
@@ -11,7 +12,7 @@ require_once __DIR__ . '/../functions/mailer.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // CSRF token validation
-    ver_csrf($_POST['csrf_token'] ?? '', "auth/forget_password.php", "forget password");
+    Csrf::ver_csrf($_POST['csrf_token'] ?? '', "auth/forget_password.php", "forget password");
 
     //32 length token
     $token = bin2hex(random_bytes(32));
@@ -70,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <section class="py-3 py-md-5 py-xl-8 was-validated">
     <form method="post">
-        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token()) ?>">
+        <?= csrf::csrf_field() ?>
 
         <div class="container">
 

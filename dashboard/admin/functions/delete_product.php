@@ -1,5 +1,6 @@
 <?php
 
+use App\Security\Csrf;
 use App\Utils\Alert;
 
 require_once __DIR__ . '/../../../core/init.php';
@@ -8,13 +9,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id']) && empt
     $product_id = $_POST['product_id'];
 
     // CSRF token validation
-    ver_csrf($_POST['csrf_token'] ?? '', "dashboard/admin/index.php", "delete product");
+    Csrf::ver_csrf($_POST['csrf_token'] ?? '', "dashboard/admin/index.php", "delete product");
 ?>
 
     <form id="delete_product?id=<?= $product_id ?>" method="POST" action="delete_product.php">
         <input type="hidden" name="confirm" value="true">
         <input type="hidden" name="product_id" value="<?= htmlspecialchars($product_id) ?>">
-        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token()) ?>">
+        <?= csrf::csrf_field() ?>
     </form>
 
     <?php

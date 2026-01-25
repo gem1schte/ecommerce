@@ -1,4 +1,7 @@
 <?php
+
+use App\Security\Csrf;
+
 require_once __DIR__ . '/../../../core/init.php';
 
 ?>
@@ -28,7 +31,7 @@ require_once __DIR__ . '/../../../core/init.php';
                                 </div>
 
                                 <form class="user was-validated" method="POST" action="<?= ADMIN_URL . 'auth/login.php' ?>">
-                                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token()) ?>">
+                                    <?= csrf::csrf_field() ?>
                                     
                                     <div class="form-group">
                                         <input type="text"

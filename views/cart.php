@@ -1,4 +1,7 @@
 <?php
+
+use App\Security\Csrf;
+
 require_once __DIR__ . '/../core/init.php';
 
 if (!isset($_SESSION['cart'])) {
@@ -7,7 +10,7 @@ if (!isset($_SESSION['cart'])) {
 
 if($_SERVER['REQUEST_METHOD']==='POST'){
     // CSRF token validation
-    ver_csrf($_POST['csrf_token'] ?? '', "views/cart.php", "cart");
+    Csrf::ver_csrf($_POST['csrf_token'] ?? '', "views/cart.php", "cart");
 }
 
 if (isset($_POST['add_to_cart'])) {
@@ -70,7 +73,7 @@ if (isset($_POST['delete_quantity'])) {
                                         <form method="POST">
                                             <div class='input-group'>
                                                 <input type="hidden" name="product_id" value="<?= $product_id ?>">
-                                                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token()) ?>">
+                                                <?= csrf::csrf_field() ?>
                                                 <input type="hidden" name="quantity" value="1">
                                                 <button class='btn btn-outline-secondary btn-sm' name="delete_quantity" value='-1' type='submit'>-</button>
                                                 <input style='max-width:100px' type='text' class='form-control form-control-sm text-center quantity-input' value='<?= $quantity ?>'>
@@ -83,7 +86,7 @@ if (isset($_POST['delete_quantity'])) {
                                         <p class='fw-bold'>$ <?= $total_price ?></p>
                                         <form action='cart.php' method='POST'>
                                             <input type='hidden' name='product_id' value='<?= $product_id ?>'>
-                                            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token()) ?>">
+                                            <?= csrf::csrf_field() ?>
                                             <button type='submit' name='remove_from_cart' class='btn btn-sm btn-danger'>
                                                 <i class='fa-solid fa-trash'></i>
                                             </button>
@@ -147,7 +150,7 @@ if (isset($_POST['delete_quantity'])) {
                             </div>
 
                             <form action=<?= WEBSITE_URL . "views/checkout.php" ?> method="post">
-                                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token()) ?>">
+                                <?= csrf::csrf_field() ?>
                                 <button class="btn btn-primary w-100 mt-3"><?= __('Proceed to Checkout') ?></button>
                             </form>
 

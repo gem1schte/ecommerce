@@ -1,5 +1,6 @@
 <?php
 
+use App\Security\Csrf;
 use App\Utils\Alert;
 
 require_once __DIR__ . '/../../../core/init.php';
@@ -41,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['product_id'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
     // CSRF token validation
-    ver_csrf($_POST['csrf_token'] ?? '', "dashboard/admin/index.php", "edit product");
+    Csrf::ver_csrf($_POST['csrf_token'] ?? '', "dashboard/admin/index.php", "edit product");
 
     // Validate and sanitize input data
     $product_id = $_POST['product_id'] ?? $product_id;
@@ -109,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         <div class="card-body">
             <form method="POST" action="edit_product.php" enctype="multipart/form-data">
                 <input type="hidden" name="product_id" value="<?= htmlspecialchars($product_id); ?>">
-                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token()) ?>">
+                <?= csrf::csrf_field() ?>
 
                 <div class="mb-3">
                     <label for="product_name" class="form-label">Product Name</label>

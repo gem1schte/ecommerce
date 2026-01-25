@@ -1,5 +1,6 @@
 <?php
 
+use App\Security\Csrf;
 use App\Utils\Alert;
 
 require_once __DIR__ . '/../../../core/init.php';
@@ -50,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && $userid) {
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
     // CSRF token validation
-    ver_csrf($_POST['csrf_token'] ?? '', "dashboard/user/views/profile.php", "edit profile");
+    Csrf::ver_csrf($_POST['csrf_token'] ?? '', "dashboard/user/views/profile.php", "edit profile");
 
     // Validate and sanitize input data
     $call_code = $_POST['calling_code'] ?? '';
@@ -123,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         <div class="card-body">
             <form method="POST" action="edit_profile.php" enctype="multipart/form-data">
                 <input type="hidden" name="user_id" value="<?= htmlspecialchars($userid); ?>">
-                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token()) ?>">
+                <?= csrf::csrf_field() ?>
                 <div class="row">
 
                     <div class="col-md-6 mb-3">

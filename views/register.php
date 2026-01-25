@@ -1,4 +1,7 @@
 <?php
+
+use App\Security\Csrf;
+
 require_once __DIR__ . '/../core/init.php';
 require_once __DIR__ . '/../views/includes/header.php';
 ?>
@@ -23,7 +26,7 @@ require_once __DIR__ . '/../views/includes/header.php';
                     <div class="col-12 col-lg-5">
 
                         <form class="form-horizontal was-validated" method="POST" action="<?= WEBSITE_URL . "auth/register.php" ?>">
-                            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token()) ?>">
+                            <?= csrf::csrf_field() ?>
 
                             <div class="row gy-3 overflow-hidden">
 

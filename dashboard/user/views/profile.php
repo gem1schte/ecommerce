@@ -1,4 +1,7 @@
 <?php
+
+use App\Security\Csrf;
+
 include __DIR__ . '/../../../core/init.php';
 
 $user_id = $_SESSION['user_id'];
@@ -53,7 +56,7 @@ if (isset($_SESSION['user_id'])) {
 
                                         <form action="<?= WEBSITE_URL . "auth/delete_account.php" ?>" method="POST" class="mt-3">
                                             <input type="hidden" name="username" value="<?= $_SESSION['user'] ?>">
-                                            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token()) ?>">
+                                            <?= csrf::csrf_field() ?>
                                             <button type="submit" class="btn btn-danger w-100"><?= __('Delete Account') ?></button>
                                         </form>
                                     </div>

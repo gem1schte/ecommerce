@@ -1,13 +1,14 @@
 <?php
 
+use App\Security\Csrf;
 use App\Utils\Alert;
 
 require_once __DIR__ . '/../../../core/init.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    
+
     // CSRF token validation
-    ver_csrf($_POST['csrf_token'] ?? '', "dashboard/admin/views/login.php", "admin login");
+    Csrf::ver_csrf($_POST['csrf_token'] ?? '', "dashboard/admin/views/login.php", "admin login");
 
     if (isset($_POST['username']) && isset($_POST['password'])) {
         $username = $_POST['username'];

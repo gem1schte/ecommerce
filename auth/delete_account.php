@@ -1,5 +1,6 @@
 <?php
 
+use App\Security\Csrf;
 use App\Utils\Alert;
 
 require_once __DIR__ . '/../core/init.php';
@@ -8,14 +9,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['username']) && empty(
     $username = $_POST['username'];
 
     // CSRF token validation
-    ver_csrf($_POST['csrf_token'] ?? '', "dashboard/user/views/profile.php", "delete account");
+    Csrf::ver_csrf($_POST['csrf_token'] ?? '', "dashboard/user/views/profile.php", "delete account");
 
 ?>
 
     <form id="delete_account?username=<?= $username ?>" method="POST" action="delete_account.php">
         <input type="hidden" name="confirm" value="true">
         <input type="hidden" name="username" value="<?= htmlspecialchars($username) ?>">
-        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token()) ?>">
+        <?= csrf::csrf_field() ?>
     </form>
     
     <?php
@@ -31,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['username']) && empty(
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm']) && $_POST['confirm'] === 'true' && isset($_POST['username'])) {
 
     // CSRF token validation
-    ver_csrf($_POST['csrf_token'] ?? '', "dashboard/user/views/profile.php", "delete account");
+    Csrf::ver_csrf($_POST['csrf_token'] ?? '', "dashboard/user/views/profile.php", "delete account");
 
     $username = $_POST['username'];
 

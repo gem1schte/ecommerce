@@ -1,11 +1,14 @@
 <?php
+
+use App\Security\Csrf;
+
 require_once __DIR__ . '/../../../core/init.php';
 require __DIR__ . "../../../../vendor/autoload.php";
 
 if($_SERVER["REQUEST_METHOD"] === "POST"){
 
     // CSRF token validation
-    ver_csrf($_POST['csrf_token'] ?? '', "views/checkout.php", "stripe pay meyhod");
+    Csrf::ver_csrf($_POST['csrf_token'] ?? '', "views/checkout.php", "stripe pay meyhod");
 }
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '../../../../', '.env');
