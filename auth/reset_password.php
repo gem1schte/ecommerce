@@ -1,9 +1,9 @@
 <?php
 
+require_once __DIR__ . '/../core/init.php';
+
 use App\Security\Csrf;
 use App\Utils\Alert;
-
-require_once __DIR__ . '/../core/init.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['token'])) {
 
@@ -37,7 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['token'])) {
                         $token_expiry = $row['token_expiry'];
 
                         if ($token === $db_token && strtotime($token_expiry) > time()) {
-                            $update_password = "UPDATE user_accounts SET password = ?,token = NULL, token_expiry = NULL WHERE token = ?";
+                            $update_password = "UPDATE user_accounts SET password = ?,
+                            token = NULL, token_expiry = NULL WHERE token = ?";
                             $stmt = $conn->prepare($update_password);
 
                             if ($stmt) {

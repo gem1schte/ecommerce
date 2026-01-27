@@ -1,10 +1,12 @@
 <?php
+require_once __DIR__ . '/../core/init.php';
 
 use App\Security\Csrf;
 use App\Utils\Alert;
+use App\Services\CartService;
+use App\Services\Mail;
 
-require_once __DIR__ . '/../core/init.php';
-require_once __DIR__ . '/../functions/mailer.php';
+$CartService = new CartService($conn);
 
 //all country list
 $countries = all_countries();
@@ -14,7 +16,7 @@ if (isset($_POST['remove_from_cart'])) {
     // CSRF token validation
     Csrf::ver_csrf($_POST['csrf_token'] ?? '', "views/checkout.php", "checkout");
 
-    remove_cart_product($_POST['product_id']);
+    $CartService->remove_cart_product($_POST['product_id']);
 }
 
 if (isset($_POST['checkout'])) {
@@ -62,11 +64,11 @@ if (isset($_POST['checkout'])) {
             $tax = 0;
             foreach ($_SESSION['cart'] as $product_id => $quantity) {
                 $price = isset($prices[$product_id]) ? $prices[$product_id] : 0;
-                $totals = calc_cart_totals($price, $quantity);
+                $totals = $CartService->calc_cart_totals($price, $quantity);
                 $sub_total = $totals['total'];
                 $stmt->bind_param("ssiid", $orders_id, $user_id, $product_id, $quantity, $sub_total);
                 $stmt->execute();
-                update_product_stock($product_id, $quantity);
+                $CartService->update_product_stock($product_id, $quantity);
             }
         }
 
@@ -146,7 +148,7 @@ if (isset($_POST['checkout'])) {
                                         $price = $row['price'];
                                         $product_images = $row['product_images'];
                                         $quantity = $_SESSION['cart'][$product_id];
-                                        $totals = calc_cart_totals($price, $quantity);
+                                        $totals = $CartService->calc_cart_totals($price, $quantity);
                                         $sub_total += $totals['total'];
                                         $total_tax += $totals['tax'];
                                         $total_price = $totals['subtotal'];
@@ -324,16 +326,9 @@ if (isset($_POST['checkout'])) {
                                 $pdfContent = $mpdf->Output('', 'S');
 
                                 if (!empty($_POST['email']) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-                                    $mail->addAddress($email);
-                                    $mail->Subject = "Order Confirmation";
-                                    $mail->Body = "The is your order confirmation. Please find the attached PDF for details.";
-                                    $mail->addStringAttachment($pdfContent, 'order.pdf');
-
-                                    try {
-                                        $mail->send();
-                                    } catch (Exception $e) {
-                                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-                                    }
+                                    Mail::send($email, "Order Confirmation",
+                                    "The is your order confirmation. Please find the attached PDF for details.",
+                                    $pdfContent ,"order.pdf");
                                 }
                             }
                             ?>

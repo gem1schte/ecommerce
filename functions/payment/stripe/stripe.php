@@ -1,9 +1,12 @@
 <?php
 
-use App\Security\Csrf;
-
 require_once __DIR__ . '/../../../core/init.php';
 require __DIR__ . "../../../../vendor/autoload.php";
+
+use App\Security\Csrf;
+use App\Services\CartService;
+
+$CartService = new CartService($conn);
 
 if($_SERVER["REQUEST_METHOD"] === "POST"){
 
@@ -23,7 +26,7 @@ foreach ($_SESSION['cart'] as $product_id => $quantity) {
   $stmt->bind_param("i", $product_id);
   $stmt->execute();
   $result = $stmt->get_result();
-  update_product_stock($product_id, $quantity);
+  $CartService->update_product_stock($product_id, $quantity);
 
   if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();

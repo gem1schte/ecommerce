@@ -1,12 +1,11 @@
 <?php
 
-use App\Security\Csrf;
-
 require_once __DIR__ . '/../core/init.php';
 
-if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = array();
-}
+use App\Security\Csrf;
+use App\Services\CartService;
+
+$CartService = new CartService($conn);
 
 if($_SERVER['REQUEST_METHOD']==='POST'){
     // CSRF token validation
@@ -14,15 +13,15 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 }
 
 if (isset($_POST['add_to_cart'])) {
-    add_product_to_cart($_POST['product_id'], $_POST['quantity']);
+    $CartService->add_product_to_cart($_POST['product_id'], $_POST['quantity']);
 }
 
 if (isset($_POST['remove_from_cart'])) {
-    remove_cart_product($_POST['product_id']);
+    $CartService->remove_cart_product($_POST['product_id']);
 }
 
 if (isset($_POST['delete_quantity'])) {
-    delete_cart_qty($_POST['product_id'], $_POST['quantity']);
+    $CartService->delete_cart_qty($_POST['product_id'], $_POST['quantity']);
 }
 ?>
 
@@ -128,7 +127,7 @@ if (isset($_POST['delete_quantity'])) {
                                 $sql = "SELECT price FROM products WHERE product_id = $product_id";
                                 $result = $conn->query($sql);
                                 if ($result && $row = $result->fetch_assoc()) {
-                                    $totals = calc_cart_totals($row['price'], $quantity);
+                                    $totals = $CartService->calc_cart_totals($row['price'], $quantity);
                                     $subtotal += $totals['subtotal'];
                                     $tax += $totals['tax'];
                                     $total += $totals['total'];

@@ -1,8 +1,8 @@
 <?php
 
-use App\Security\Csrf;
-
 require_once __DIR__ . '/../core/init.php';
+
+use App\Security\Csrf;
 
 if (isset($_GET['id'])) {
     $product_id = $_GET['id'];

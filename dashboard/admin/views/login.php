@@ -1,9 +1,8 @@
 <?php
 
-use App\Security\Csrf;
-
 require_once __DIR__ . '/../../../core/init.php';
 
+use App\Security\Csrf;
 ?>
 
 <?php require_once __DIR__ . '/../includes/header.php'; ?>

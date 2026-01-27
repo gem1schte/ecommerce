@@ -1,8 +1,8 @@
 <?php
 
-use App\Security\Csrf;
-
 include __DIR__ . '/../../../core/init.php';
+
+use App\Security\Csrf;
 
 $user_id = $_SESSION['user_id'];
 if (!$user_id) {

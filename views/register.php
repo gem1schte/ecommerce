@@ -1,9 +1,9 @@
 <?php
 
-use App\Security\Csrf;
-
 require_once __DIR__ . '/../core/init.php';
 require_once __DIR__ . '/../views/includes/header.php';
+
+use App\Security\Csrf;
 ?>
 
 <title>Register</title>

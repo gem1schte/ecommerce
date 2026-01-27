@@ -1,9 +1,9 @@
 <?php
 
+require_once __DIR__ . '/../../../core/init.php';
+
 use App\Security\Csrf;
 use App\Utils\Alert;
-
-require_once __DIR__ . '/../../../core/init.php';
 
 $product_id = null;
 $product_names = $description = $price = $original_price = $stock = $brand = $images = "";
@@ -54,7 +54,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $stock = $_POST['stock'] ?? $stock;
     $images = $_POST['product_images'] ?? $images;
 
-    $update = "UPDATE products SET product_name = ?, description = ?, price = ?, original_price = ?, stock = ?, brand = ?, product_images = ? WHERE product_id = ?";
+    $update = "UPDATE products SET product_name = ?, 
+    description = ?, price = ?, original_price = ?, stock = ?, 
+    brand = ?, product_images = ? WHERE product_id = ?";
     $stmt = $conn->prepare($update);
 
     if ($stmt) {

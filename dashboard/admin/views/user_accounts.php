@@ -1,9 +1,11 @@
 <?php
 
+require_once __DIR__ . '/../../../core/init.php';
+
 use App\Security\Csrf;
 
-require_once __DIR__ . '/../../../core/init.php';
-$user_account = "SELECT user_id ,username,email,token,token_expiry FROM user_accounts";
+$user_account = "SELECT user_id ,username,email,token,token_expiry 
+FROM user_accounts";
 $result = $conn->query($user_account);
 
 if (!$result) {

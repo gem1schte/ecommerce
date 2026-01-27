@@ -1,9 +1,9 @@
 <?php
 
+require_once __DIR__ . '/../core/init.php';
+
 use App\Security\Csrf;
 use App\Utils\Alert;
-
-require_once __DIR__ . '/../core/init.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['username']) && empty($_POST['confirm'])) {
     $username = $_POST['username'];
