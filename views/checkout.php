@@ -23,7 +23,7 @@ if (isset($_POST['checkout'])) {
 
     // CSRF token validation
     Csrf::ver_csrf($_POST['csrf_token'] ?? '', "views/checkout.php", "checkout");
-    
+
     $orders_id = 'ORD' . '-' . date("Y") . '-' . date("m") . '-' . uniqid() . '-' . bin2hex(random_bytes(4));
     $country = $_POST['country'];
     $city = $_POST['city'];
@@ -74,14 +74,18 @@ if (isset($_POST['checkout'])) {
 
         if ($stmt->affected_rows > 0) {
             unset($_SESSION['cart']);
-            Alert::success("Payment successfully", 
-            "Your order has been placed successfully.",
-            WEBSITE_URL . "index.php");
+            Alert::success(
+                "Payment successfully",
+                "Your order has been placed successfully.",
+                WEBSITE_URL . "index.php"
+            );
             exit();
-        } 
-        else {
-            Alert::error("Oops...", "Order placed failed!", 
-            WEBSITE_URL . "index.php");
+        } else {
+            Alert::error(
+                "Oops...",
+                "Order placed failed!",
+                WEBSITE_URL . "index.php"
+            );
             exit();
         }
         # code...
@@ -326,9 +330,13 @@ if (isset($_POST['checkout'])) {
                                 $pdfContent = $mpdf->Output('', 'S');
 
                                 if (!empty($_POST['email']) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-                                    Mail::send($email, "Order Confirmation",
-                                    "The is your order confirmation. Please find the attached PDF for details.",
-                                    $pdfContent ,"order.pdf");
+                                    Mail::send(
+                                        $email,
+                                        "Order Confirmation",
+                                        "The is your order confirmation. Please find the attached PDF for details.",
+                                        $pdfContent,
+                                        "order.pdf"
+                                    );
                                 }
                             }
                             ?>
@@ -423,7 +431,7 @@ if (isset($_POST['checkout'])) {
                         <button class="w-100 btn btn-primary btn-lg" type="submit" name="checkout"><?= __('Continue to checkout') ?></button>
                     </form>
 
-                    <form action="<?= WEBSITE_URL ?>functions/payment/stripe/stripe.php" method="POST">
+                    <form action="<?= WEBSITE_URL ?>src/Payments/Stripe/StripeGateway.php" method="POST">
                         <?= csrf::csrf_field() ?>
                         <button class="btn btn-lg btn-dark">
                             <i class="fa-solid fa-credit-card"></i>
