@@ -79,7 +79,7 @@ use App\Security\Csrf;
                                     <div class="form-floating mb-3">
                                         <select class="form-select" name="calling_code" id="calling_code">
                                             <?php
-                                            $countries = all_countries();
+                                            $countries = all_countries($conn);
                                             foreach ($countries as $c) {
                                                 $call_code = htmlspecialchars($c['calling_codes']);
                                                 $ctry_name = htmlspecialchars($c['name']);

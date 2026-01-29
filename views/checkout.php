@@ -9,7 +9,7 @@ use App\Services\Mail;
 $CartService = new CartService($conn);
 
 //all country list
-$countries = all_countries();
+$countries = all_countries($conn);
 
 if (isset($_POST['remove_from_cart'])) {
 
