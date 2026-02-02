@@ -4,6 +4,7 @@ require_once __DIR__ . '/../../../core/init.php';
 
 use App\Security\Csrf;
 use App\Utils\Alert;
+use Utils\Helper;
 
 $product_id = null;
 $product_names = $description = $price = $original_price = $stock = $brand = $images = "";
@@ -29,13 +30,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['product_id'])) {
             $stock = $row['stock'];
             $brand = $row['brand'];
             $images = $row['product_images'];
-        } else {
+        } 
+        else {
             Alert::error("Oops...", "Product not found.",
             ADMIN_URL . "index.php");
             exit();
         }
-    } else {
-        write_log("Prepare failed: " . $conn->error, 'ERROR');
+    } 
+    else {
+        Helper::write_log("Prepare failed: " . $conn->error, 'ERROR');
     }
 }
 

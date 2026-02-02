@@ -4,6 +4,7 @@ require_once __DIR__ . '/../../../core/init.php';
 
 use App\Security\Csrf;
 use App\Utils\Alert;
+use Utils\Helper;
 
 //all country list
 $countries = all_countries($conn);
@@ -38,13 +39,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && $userid) {
             $first_name = $row['first_name'];
             $last_name = $row['last_name'];
             $birthday = $row['birthday'];
-        } else {
+        } 
+        else {
             Alert::error("Oops...", "Account not found.",
             WEBSITE_URL . "dashboard/user/views/profile.php");
             exit();
         }
-    } else {
-        write_log("Error preparing statement: " . $conn->error, 'ERROR');
+    } 
+    else {
+        Helper::write_log("Error preparing statement: " . $conn->error, 'ERROR');
     }
 }
 

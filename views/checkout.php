@@ -5,6 +5,7 @@ use App\Security\Csrf;
 use App\Utils\Alert;
 use App\Services\CartService;
 use App\Services\Mail;
+use Utils\Helper;
 
 $CartService = new CartService($conn);
 
@@ -57,7 +58,7 @@ if (isset($_POST['checkout'])) {
 
             $stmt = $conn->prepare($order_details);
             if (!$stmt) {
-                write_log("Prepare failed: " . $conn->error, 'ERROR');
+                Helper::write_log("Prepare failed: " . $conn->error, 'ERROR');
             }
 
             $total_price = 0;
@@ -89,8 +90,9 @@ if (isset($_POST['checkout'])) {
             exit();
         }
         # code...
-    } else {
-        write_log("Error: " . $conn->error, 'ERROR');
+    } 
+    else {
+        Helper::write_log("Error: " . $conn->error, 'ERROR');
     }
 }
 

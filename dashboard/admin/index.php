@@ -3,12 +3,13 @@
 require_once __DIR__ . '/../../core/init.php';
 
 use App\Security\Csrf;
+use Utils\Helper;
 
 $sql = 'SELECT product_id, product_name, brand, stock, original_price, description, price, star, product_images FROM products';
 $result = $conn->query($sql);
 
 if (!$result) {
-    write_log("Prepare failed: " . $conn->error, 'ERROR'); // Debugging
+    Helper::write_log("Prepare failed: " . $conn->error, 'ERROR');
 }
 ?>
 

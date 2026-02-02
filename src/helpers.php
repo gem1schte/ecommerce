@@ -3,11 +3,6 @@ require_once __DIR__ . '/Utils/Helper.php';
 
 use Utils\Helper;
 
-function write_log($error_msg, $level = 'INFO')
-{
-    Helper::write_log($error_msg, $level);
-}
-
 function select_lang($lang)
 {
     return Helper::select_lang($lang);

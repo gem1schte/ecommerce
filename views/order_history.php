@@ -1,5 +1,8 @@
 <?php
+
 require_once __DIR__ . '/../core/init.php';
+
+use Utils\Helper;
 
 $user_id = $_SESSION['user_id'];
 if (!$user_id) {
@@ -31,7 +34,7 @@ oi.orders_created_at DESC
 
 $stmt = $conn->prepare($sql);
 if (!$stmt) {
-    write_log("SQL prepare failed: " . $conn->error,'ERROR');
+    Helper::write_log("SQL prepare failed: " . $conn->error,'ERROR');
 }
 $stmt->bind_param("s", $user_id);
 $stmt->execute();

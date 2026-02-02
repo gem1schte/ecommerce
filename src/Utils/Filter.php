@@ -3,6 +3,7 @@
 namespace Utils\Filter;
 
 use mysqli;
+use Utils\Helper;
 
 require_once __DIR__ . '/../../core/init.php';
 
@@ -107,13 +108,13 @@ class ProductFilterService
 
         $stmt = $this->conn->prepare($sql);
         if (!$stmt) {
-            write_log("Prepare failed: " . $this->conn->error);
+            Helper::write_log("Prepare failed: " . $this->conn->error);
         }
 
         if (!empty($params))
         {
             if (Filter::bind_params_dynamic($stmt, $params)) {
-                write_log("Binding parameters failed: " . $stmt->error);
+                Helper::write_log("Binding parameters failed: " . $stmt->error);
             }
         }
 

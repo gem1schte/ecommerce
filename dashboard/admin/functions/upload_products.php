@@ -4,6 +4,7 @@ require_once __DIR__ . '/../../../core/init.php';
 
 use App\Security\Csrf;
 use App\Utils\Alert;
+use Utils\Helper;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -60,13 +61,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $stmt2->close();
                 }
                 Alert::success("Success", "New product has been added successfully!");
-            } else {
+            } 
+            else {
                 Alert::error("Oops...", "Product addition failed!");
             }
 
             $stmt->close();
-        } else {
-            write_log("SQL prepare failed: " . $conn->error, 'ERROR');
+        } 
+        else {
+            Helper::write_log("SQL prepare failed: " . $conn->error, 'ERROR');
         }
     }
 }

@@ -26,7 +26,7 @@ $user_id = Helper::create_uid();
 $stmt = $conn->prepare($register_account);
 
 if (!$stmt) {
-	write_log("Prepare failed: " . $conn->error,'ERROR'); // Debugging
+	Helper::write_log("Prepare failed: " . $conn->error,'ERROR');
 	redirect_to(WEBSITE_URL . "views/404.php");
 }
 
@@ -51,7 +51,8 @@ if ($check_result->num_rows > 0) {
 	exit();
 }
 
-if ($stmt->execute()) {
+if ($stmt->execute()) 
+{
 
 	$phone = $_POST['phone'] ?? $phone;
 	$profiles = "INSERT INTO user_profiles (user_id,phone ,first_name, last_name)
@@ -66,8 +67,9 @@ if ($stmt->execute()) {
     Alert::success("Success", "You have successfully registered!",
     WEBSITE_URL . "index.php");
     exit();
-} else {
-	write_log("Execute failed: " . $stmt->error,'ERROR');
+} 
+else {
+	Helper::write_log("Execute failed: " . $stmt->error,'ERROR');
 }
 
 $stmt->close();
