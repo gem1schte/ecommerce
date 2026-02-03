@@ -27,7 +27,7 @@ $stmt = $conn->prepare($register_account);
 
 if (!$stmt) {
 	Helper::write_log("Prepare failed: " . $conn->error,'ERROR');
-	redirect_to(WEBSITE_URL . "views/404.php");
+	Helper::redirect_to(WEBSITE_URL . "views/404.php");
 }
 
 $username = $_POST['username'];

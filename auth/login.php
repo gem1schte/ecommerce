@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
                         // Store the session data
                         $_SESSION['user'] = $username;
                         $_SESSION['user_id'] = $row['user_id'];
-                        redirect_to(WEBSITE_URL . "index.php");
+                        Helper::redirect_to(WEBSITE_URL . "index.php");
                     }
                 } 
                 else 
@@ -72,13 +72,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
         else 
         {
             Helper::write_log("Failed to prepare statement: " . $conn->error,'ERROR');
-            redirect_to(WEBSITE_URL . "views/404.php");
+            Helper::redirect_to(WEBSITE_URL . "views/404.php");
         }
     } 
     else 
     {
         Helper::write_log("Username or password not set in POST request",'WARNING');
-        redirect_to(WEBSITE_URL . "views/login.php");
+        Helper::redirect_to(WEBSITE_URL . "views/login.php");
     }
 }
 

@@ -4,6 +4,7 @@ require_once __DIR__ . '/../../../core/init.php';
 
 use App\Security\Csrf;
 use App\Utils\Alert;
+use Utils\Helper;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -35,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $_SESSION['user_id'] = $row['user_id'];
                         $_SESSION['admin_role'] = $row['admin_role'];
                         
-                        redirect_to(ADMIN_URL . "index.php");
+                        Helper::redirect_to(ADMIN_URL . "index.php");
                         
                     } else {
                         Alert::error("Oops...", "You are not an admin!",

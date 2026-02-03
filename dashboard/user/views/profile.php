@@ -3,10 +3,11 @@
 include __DIR__ . '/../../../core/init.php';
 
 use App\Security\Csrf;
+use Utils\Helper;
 
 $user_id = $_SESSION['user_id'];
 if (!$user_id) {
-    redirect_to(WEBSITE_URL . "views/login.php");
+    Helper::redirect_to(WEBSITE_URL . "views/login.php");
 }
 
 if (isset($_SESSION['user_id'])) {

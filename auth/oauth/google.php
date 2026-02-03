@@ -59,7 +59,7 @@ if (isset($_GET['code']))
 		}
 
 		$_SESSION['user_id'] = $row['user_id'];
-		redirect_to(WEBSITE_URL . "index.php");
+		Helper::redirect_to(WEBSITE_URL . "index.php");
 
 	} 
     else

@@ -6,7 +6,7 @@ use Utils\Helper;
 
 $user_id = $_SESSION['user_id'];
 if (!$user_id) {
-    redirect_to("login.php");
+    Helper::redirect_to("login.php");
 }
 
 $user_id = $_SESSION['user_id'];

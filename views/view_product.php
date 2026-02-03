@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../core/init.php';
 
 use App\Security\Csrf;
+use Utils\Helper;
 
 if (isset($_GET['id'])) {
     $product_id = $_GET['id'];
@@ -107,11 +108,11 @@ if (isset($_GET['id'])) {
         <?php include __DIR__ . ('/../views/includes/footer.php'); ?>
 <?php
     } else {
-        redirect_to(WEBSITE_URL . "views/404.php");
+        Helper::redirect_to(WEBSITE_URL . "views/404.php");
     }
     $stmt->close();
 } else {
-    redirect_to(WEBSITE_URL . "views/404.php");
+    Helper::redirect_to(WEBSITE_URL . "views/404.php");
 }
 
 $conn->close();

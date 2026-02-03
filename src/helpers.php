@@ -8,11 +8,6 @@ function select_lang($lang)
     return Helper::select_lang($lang);
 }
 
-function redirect_to($url)
-{
-    Helper::redirect_to($url);
-}
-
 function all_countries(mysqli $conn)
 {
     return Helper::all_countries($conn);
