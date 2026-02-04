@@ -10,7 +10,7 @@ use Utils\Helper;
 $CartService = new CartService($conn);
 
 //all country list
-$countries = all_countries($conn);
+$countries = Helper::all_countries($conn);
 
 if (isset($_POST['remove_from_cart'])) {
 

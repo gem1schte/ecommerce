@@ -4,6 +4,8 @@ require_once __DIR__ . '/../core/init.php';
 require_once __DIR__ . '/../views/includes/header.php';
 
 use App\Security\Csrf;
+use Utils\Helper;
+
 ?>
 
 <title>Register</title>
@@ -79,7 +81,7 @@ use App\Security\Csrf;
                                     <div class="form-floating mb-3">
                                         <select class="form-select" name="calling_code" id="calling_code">
                                             <?php
-                                            $countries = all_countries($conn);
+                                            $countries = Helper::all_countries($conn);
                                             foreach ($countries as $c) {
                                                 $call_code = htmlspecialchars($c['calling_codes']);
                                                 $ctry_name = htmlspecialchars($c['name']);

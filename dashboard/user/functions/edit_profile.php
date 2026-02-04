@@ -7,7 +7,7 @@ use App\Utils\Alert;
 use Utils\Helper;
 
 //all country list
-$countries = all_countries($conn);
+$countries = Helper::all_countries($conn);
 
 $userid = $_GET['uid'] ?? $_POST['user_id'] ?? null;
 $phone = $call_code = $email = $country = $city = $address = $postal_code = $last_name = $first_name = $birthday = "";
