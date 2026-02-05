@@ -5,6 +5,7 @@ require_once __DIR__ . '/../../../core/init.php';
 use App\Security\Csrf;
 use App\Utils\Alert;
 use Utils\Helper;
+use Utils\Lang;
 
 //all country list
 $countries = Helper::all_countries($conn);
@@ -121,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 <div class="container py-5">
     <div class="card shadow-lg">
         <div class="card-header bg-primary text-white text-center">
-            <h2 class="mb-0">Edit User Account</h2>
+            <h2 class="mb-0"><?= Lang::__('Edit User Account') ?></h2>
         </div>
 
         <div class="card-body">
@@ -131,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                 <div class="row">
 
                     <div class="col-md-6 mb-3">
-                        <label for="first_name" class="form-label"><?= __('First name') ?></label>
+                        <label for="first_name" class="form-label"><?= Lang::__('First name') ?></label>
                         <input
                             type="text"
                             class="form-control"
@@ -142,7 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="last_name" class="form-label"><?= __('Last name') ?></label>
+                        <label for="last_name" class="form-label"><?= Lang::__('Last name') ?></label>
                         <input
                             type="text"
                             class="form-control"
@@ -156,7 +157,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="calling_code" class="form-label"><?= __('Phone') ?></label>
+                        <label for="calling_code" class="form-label"><?= Lang::__('Phone') ?></label>
 
                         <select name="calling_code" id="calling_code" class="form-select">
                             <?php
@@ -180,7 +181,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="email" class="form-label"><?= __('email') ?></label>
+                        <label for="email" class="form-label"><?= Lang::__('Email') ?></label>
                         <input
                             type="text"
                             class="form-control"
@@ -191,7 +192,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="last_name" class="form-label"><?= __('Birthday') ?></label>
+                        <label for="last_name" class="form-label"><?= Lang::__('Birthday') ?></label>
                         <input
                             type="date"
                             class="form-control"
@@ -205,7 +206,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                 <div class="row">
 
                     <div class="col-md-6 mb-3">
-                        <label for="country" class="form-label"><?= __('Country') ?></label>
+                        <label for="country" class="form-label"><?= Lang::__('Country') ?></label>
                         <select class="form-select"
                             id="country"
                             name="country"
@@ -223,7 +224,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="city" class="form-label"><?= __('city') ?></label>
+                        <label for="city" class="form-label"><?= Lang::__('city') ?></label>
                         <input
                             type="text"
                             class="form-control"
@@ -234,7 +235,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="address" class="form-label"><?= __('Address') ?></label>
+                        <label for="address" class="form-label"><?= Lang::__('Address') ?></label>
                         <input
                             type="text"
                             class="form-control"
@@ -245,7 +246,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="postal_code" class="form-label"><?= __('postal code') ?></label>
+                        <label for="postal_code" class="form-label"><?= Lang::__('postal code') ?></label>
                         <input
                             type="text"
                             class="form-control"

@@ -5,6 +5,7 @@ require_once __DIR__ . '/../views/includes/header.php';
 
 use App\Security\Csrf;
 use Utils\Helper;
+use Utils\Lang;
 
 ?>
 
@@ -16,7 +17,7 @@ use Utils\Helper;
         <div class="row">
             <div class="col-12">
                 <div class="mb-5">
-                    <h2 class="display-5 fw-bold text-center"><?= __('Register') ?></h2>
+                    <h2 class="display-5 fw-bold text-center"><?= Lang::__('Register') ?></h2>
                     <p class="text-center m-0"><span id="Register_Section_Title"></span> <a href="login.php" class="text-decoration-none">Sign in</a></p>
                 </div>
             </div>
@@ -37,7 +38,7 @@ use Utils\Helper;
                                         <input
                                             class="form-control"
                                             placeholder="e.g.Trevor_313"
-                                            title="<?= __('4-32 characters, allows letters, numbers, and special characters.') ?>"
+                                            title="<?= Lang::__('4-32 characters, allows letters, numbers, and special characters.') ?>"
                                             type="text"
                                             name="username"
                                             id="username"
@@ -56,7 +57,7 @@ use Utils\Helper;
                                             class="form-control"
                                             id="last_name"
                                             name="last_name"
-                                            title="<?= __('Real last name is required') ?>"
+                                            title="<?= Lang::__('Real last name is required') ?>"
                                             placeholder="Enter list name"
                                             required>
                                         <label for="last_name" class="form-label">Last name</label>
@@ -70,7 +71,7 @@ use Utils\Helper;
                                             class="form-control"
                                             id="first_name"
                                             name="first_name"
-                                            title="<?= __('Real first name is required') ?>"
+                                            title="<?= Lang::__('Real first name is required') ?>"
                                             placeholder="Enter First name"
                                             required>
                                         <label for="first_name" class="form-label">First name</label>
@@ -100,7 +101,7 @@ use Utils\Helper;
                                             placeholder=""
                                             type="number"
                                             name="phone"
-                                            title="<?= __('Real phone number is required') ?>"
+                                            title="<?= Lang::__('Real phone number is required') ?>"
                                             id="phone"
                                             required
                                             pattern="[0-9]{6,15}"
@@ -114,7 +115,7 @@ use Utils\Helper;
                                         <input
                                             class="form-control"
                                             placeholder="mail@example.com"
-                                            title="<?= __('Enter a valid email address') ?>."
+                                            title="<?= Lang::__('Enter a valid email address') ?>."
                                             type="text"
                                             name="email"
                                             id="email"
@@ -130,7 +131,7 @@ use Utils\Helper;
                                         <input
                                             class="form-control"
                                             placeholder="e.g.Password123"
-                                            title="<?= __('Password must be 6-16 characters long, with uppercase letters, lowercase letters, and numbers.') ?>"
+                                            title="<?= Lang::__('Password must be 6-16 characters long, with uppercase letters, lowercase letters, and numbers.') ?>"
                                             type="password"
                                             name="password"
                                             id="password"
@@ -150,7 +151,7 @@ use Utils\Helper;
                                     <div class="form-floating mb-3 position-relative">
                                         <input
                                             placeholder="e.g.Password123"
-                                            title="<?= __('Confirm Password') ?>"
+                                            title="<?= Lang::__('Confirm Password') ?>"
                                             type="password"
                                             name="confirmPassword"
                                             id="confirmPassword"
@@ -169,13 +170,13 @@ use Utils\Helper;
                                 <div class="form-check mb-3">
                                     <input class="for-check-input" type="checkbox" id="tos_agree" required
                                         value="Y" name="tos_agree" />
-                                    <?= __('I agree to the') ?>
-                                    <a href="tos.php" class="clickable text-decoration-none"><?= __('Terms of Service.') ?></a>
+                                    <?= Lang::__('I agree to the') ?>
+                                    <a href="tos.php" class="clickable text-decoration-none"><?= Lang::__('Terms of Service.') ?></a>
                                 </div>
 
                                 <div class="col-12">
                                     <div class="d-grid">
-                                        <button class="btn btn-primary btn-lg" type="submit"><?= __('Register') ?></button>
+                                        <button class="btn btn-primary btn-lg" type="submit"><?= Lang::__('Register') ?></button>
                                     </div>
                                 </div>
 
@@ -205,7 +206,7 @@ use Utils\Helper;
                                     <path
                                         d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z" />
                                 </svg>
-                                <span class="ms-2 fs-6"><?= __('With Google OAuth') ?></span>
+                                <span class="ms-2 fs-6"><?= Lang::__('With Google OAuth') ?></span>
                             </a>
 
                         </div>

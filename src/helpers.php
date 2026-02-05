@@ -16,8 +16,8 @@ use Utils\Helper;
 require_once __DIR__ . '/Utils/Lang.php';
 use Utils\Lang;
 
-function __($str)
-{
-    return Lang::__($str);
-}
-Lang::init();
+// function __($str)
+// {
+//     return Lang::__($str);
+// }
+// Lang::init();

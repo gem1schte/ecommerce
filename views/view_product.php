@@ -4,6 +4,7 @@ require_once __DIR__ . '/../core/init.php';
 
 use App\Security\Csrf;
 use Utils\Helper;
+use Utils\Lang;
 
 if (isset($_GET['id'])) {
     $product_id = $_GET['id'];
@@ -58,16 +59,16 @@ if (isset($_GET['id'])) {
 
                             <?php
                             if ($row['stock'] > 10) {
-                                echo "<span class='badge bg-success ms-2'>" . htmlspecialchars($row['stock']) . __('In a stock') . "</span>";
+                                echo "<span class='badge bg-success ms-2'>" . htmlspecialchars($row['stock']) . Lang::__('In a stock') . "</span>";
                             } elseif ($row['stock'] > 0) {
-                                echo "<span class='badge bg-warning ms-2'>" . htmlspecialchars($row['stock']) . __('Almost sold out') . "</span>";
+                                echo "<span class='badge bg-warning ms-2'>" . htmlspecialchars($row['stock']) . Lang::__('Almost sold out') . "</span>";
                             } else {
-                                echo "<span class='badge bg-danger ms-2'>" . __('Out of Stock') . "</span>";
+                                echo "<span class='badge bg-danger ms-2'>" . Lang::__('Out of Stock') . "</span>";
                             }
                             ?>
 
                             <div class="mb-4">
-                                <strong><?= __('Description') ?>:</strong>
+                                <strong><?= Lang::__('Description') ?>:</strong>
                                 <p><?= htmlspecialchars($row['description']); ?></p>
                             </div>
 
@@ -75,7 +76,7 @@ if (isset($_GET['id'])) {
                             <form action="<?= WEBSITE_URL . "views/cart.php" ?>" method="post">
                                 <input type="hidden" name="product_id" value="<?= htmlspecialchars($row['product_id']) ?>">
                                 <?= csrf::csrf_field() ?>
-                                <label class="me-2"><?= __('Quantity') ?>:</label>
+                                <label class="me-2"><?= Lang::__('Quantity') ?>:</label>
                                 <select name="quantity" id="quantity">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -93,7 +94,7 @@ if (isset($_GET['id'])) {
                                     }
                                     ?>>
                                     <i class="fa-solid fa-cart-shopping"></i>
-                                    <?= __('Add to cart') ?>
+                                    <?= Lang::__('Add to cart') ?>
                                 </button>
 
                             </form>

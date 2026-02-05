@@ -1,6 +1,10 @@
 <?php
 
 use Utils\Helper;
+use Utils\Lang;
+
+Lang::init();
+
 ?>
 <nav class="navbar navbar-expand-lg px-3 mb-3 bg-light">
 
@@ -31,18 +35,18 @@ use Utils\Helper;
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end align-items-center flex-grow-1 pe-3">
 
-                    <li class="nav-item"><a class="nav-link active me-4" href="<?= WEBSITE_URL ?>index.php"><?= __('Home') ?></a></li>
+                    <li class="nav-item"><a class="nav-link active me-4" href="<?= WEBSITE_URL ?>index.php"><?= Lang::__('Home') ?></a></li>
 
                     <!-- Translation dropdown -->
                     <li class="nav-item dropdown me-4">
                         <button class="btn btn-light dropdown-toggle" type="button" id="lang_dropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa-solid fa-globe"></i>
-                            <?= __('Language') ?>
+                            <?= Lang::__('Language') ?>
                         </button>
                         <ul class="dropdown-menu bg-white" aria-labelledby="lang_dropdown">
-                            <li><a class="text-reset text-decoration-none" href="<?= Helper::select_lang('en-us'); ?>"><?= __('English(USA)') ?></a></li>
-                            <li><a class="text-reset text-decoration-none" href="<?= Helper::select_lang('zh-tw'); ?>"><?= __('Chinese(Traditional)') ?></a></li>
-                            <li><a class="text-reset text-decoration-none" href="<?= Helper::select_lang('zh-cn'); ?>"><?= __('Chinese(Simplified)') ?></a></li>
+                            <li><a class="text-reset text-decoration-none" href="<?= Helper::select_lang('en-us'); ?>"><?= Lang::__('English(USA)') ?></a></li>
+                            <li><a class="text-reset text-decoration-none" href="<?= Helper::select_lang('zh-tw'); ?>"><?= Lang::__('Chinese(Traditional)') ?></a></li>
+                            <li><a class="text-reset text-decoration-none" href="<?= Helper::select_lang('zh-cn'); ?>"><?= Lang::__('Chinese(Simplified)') ?></a></li>
                         </ul>
                     </li>
 
@@ -54,18 +58,18 @@ use Utils\Helper;
                                 <?= $_SESSION['user'] ?>
                             </button>
                             <ul class="dropdown-menu dropdown-content bg-white" id="dropdown-list" aria-labelledby="user_dropdown">
-                                <li><a class="text-reset text-decoration-none" href="<?= WEBSITE_URL . "views/order_history.php" ?>"><?= __('Order History') ?></a></li>
-                                <li><a class="text-reset text-decoration-none" href="<?= WEBSITE_URL . "dashboard/user/views/profile.php" ?>"><?= __('Profile') ?></a></li>
+                                <li><a class="text-reset text-decoration-none" href="<?= WEBSITE_URL . "views/order_history.php" ?>"><?= Lang::__('Order History') ?></a></li>
+                                <li><a class="text-reset text-decoration-none" href="<?= WEBSITE_URL . "dashboard/user/views/profile.php" ?>"><?= Lang::__('Profile') ?></a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="text-danger text-decoration-none" href="<?= WEBSITE_URL . "auth/logout.php" ?>"><?= __('Logout') ?></a></li>
+                                <li><a class="text-danger text-decoration-none" href="<?= WEBSITE_URL . "auth/logout.php" ?>"><?= Lang::__('Logout') ?></a></li>
                             </ul>
                     </li>
                 <?php else: ?>
-                    <a class="text-decoration-none text-reset" href="<?= WEBSITE_URL . "views/login.php" ?>" rel="sponsored"><?= __('Login') ?></a>
+                    <a class="text-decoration-none text-reset" href="<?= WEBSITE_URL . "views/login.php" ?>" rel="sponsored"><?= Lang::__('Login') ?></a>
                     <div class="vr mx-2"></div>
-                    <a class="text-decoration-none text-reset" href="<?= WEBSITE_URL . "views/register.php" ?>"><?= __('Register') ?></a>
+                    <a class="text-decoration-none text-reset" href="<?= WEBSITE_URL . "views/register.php" ?>"><?= Lang::__('Register') ?></a>
                 <?php endif; ?>
                 </li>
 

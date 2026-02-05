@@ -5,6 +5,7 @@ require_once __DIR__ . '/../core/init.php';
 use App\Security\Csrf;
 use App\Services\CartService;
 use Utils\Helper;
+use Utils\Lang;
 
 $CartService = new CartService($conn);
 
@@ -33,7 +34,7 @@ if (isset($_POST['delete_quantity'])) {
 <body class="bg-white">
 
     <div class="container py-5">
-        <h1 class="text-center"><?= __('Shopping Cart') ?></h1>
+        <h1 class="text-center"><?= Lang::__('Shopping Cart') ?></h1>
         <!-- Cart Table -->
         <div class="table-responsive">
             <?php
@@ -108,8 +109,8 @@ if (isset($_POST['delete_quantity'])) {
                     Helper::write_log("Prepare failed: " . $conn->error, 'ERROR');
                 }
             } else {
-                echo "<p style='user-select: none;' class='fs-1 text-center  text-danger'>" . __('Your cart is empty') . "</p>";
-                echo "<p class='text-center'><a href='" . WEBSITE_URL . "index.php' class='btn btn-primary'>" .  __('Continue Shopping') . "</a></p>";
+                echo "<p style='user-select: none;' class='fs-1 text-center  text-danger'>" . Lang::__('Your cart is empty') . "</p>";
+                echo "<p class='text-center'><a href='" . WEBSITE_URL . "index.php' class='btn btn-primary'>" .  Lang::__('Continue Shopping') . "</a></p>";
             }
             ?>
         </div>
@@ -120,7 +121,7 @@ if (isset($_POST['delete_quantity'])) {
                 <div class="col-md-6 offset-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title"><?= __('Cart Summary') ?></h5>
+                            <h5 class="card-title"><?= Lang::__('Cart Summary') ?></h5>
                             <?php
                             $subtotal = 0;
                             $tax = 0;
@@ -137,22 +138,22 @@ if (isset($_POST['delete_quantity'])) {
                             }
                             ?>
                             <div class="d-flex justify-content-between">
-                                <span><?= __('Subtotal') ?></span>
+                                <span><?= Lang::__('Subtotal') ?></span>
                                 <span>$<?php echo number_format($subtotal, 2); ?></span>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <span><?= __('Tax') ?>(5%)</span>
+                                <span><?= Lang::__('Tax') ?>(5%)</span>
                                 <span>$<?php echo number_format($tax, 2); ?></span>
                             </div>
                             <hr>
                             <div class="d-flex justify-content-between fw-bold">
-                                <span><?= __('Total') ?></span>
+                                <span><?= Lang::__('Total') ?></span>
                                 <span>$<?php echo number_format($total, 2); ?></span>
                             </div>
 
                             <form action=<?= WEBSITE_URL . "views/checkout.php" ?> method="post">
                                 <?= csrf::csrf_field() ?>
-                                <button class="btn btn-primary w-100 mt-3"><?= __('Proceed to Checkout') ?></button>
+                                <button class="btn btn-primary w-100 mt-3"><?= Lang::__('Proceed to Checkout') ?></button>
                             </form>
 
                         </div>
