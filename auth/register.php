@@ -4,6 +4,7 @@ require_once __DIR__ . '/../core/init.php';
 
 use App\Security\Csrf;
 use App\Utils\Alert;
+use Utils\Helper;
 
 if($_SERVER['REQUEST_METHOD']==='POST'){
     // CSRF token validation
@@ -20,13 +21,13 @@ $register_account = "INSERT INTO user_accounts
 (username,user_id, email, password, account_registered_at) 
 VALUES (?, ?, ?,?,?)";
 
-$user_id = create_uid();
+$user_id = Helper::create_uid();
 
 $stmt = $conn->prepare($register_account);
 
 if (!$stmt) {
-	write_log("Prepare failed: " . $conn->error,'ERROR'); // Debugging
-	redirect_to(WEBSITE_URL . "views/404.php");
+	Helper::write_log("Prepare failed: " . $conn->error,'ERROR');
+	Helper::redirect_to(WEBSITE_URL . "views/404.php");
 }
 
 $username = $_POST['username'];
@@ -50,7 +51,8 @@ if ($check_result->num_rows > 0) {
 	exit();
 }
 
-if ($stmt->execute()) {
+if ($stmt->execute()) 
+{
 
 	$phone = $_POST['phone'] ?? $phone;
 	$profiles = "INSERT INTO user_profiles (user_id,phone ,first_name, last_name)
@@ -65,8 +67,9 @@ if ($stmt->execute()) {
     Alert::success("Success", "You have successfully registered!",
     WEBSITE_URL . "index.php");
     exit();
-} else {
-	write_log("Execute failed: " . $stmt->error,'ERROR');
+} 
+else {
+	Helper::write_log("Execute failed: " . $stmt->error,'ERROR');
 }
 
 $stmt->close();

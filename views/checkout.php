@@ -5,11 +5,13 @@ use App\Security\Csrf;
 use App\Utils\Alert;
 use App\Services\CartService;
 use App\Services\Mail;
+use Utils\Helper;
+use Utils\Lang;
 
 $CartService = new CartService($conn);
 
 //all country list
-$countries = all_countries($conn);
+$countries = Helper::all_countries($conn);
 
 if (isset($_POST['remove_from_cart'])) {
 
@@ -57,7 +59,7 @@ if (isset($_POST['checkout'])) {
 
             $stmt = $conn->prepare($order_details);
             if (!$stmt) {
-                write_log("Prepare failed: " . $conn->error, 'ERROR');
+                Helper::write_log("Prepare failed: " . $conn->error, 'ERROR');
             }
 
             $total_price = 0;
@@ -89,8 +91,9 @@ if (isset($_POST['checkout'])) {
             exit();
         }
         # code...
-    } else {
-        write_log("Error: " . $conn->error, 'ERROR');
+    } 
+    else {
+        Helper::write_log("Error: " . $conn->error, 'ERROR');
     }
 }
 
@@ -105,13 +108,13 @@ if (isset($_POST['checkout'])) {
     <div class="container">
         <main>
             <div class="py-5 text-center">
-                <h2><?= __('Thanks you for buying our products') ?></h2>
+                <h2><?= Lang::__('Thanks you for buying our products') ?></h2>
             </div>
 
             <div class="row g-5">
                 <div class="col-md-5 col-lg-4 order-md-last">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-primary"><?= __('Your cart') ?></span>
+                        <span class="text-primary"><?= Lang::__('Your cart') ?></span>
 
                         <?php
                         if (isset($_SESSION['cart'])) {
@@ -197,7 +200,7 @@ if (isset($_POST['checkout'])) {
 
                                 <li class='list-group-item d-flex justify-content-between bg-body-tertiary'>
                                     <div class='text-success'>
-                                        <h6 class='my-0'><?= __('Tax') ?></h6>
+                                        <h6 class='my-0'><?= Lang::__('Tax') ?></h6>
                                         <small>(5%)</small>
                                     </div>
                                     <span class='text-success'><?= $total_tax ?></span>
@@ -205,13 +208,13 @@ if (isset($_POST['checkout'])) {
 
                                 <li class='list-group-item d-flex justify-content-between bg-body-tertiary'>
                                     <div class='text-success'>
-                                        <h6 class='my-0'><?= __('Promo code') ?></h6>
+                                        <h6 class='my-0'><?= Lang::__('Promo code') ?></h6>
                                     </div>
                                     <span class='text-success'>−$5</span>
                                 </li>
 
                                 <li class='list-group-item d-flex justify-content-between'>
-                                    <span><?= __('Total') ?> (USD)</span>
+                                    <span><?= Lang::__('Total') ?> (USD)</span>
                                     <strong><?= $sub_total ?></strong>
                                 </li>
 
@@ -221,8 +224,8 @@ if (isset($_POST['checkout'])) {
                             echo "<tr><td colspan='5'>Error: " . $conn->error . "</td></tr>";
                         }
                     } else {
-                        echo "<p>" . __('Your cart is empty') . "</p>";
-                        echo "<p class='text-center'><a href='" . WEBSITE_URL . "index.php' class='btn btn-primary'>" .  __('Continue Shopping') . "</a></p>";
+                        echo "<p>" . Lang::__('Your cart is empty') . "</p>";
+                        echo "<p class='text-center'><a href='" . WEBSITE_URL . "index.php' class='btn btn-primary'>" .  Lang::__('Continue Shopping') . "</a></p>";
                     }
                     ?>
 
@@ -230,8 +233,8 @@ if (isset($_POST['checkout'])) {
                         <div class="input-group">
                             <input type="text"
                                 class="form-control"
-                                placeholder="<?= __('Promo code') ?>">
-                            <button type="submit" class="btn btn-secondary"><?= __('Redeem') ?></button>
+                                placeholder="<?= Lang::__('Promo code') ?>">
+                            <button type="submit" class="btn btn-secondary"><?= Lang::__('Redeem') ?></button>
                         </div>
                     </form>
                 </div>
@@ -262,14 +265,14 @@ if (isset($_POST['checkout'])) {
                 ?>
 
                 <div class="col-md-7 col-lg-8">
-                    <h4 class="mb-3"><?= __('Billing address') ?></h4>
+                    <h4 class="mb-3"><?= Lang::__('Billing address') ?></h4>
                     <form class="needs-validation" method="post">
                         <?= csrf::csrf_field() ?>
 
                         <div class="row g-3">
 
                             <div class="col-sm-6">
-                                <label for="firstName" class="form-label"><?= __('First name') ?></label>
+                                <label for="firstName" class="form-label"><?= Lang::__('First name') ?></label>
                                 <input type="text"
                                     class="form-control"
                                     id="firstName"
@@ -278,12 +281,12 @@ if (isset($_POST['checkout'])) {
                                     value="<?= htmlspecialchars($row['f_name']) ?>"
                                     required>
                                 <div class="invalid-feedback">
-                                    <?= __('Real first name is required') ?>
+                                    <?= Lang::__('Real first name is required') ?>
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
-                                <label for="lastName" class="form-label"><?= __('Last name') ?></label>
+                                <label for="lastName" class="form-label"><?= Lang::__('Last name') ?></label>
                                 <input type="text"
                                     class="form-control"
                                     id="lastName"
@@ -292,12 +295,12 @@ if (isset($_POST['checkout'])) {
                                     value="<?= htmlspecialchars($row['l_name']) ?>"
                                     required>
                                 <div class="invalid-feedback">
-                                    <?= __('Real last name is required') ?>
+                                    <?= Lang::__('Real last name is required') ?>
                                 </div>
                             </div>
 
                             <div class="col-12">
-                                <label for="username" class="form-label"><?= __('Email') ?></label>
+                                <label for="username" class="form-label"><?= Lang::__('Email') ?></label>
                                 <div class="input-group has-validation">
                                     <span class="input-group-text">@</span>
                                     <input type="text"
@@ -308,8 +311,8 @@ if (isset($_POST['checkout'])) {
                                         placeholder="Email"
                                         pattern="\S+@\S+\.\S+"
                                         required>
-                                    <div class="invalid-feedback"><?= __('Enter your email address') ?></div>
-                                    <div class="valid-feedback"><?= __('The email is valid. You can go to email get orders information') ?></div>
+                                    <div class="invalid-feedback"><?= Lang::__('Enter your email address') ?></div>
+                                    <div class="valid-feedback"><?= Lang::__('The email is valid. You can go to email get orders information') ?></div>
                                 </div>
                             </div>
 
@@ -342,7 +345,7 @@ if (isset($_POST['checkout'])) {
                             ?>
 
                             <div class="col-12">
-                                <label for="address" class="form-label"><?= __('Address') ?></label>
+                                <label for="address" class="form-label"><?= Lang::__('Address') ?></label>
                                 <input type="text"
                                     class="form-control"
                                     id="address"
@@ -351,12 +354,12 @@ if (isset($_POST['checkout'])) {
                                     placeholder="1234 Main St"
                                     required>
                                 <div class="invalid-feedback">
-                                    <?= __('Please enter your shipping address') ?>
+                                    <?= Lang::__('Please enter your shipping address') ?>
                                 </div>
                             </div>
 
                             <div class="col-md-5">
-                                <label for="country" class="form-label"><?= __('Country') ?></label>
+                                <label for="country" class="form-label"><?= Lang::__('Country') ?></label>
                                 <select class="form-select"
                                     id="country"
                                     name="country"
@@ -377,22 +380,22 @@ if (isset($_POST['checkout'])) {
                             </div>
 
                             <div class="col-md-3">
-                                <label for="city" class="form-label"><?= __('city') ?></label>
+                                <label for="city" class="form-label"><?= Lang::__('city') ?></label>
                                 <input
                                     type="text"
                                     class="form-control"
                                     id="city"
                                     name="city"
                                     value="<?= htmlspecialchars($row['city']) ?>"
-                                    placeholder="<?= __('California') ?>"
+                                    placeholder="<?= Lang::__('California') ?>"
                                     required>
                                 <div class="invalid-feedback">
-                                    <?= __('Provide a valid city') ?>
+                                    <?= Lang::__('Provide a valid city') ?>
                                 </div>
                             </div>
 
                             <div class="col-md-3">
-                                <label for="postal_code" class="form-label"><?= __('postal code') ?></label>
+                                <label for="postal_code" class="form-label"><?= Lang::__('postal code') ?></label>
                                 <input
                                     type="text"
                                     class="form-control"
@@ -402,7 +405,7 @@ if (isset($_POST['checkout'])) {
                                     placeholder=""
                                     required>
                                 <div class="invalid-feedback">
-                                    <?= __('Provide a valid postal code') ?>
+                                    <?= Lang::__('Provide a valid postal code') ?>
                                 </div>
                             </div>
 
@@ -410,32 +413,32 @@ if (isset($_POST['checkout'])) {
 
                         <hr class="my-4">
 
-                        <h4 class="mb-3"><?= __('Payment') ?> </h4>
+                        <h4 class="mb-3"><?= Lang::__('Payment') ?> </h4>
 
                         <div class="col-md-3">
-                            <label for="payment_method" class="form-label"><?= __('Payment method') ?></label>
+                            <label for="payment_method" class="form-label"><?= Lang::__('Payment method') ?></label>
                             <select class="form-select"
                                 id="payment_method"
                                 name="payment_method"
                                 required>
-                                <option selected disabled value=""><?= __('Choose') ?>...</option>
-                                <option value="Credit Card"><?= __('Credit Card') ?></option>
+                                <option selected disabled value=""><?= Lang::__('Choose') ?>...</option>
+                                <option value="Credit Card"><?= Lang::__('Credit Card') ?></option>
                                 <option value="PayPal">Paypal</option>
-                                <option value="Bank Transfer"><?= __('Bank Transfer') ?></option>
-                                <option value="Cash on delivery"><?= __('Cash on delivery') ?></option>
+                                <option value="Bank Transfer"><?= Lang::__('Bank Transfer') ?></option>
+                                <option value="Cash on delivery"><?= Lang::__('Cash on delivery') ?></option>
                             </select>
                         </div>
 
                         <hr class="my-4">
 
-                        <button class="w-100 btn btn-primary btn-lg" type="submit" name="checkout"><?= __('Continue to checkout') ?></button>
+                        <button class="w-100 btn btn-primary btn-lg" type="submit" name="checkout"><?= Lang::__('Continue to checkout') ?></button>
                     </form>
 
                     <form action="<?= WEBSITE_URL ?>src/Payments/Stripe/StripeGateway.php" method="POST">
                         <?= csrf::csrf_field() ?>
                         <button class="btn btn-lg btn-dark">
                             <i class="fa-solid fa-credit-card"></i>
-                            <span class="ms-2 fs-6"><?= __('Debit Card or Credit Card') ?></span>
+                            <span class="ms-2 fs-6"><?= Lang::__('Debit Card or Credit Card') ?></span>
                         </button>
                     </form>
 

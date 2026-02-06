@@ -4,6 +4,7 @@ require_once __DIR__ . '/../../../core/init.php';
 
 use App\Security\Csrf;
 use App\Utils\Alert;
+use Utils\Helper;
 
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['user_id'])) {
 
@@ -28,8 +29,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['user_id'])) {
             ADMIN_URL . "views/user_accounts.php");
             exit();
         }
-    } else {
-        write_log("Prepare failed: " . $conn->error, 'ERROR');
+    } 
+    else {
+        Helper::write_log("Prepare failed: " . $conn->error, 'ERROR');
     }
 }
 

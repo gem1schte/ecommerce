@@ -1,12 +1,16 @@
 <?php
+
 require_once __DIR__ . '/core/init.php';
+
+use Utils\Helper;
+use Utils\Lang;
 
 $sql = 'SELECT product_id, product_name, original_price, 
 description, brand,price, star, product_images FROM products';
 $result = $conn->query($sql);
 
 if (!$result) {
-  write_log("Prepare failed: " . $conn->error,'ERROR'); // Debugging
+  Helper::write_log("Prepare failed: " . $conn->error,'ERROR');
 }
 ?>
 
@@ -16,13 +20,13 @@ if (!$result) {
 
 <!-- Filters Sidebar -->
 <div class="container py-5">
-  <h4 class="mb-0"><i class="fa-solid fa-filter"></i> <?= __('Filters') ?></h4>
+  <h4 class="mb-0"><i class="fa-solid fa-filter"></i> <?= Lang::__('Filters') ?></h4>
   <div class="row g-4">
     <div class="col-lg-3">
       <div class="filter-sidebar p-4 shadow-sm">
 
         <!-- Brand Filter -->
-        <h5 class="mb-4"><?= __('Brand') ?></h5>
+        <h5 class="mb-4"><?= Lang::__('Brand') ?></h5>
         <?php
         $brand = 'SELECT DISTINCT brand FROM products';
         $brand_result = $conn->query($brand);
@@ -47,7 +51,7 @@ if (!$result) {
         </form>
 
         <!-- Category Filter -->
-        <h5 class="mb-4"><?= __('Category') ?></h5>
+        <h5 class="mb-4"><?= Lang::__('Category') ?></h5>
         <?php
         $category_sql = "SELECT DISTINCT category_name FROM category";
         $category_result = $conn->query($category_sql);
@@ -84,7 +88,7 @@ if (!$result) {
                   <div class="card h-100">
 
                     <?php if ($row['original_price'] > $row['price']): ?>
-                      <div class='badge bg-dark text-white position-absolute' style='top: 0.5rem; right: 0.5rem'><?= __('Sale') ?></div>
+                      <div class='badge bg-dark text-white position-absolute' style='top: 0.5rem; right: 0.5rem'><?= Lang::__('Sale') ?></div>
                       <div class='badge bg-success text-white position-absolute' style='top: 0.5rem; left: 0.5rem'>
                         <?= round((($row['original_price'] - $row['price']) / $row['original_price']) * 100) ?>%
                       </div>
@@ -108,7 +112,7 @@ if (!$result) {
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light">
                       <div class="text-center">
-                        <a class="btn btn-primary btn-sm" href="<?= WEBSITE_URL . "views/view_product.php?id=" . htmlspecialchars($row['product_id']) ?>"><?= __('View products') ?></a>
+                        <a class="btn btn-primary btn-sm" href="<?= WEBSITE_URL . "views/view_product.php?id=" . htmlspecialchars($row['product_id']) ?>"><?= Lang::__('View products') ?></a>
                       </div>
                     </div>
                   </div>

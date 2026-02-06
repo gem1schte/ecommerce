@@ -1,9 +1,13 @@
 <?php
+
 require_once __DIR__ . '/../core/init.php';
+
+use Utils\Helper;
+use Utils\Lang;
 
 $user_id = $_SESSION['user_id'];
 if (!$user_id) {
-    redirect_to("login.php");
+    Helper::redirect_to("login.php");
 }
 
 $user_id = $_SESSION['user_id'];
@@ -31,7 +35,7 @@ oi.orders_created_at DESC
 
 $stmt = $conn->prepare($sql);
 if (!$stmt) {
-    write_log("SQL prepare failed: " . $conn->error,'ERROR');
+    Helper::write_log("SQL prepare failed: " . $conn->error,'ERROR');
 }
 $stmt->bind_param("s", $user_id);
 $stmt->execute();
@@ -65,7 +69,7 @@ while ($row = $result->fetch_assoc()) {
 <body class="bg-white">
 
     <div class="container py-5">
-        <h1 class="text-center mb-4"><?= __('Order History') ?></h1>
+        <h1 class="text-center mb-4"><?= Lang::__('Order History') ?></h1>
 
         <?php if (!empty($orders)): ?>
             <?php foreach ($orders as $order): ?>
@@ -78,10 +82,10 @@ while ($row = $result->fetch_assoc()) {
                 <div class="card mb-4">
 
                     <div class="card-header bg-light">
-                        <strong><?= __('Order Id') ?>:</strong> <?= htmlspecialchars($order['order_id']) ?>
-                        <span class="ms-3"><strong><?= __('Payment method') ?>:</strong> <?= htmlspecialchars($order['pay']) ?></span>
-                        <span class="ms-3"><strong><?= __('Total') ?>:</strong> <?= htmlspecialchars(number_format($total_price, 2)) ?></span>
-                        <span class="ms-3"><strong><?= __('Date') ?>:</strong> <?= htmlspecialchars($order['date']) ?></span>
+                        <strong><?= Lang::__('Order Id') ?>:</strong> <?= htmlspecialchars($order['order_id']) ?>
+                        <span class="ms-3"><strong><?= Lang::__('Payment method') ?>:</strong> <?= htmlspecialchars($order['pay']) ?></span>
+                        <span class="ms-3"><strong><?= Lang::__('Total') ?>:</strong> <?= htmlspecialchars(number_format($total_price, 2)) ?></span>
+                        <span class="ms-3"><strong><?= Lang::__('Date') ?>:</strong> <?= htmlspecialchars($order['date']) ?></span>
                     </div>
 
                     <div class="card-body">
@@ -91,10 +95,10 @@ while ($row = $result->fetch_assoc()) {
 
                                 <thead class="table-light">
                                     <tr>
-                                        <th><?= __('Product image') ?></th>
-                                        <th><?= __('Product name') ?></th>
-                                        <th><?= __('Quantity') ?></th>
-                                        <th><?= __('Price') ?>(5%)</th>
+                                        <th><?= Lang::__('Product image') ?></th>
+                                        <th><?= Lang::__('Product name') ?></th>
+                                        <th><?= Lang::__('Quantity') ?></th>
+                                        <th><?= Lang::__('Price') ?>(5%)</th>
                                     </tr>
                                 </thead>
 
@@ -107,8 +111,8 @@ while ($row = $result->fetch_assoc()) {
                                             </td>
 
                                             <td><?= htmlspecialchars($product['product_name']) ?>
-                                                <p class="small"><strong><?= __('Brand') ?>:</strong><?= htmlspecialchars($product['brand']) ?></p>
-                                                <p class="small"><strong><?= __('Category') ?>:</strong><?= htmlspecialchars($product['cat_name']) ?></p>
+                                                <p class="small"><strong><?= Lang::__('Brand') ?>:</strong><?= htmlspecialchars($product['brand']) ?></p>
+                                                <p class="small"><strong><?= Lang::__('Category') ?>:</strong><?= htmlspecialchars($product['cat_name']) ?></p>
                                             </td>
 
                                             <td><?= htmlspecialchars($product['quantity']) ?></td>
@@ -130,10 +134,10 @@ while ($row = $result->fetch_assoc()) {
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
-            <p class="text-center text-danger"><?= __('No orders found') ?></p>
+            <p class="text-center text-danger"><?= Lang::__('No orders found') ?></p>
             <div class="text-center">
                 <a href="<?= WEBSITE_URL . "index.php" ?>" class="btn btn-primary">
-                    <?= __('Continue Shopping') ?>
+                    <?= Lang::__('Continue Shopping') ?>
                 </a>
             </div>
         <?php endif; ?>

@@ -4,6 +4,7 @@ require_once __DIR__ . '/../core/init.php';
 
 use App\Security\Csrf;
 use App\Utils\Alert;
+use Utils\Lang;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['token'])) {
 
@@ -78,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['token'])) {
         <div class="container">
 
             <div class="text-center mb-5">
-                <h2 class="display-5 fw-bold"><?= __('Reset Password') ?></h2>
+                <h2 class="display-5 fw-bold"><?= Lang::__('Reset Password') ?></h2>
             </div>
 
             <div class="row justify-content-center">
@@ -94,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['token'])) {
                                     placeholder=""
                                     required
                                     pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,16}"
-                                    title="<?= __('Password must be 6-16 characters long, with uppercase letters, lowercase letters, and numbers.') ?>"
+                                    title="<?= Lang::__('Password must be 6-16 characters long, with uppercase letters, lowercase letters, and numbers.') ?>"
                                     autofocus />
                                 <label for="password">Password</label>
                                 <button type="button" class="btn btn-light position-absolute end-0 top-50 translate-middle-y me-2" onclick="showpassword()">
@@ -111,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['token'])) {
                                     placeholder=""
                                     required
                                     pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,16}"
-                                    title="<?= __('Confirm Password') ?>" />
+                                    title="<?= Lang::__('Confirm Password') ?>" />
                                 <label for="confirmPassword">Confirm Password</label>
                                 <button type="button" class="btn btn-light position-absolute end-0 top-50 translate-middle-y me-2" onclick="confirm_show_password()">
                                     <i id="confirm_password_eye_icon" class="fa fa-eye"></i>
@@ -120,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['token'])) {
 
                             <div class="col-12">
                                 <div class="d-grid">
-                                    <button class="btn btn-primary btn-lg" type="submit"><?= __('Reset Password') ?></button>
+                                    <button class="btn btn-primary btn-lg" type="submit"><?= Lang::__('Reset Password') ?></button>
                                 </div>
                             </div>
 

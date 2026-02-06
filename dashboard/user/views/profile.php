@@ -3,10 +3,12 @@
 include __DIR__ . '/../../../core/init.php';
 
 use App\Security\Csrf;
+use Utils\Helper;
+use Utils\Lang;
 
 $user_id = $_SESSION['user_id'];
 if (!$user_id) {
-    redirect_to(WEBSITE_URL . "views/login.php");
+    Helper::redirect_to(WEBSITE_URL . "views/login.php");
 }
 
 if (isset($_SESSION['user_id'])) {
@@ -51,13 +53,13 @@ if (isset($_SESSION['user_id'])) {
                             <div class="col-lg-3 border-end">
                                 <div class="p-4">
                                     <div class="nav flex-column nav-pills">
-                                        <a class="nav-link active" href="#"><i class="fas fa-user me-2"></i><?= __('Personal Information') ?></a>
-                                        <a class="nav-link" href="#"><i class="fas fa-lock me-2"></i><?= __('Security') ?></a>
+                                        <a class="nav-link active" href="#"><i class="fas fa-user me-2"></i><?= Lang::__('Personal Information') ?></a>
+                                        <a class="nav-link" href="#"><i class="fas fa-lock me-2"></i><?= Lang::__('Security') ?></a>
 
                                         <form action="<?= WEBSITE_URL . "auth/delete_account.php" ?>" method="POST" class="mt-3">
                                             <input type="hidden" name="username" value="<?= $_SESSION['user'] ?>">
                                             <?= csrf::csrf_field() ?>
-                                            <button type="submit" class="btn btn-danger w-100"><?= __('Delete Account') ?></button>
+                                            <button type="submit" class="btn btn-danger w-100"><?= Lang::__('Delete Account') ?></button>
                                         </form>
                                     </div>
                                 </div>
@@ -68,14 +70,14 @@ if (isset($_SESSION['user_id'])) {
                                 <div class="p-4">
                                     <!-- Personal Information -->
                                     <div class="mb-4">
-                                        <h5 class="mb-4"><?= __('Personal Information') ?></h5>
+                                        <h5 class="mb-4"><?= Lang::__('Personal Information') ?></h5>
 
                                         <form method="post">
                                             <input type="hidden" name="user_id" value="<?= htmlspecialchars($user_id); ?>">
 
                                             <div class="row g-3">
                                                 <div class="col-md-6">
-                                                    <label class="form-label"><?= __('First name') ?></label>
+                                                    <label class="form-label"><?= Lang::__('First name') ?></label>
                                                     <input
                                                     type="text"
                                                     class="form-control"
@@ -86,7 +88,7 @@ if (isset($_SESSION['user_id'])) {
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <label class="form-label"><?= __('Last name') ?></label>
+                                                    <label class="form-label"><?= Lang::__('Last name') ?></label>
                                                     <input
                                                     type="text"
                                                     class="form-control"
@@ -97,7 +99,7 @@ if (isset($_SESSION['user_id'])) {
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <label class="form-label"><?= __('Birthday') ?></label>
+                                                    <label class="form-label"><?= Lang::__('Birthday') ?></label>
                                                     <input
                                                     type="text"
                                                     class="form-control"
@@ -108,7 +110,7 @@ if (isset($_SESSION['user_id'])) {
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <label class="form-label"><?= __('Email') ?></label>
+                                                    <label class="form-label"><?= Lang::__('Email') ?></label>
                                                     <input
                                                     type="email"
                                                     class="form-control"
@@ -119,7 +121,7 @@ if (isset($_SESSION['user_id'])) {
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <label class="form-label"><?= __('Phone') ?></label>
+                                                    <label class="form-label"><?= Lang::__('Phone') ?></label>
                                                     <input
                                                     type="tel"
                                                     class="form-control"
@@ -130,7 +132,7 @@ if (isset($_SESSION['user_id'])) {
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <label class="form-label"><?= __('Country') ?></label>
+                                                    <label class="form-label"><?= Lang::__('Country') ?></label>
                                                     <input
                                                     type="text"
                                                     class="form-control"
@@ -141,7 +143,7 @@ if (isset($_SESSION['user_id'])) {
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <label class="form-label"><?= __('city') ?></label>
+                                                    <label class="form-label"><?= Lang::__('city') ?></label>
                                                     <input
                                                     type="text"
                                                     class="form-control"
@@ -152,7 +154,7 @@ if (isset($_SESSION['user_id'])) {
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <label class="form-label"><?= __('Address') ?></label>
+                                                    <label class="form-label"><?= Lang::__('Address') ?></label>
                                                     <input
                                                     type="text"
                                                     class="form-control"
@@ -163,7 +165,7 @@ if (isset($_SESSION['user_id'])) {
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <label class="form-label"><?= __('postal code') ?></label>
+                                                    <label class="form-label"><?= Lang::__('postal code') ?></label>
                                                     <input
                                                     type="text"
                                                     class="form-control"
@@ -175,7 +177,7 @@ if (isset($_SESSION['user_id'])) {
 
                                                 <div class="col-12">
                                                     <a class="btn btn-primary" href="<?= WEBSITE_URL . "dashboard/user/functions/edit_profile.php?uid=" . htmlspecialchars($user_id) ?>">
-                                                        <?= __('Edit Information') ?>
+                                                        <?= Lang::__('Edit Information') ?>
                                                     </a>
                                                 </div>
 

@@ -4,6 +4,7 @@ require_once __DIR__ . '/../../../core/init.php';
 
 use App\Security\Csrf;
 use App\Utils\Alert;
+use Utils\Helper;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id']) && empty($_POST['confirm'])) {
     $product_id = $_POST['product_id'];
@@ -35,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm']) && $_POST[
     if ($stmt) {
         $stmt->bind_param("i", $product_id);
         if (!$stmt->execute()) {
-            write_log("Delete failed: " . $stmt->error, 'ERROR');
+            Helper::write_log("Delete failed: " . $stmt->error, 'ERROR');
         }
 
         if ($stmt->affected_rows > 0) {
@@ -46,7 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm']) && $_POST[
             );
             exit();
 
-        } else {
+        } 
+        else {
             Alert::error(
                 "Oops...",
                 "Failed to delete the product. Please try again.",

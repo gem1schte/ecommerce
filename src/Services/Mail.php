@@ -8,9 +8,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use Dotenv\Dotenv;
+use Utils\Helper;
 
 //Load Composer's autoloader
-// require __DIR__ . '/../vendor/autoload.php';
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../../', '.env');
 $dotenv->load();
 
@@ -41,8 +41,9 @@ class Mail
             //Content
             $this->mail->isHTML(true);                                  //Set email format to HTML
 
-        } catch (Exception $e) {
-            write_log("Message could not be sent. Mailer Error: {$this->mail->ErrorInfo}", 'Error');
+        } 
+        catch (Exception $e) {
+            Helper::write_log("Message could not be sent. Mailer Error: {$this->mail->ErrorInfo}", 'Error');
         }
     }
 
@@ -62,7 +63,7 @@ class Mail
         }
         catch (Exception $e)
         {
-            write_log("Mailer Error:{$this->mail->ErrorInfo}",'Error');
+            Helper::write_log("Mailer Error:{$this->mail->ErrorInfo}",'Error');
             return false;
         }
     }

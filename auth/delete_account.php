@@ -4,6 +4,7 @@ require_once __DIR__ . '/../core/init.php';
 
 use App\Security\Csrf;
 use App\Utils\Alert;
+use Utils\Helper;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['username']) && empty($_POST['confirm'])) {
     $username = $_POST['username'];
@@ -57,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm']) && $_POST[
             }
         }
     } else {
-        write_log("Failed to prepare SQL statement: " . $conn->error);
+        Helper::write_log("Failed to prepare SQL statement: " . $conn->error);
         ?>
 
         <script>
