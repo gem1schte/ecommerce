@@ -5,14 +5,7 @@ namespace App\Utils;
 use mysqli;
 
 class Helper
-{
-    private mysqli $conn;
-    
-    public function __construct(mysqli $conn)
-    {
-        self::$conn = $conn;
-    }
-    
+{    
     public static function create_uid()
     {
         return 'user_' . bin2hex(random_bytes(16));
@@ -67,7 +60,7 @@ class Helper
     {
         $sql = "SELECT * FROM countries ORDER BY name ASC";
         $stmt = $conn->prepare($sql);
-        if (! $stmt) {
+        if (!$stmt) {
             self::write_log("Prepare filed:" . $conn->error, 'ERROR');
             return [];
         }
