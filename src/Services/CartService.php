@@ -29,21 +29,14 @@ class CartService
         $product_id = $this->sanitize_int($product_id);
         $quantity = $this->sanitize_int($quantity);
 
-        if ($product_id > 0 && $quantity > 0)
-        {
-            if (isset($this->cart[$product_id]))
-            {
-                $this->cart[$product_id] += $quantity;
-
-                // Add item to session cart, max qty = 5
-                if ($this->cart[$product_id] > 5) {
-                    $this->cart[$product_id] = 5;
-                }
-            } 
-            else {
-                $this->cart[$product_id] = $quantity;
-            }
+        if($product_id<=0 || $quantity <= 0){
+            return;
         }
+
+        $max_qty = 5;
+        $current_qty = $this->cart[$product_id] ?? 0;
+        $cart_qty = $current_qty + $quantity;
+        $this->cart[$product_id] = min($cart_qty, $max_qty);
     }
 
     public function remove_cart_product($product_id)
