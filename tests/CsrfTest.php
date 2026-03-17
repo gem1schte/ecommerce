@@ -3,11 +3,17 @@
 use PHPUnit\Framework\TestCase;
 use App\Security\Csrf;
 
-class CsrfTest extends TestCase
+final class CsrfTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        $_SESSION = [];
+    }
+    
     public function testCreateTokenReturnsString(): void
     {
         $token = Csrf::csrf_token();
+        $this->assertIsString($token);
         $this->assertSame(64, strlen($token));
     }
 
@@ -23,5 +29,17 @@ class CsrfTest extends TestCase
         $field = Csrf::csrf_field();
         $this->assertStringContainsString('name="csrf_token"', $field);
         $this->assertStringContainsString('type="hidden"', $field);
+    }
+
+    public function testVerifyTokenValid(): void
+    {
+        $token = Csrf::csrf_token();
+        $this->assertTrue(Csrf::verify_token($token));
+    }
+
+    public function testVerifyTokenInvalid(): void
+    {
+        Csrf::csrf_token();
+        $this->assertFalse(Csrf::verify_token("Invalid Token"));
     }
 }
