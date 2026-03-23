@@ -1,8 +1,9 @@
-<!-- UI source
-https://bootstrapbrain.com/component/login-page-template-using-bootstrap-5/#code
--->
-
 <?php
+
+/*
+UI source
+https://bootstrapbrain.com/component/login-page-template-using-bootstrap-5/#code
+*/
 
 require_once __DIR__ . '/../core/init.php';
 require_once __DIR__ . '/../views/includes/header.php';

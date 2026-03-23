@@ -4,9 +4,9 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../', '.env');
 $dotenv->load();
 
 try{
-    $host = $_ENV["DB_HOST"] ?? "localhost";
+    $host = $_ENV["DB_HOST"] ?? "db";
     $db_user = $_ENV["DB_USER"] ?? "root";
-    $db_pass = $_ENV["DB_PASS"] ?? "";
+    $db_pass = $_ENV["DB_PASS"] ?? "root_password";
     $db_name = $_ENV["DB_NAME"] ?? "ecommerce";
     $conn = new mysqli($host, $db_user, $db_pass, $db_name);
 }
@@ -18,5 +18,5 @@ catch(mysqli_sql_exception $e){
 
 //Set web info
 define('WEBSITE_NAME', 'Tempest Shopping');
-define('WEBSITE_URL', 'http://localhost/ecommerce/');
-define('ADMIN_URL', 'http://localhost/ecommerce/dashboard/admin/');
+define('WEBSITE_URL', 'http://localhost:8080/');
+define('ADMIN_URL', 'http://localhost:8080/dashboard/admin/');
