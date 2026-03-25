@@ -78,3 +78,72 @@ function fetchFilteredProducts() {
 document.querySelectorAll('.brand-checkbox, .category-checkbox').forEach(checkbox => {
   checkbox.addEventListener('change', fetchFilteredProducts);
 });
+
+//SwalAlert2
+function waitSwal(callback)
+{
+    const interval = setInterval(()=>{
+        if (typeof Swal !== 'undefined' && typeof Swal.fire === 'function'){
+            clearInterval(interval);
+            callback();
+        }
+    }, 50);
+}
+
+function showSwalAlert(config)
+{
+    waitSwal(() => {
+        Swal.fire(config).then((result) => {
+            if (result.isConfirmed)
+            {
+                if (config.submitId) {
+                    document.getElementById(config.submitId)?.submit();
+                }
+                else if (config.redirect) {
+                    window.location.href = config.redirect;
+                }
+            }
+
+            else if (result.dismiss === Swal.DismissReason.timer)
+            {
+                if (config.redirect && !config.submitId) {
+                    window.location.href = config.redirect;
+                }
+                else {
+                    window.history.back();
+                }
+            }
+
+            else if (result.dismiss === Swal.DismissReason.cancel)
+            {
+                if (cancel.cancelRedirect) {
+                    window.location.href = config.cancel.cancelRedirect;
+                }
+                else {
+                    window.history.back();
+                }
+            }
+            
+        });
+    });
+}
+
+function initSwalAlert() {
+    const alertElement = document.getElementById('swal-config');
+
+    if (!alertElement) {
+        return;
+    }
+
+    try {
+        const config = JSON.parse(alertElement.textContent);
+        showSwalAlert(config);
+    }
+    catch (error) {
+        console.error('Failed to parse SweetAlert config:', error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    initSwalAlert();
+});
