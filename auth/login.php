@@ -56,7 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
                 {
                     Alert::error("Oops...", "Incorrect password!",
                     WEBSITE_URL . "views/login.php");
-                    exit();
                 }
             } 
             else 
@@ -64,10 +63,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
                 Alert::error("Oops...", "User not found!",
                 WEBSITE_URL . "views/login.php",
                 ['footer'=> '<a href="' . WEBSITE_URL . 'views/register.php">Register a new account now?</a>']);
-                exit();
             }
 
             $stmt->close();
+            Helper::redirect_to(WEBSITE_URL . "views/login.php");
         } 
         else 
         {

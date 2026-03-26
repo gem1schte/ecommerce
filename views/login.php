@@ -1,15 +1,21 @@
 <?php
 
-/*
-UI source
-https://bootstrapbrain.com/component/login-page-template-using-bootstrap-5/#code
-*/
+/**
+ * UI source
+ * @link https://bootstrapbrain.com/component/login-page-template-using-bootstrap-5/#code
+ */
 
 require_once __DIR__ . '/../core/init.php';
 require_once __DIR__ . '/../views/includes/header.php';
 
 use App\Security\Csrf;
+use App\Utils\Alert;
 use App\Utils\Lang;
+
+if (isset($_SESSION['Swalfire'])) {
+    Alert::Swalfire($_SESSION['Swalfire']);
+    unset($_SESSION['Swalfire']);
+}
 
 ?>
 
