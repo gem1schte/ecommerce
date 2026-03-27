@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $stmt->execute();
 
                     //Send mail
-                    $reset_url = WEBSITE_URL . "auth/reset_password.php?token={$token}";
+                    $reset_url = WEBSITE_URL . "views/reset_password.php?token={$token}";
                     Mail::send($email, "Reset password", "<p>Hello {$username}</p> Click the link: <a href='$reset_url'>reset password</a>");
                     Alert::success("Success","An email has been sent to $email,with instructions to reset your password.");
                     Helper::redirect_to(WEBSITE_URL . "views/forget_password.php");
