@@ -56,8 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['token'])) {
                     } 
                     else {
                         Alert::error("Oops...", "Token not found or has expired.",
-                        WEBSITE_URL . "views/forget_password.php");                    
-                        Helper::redirect_to(WEBSITE_URL . "views/forget_password.php");
+                        WEBSITE_URL . "views/forgot_password.php");                    
+                        Helper::redirect_to(WEBSITE_URL . "views/forgot_password.php");
                     }
                 }
             }

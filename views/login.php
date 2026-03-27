@@ -92,7 +92,7 @@ if (isset($_SESSION['Swalfire'])) {
                                         </div>
                                         <div class="col-6">
                                             <div class="text-end">
-                                                <a href="<?= WEBSITE_URL . "views/forget_password.php" ?>"
+                                                <a href="<?= WEBSITE_URL . "views/forgot_password.php" ?>"
                                                     class="link-secondary text-decoration-none"><?= Lang::__('Forgot password?') ?>
                                                 </a>
                                             </div>

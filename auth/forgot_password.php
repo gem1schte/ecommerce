@@ -10,7 +10,7 @@ use App\Utils\Helper;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // CSRF token validation
-    Csrf::ver_csrf($_POST['csrf_token'] ?? '', "views/forget_password.php", "forget password");
+    Csrf::ver_csrf($_POST['csrf_token'] ?? '', "views/forgot_password.php", "forgot password");
 
     //32 length token
     $token = bin2hex(random_bytes(32));
@@ -48,12 +48,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $reset_url = WEBSITE_URL . "views/reset_password.php?token={$token}";
                     Mail::send($email, "Reset password", "<p>Hello {$username}</p> Click the link: <a href='$reset_url'>reset password</a>");
                     Alert::success("Success","An email has been sent to $email,with instructions to reset your password.");
-                    Helper::redirect_to(WEBSITE_URL . "views/forget_password.php");
+                    Helper::redirect_to(WEBSITE_URL . "views/forgot_password.php");
                 }
             } 
             else {
                 Alert::error("Oops...", "Email not found or invalid.");
-                Helper::redirect_to(WEBSITE_URL . "views/forget_password.php");
+                Helper::redirect_to(WEBSITE_URL . "views/forgot_password.php");
             }
         }
     }

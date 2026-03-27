@@ -20,10 +20,10 @@ if (isset($_SESSION['Swalfire'])) {
 
 <?php require_once __DIR__ . '../../views/includes/header.php'; ?>
 
-<title>Forget Password</title>
+<title>Forgot Password</title>
 
 <section class="py-3 py-md-5 py-xl-8 was-validated">
-    <form method="post" action="<?= WEBSITE_URL . "auth/forget_password.php" ?>">
+    <form method="post" action="<?= WEBSITE_URL . "auth/forgot_password.php" ?>">
         <?= Csrf::csrf_field() ?>
 
         <div class="container">
